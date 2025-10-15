@@ -1,0 +1,1001 @@
+record_type,id,timestamp,direction,from,to,phone_hash,contact_name,message,media_filename,gps_lat,gps_lon,app,app_event,device_id,imei,notes
+contact,C001,2025-07-10 08:00:00,,,,hash_06a1,Emma Dupont,,,,,contacts,created,DEV123,IMEI0001,
+contact,C002,2025-07-10 08:02:00,,,,hash_07b2,Paul Martin,,,,,contacts,created,DEV123,IMEI0001,
+contact,C003,2025-07-10 08:04:00,,,,hash_08c3,Maman,,,,,contacts,created,DEV123,IMEI0001,
+contact,C004,2025-07-10 08:06:00,,,,hash_09d4,Dealeur,,,,,contacts,created,DEV123,IMEI0001,
+contact,C005,2025-07-10 08:08:00,,,,hash_10e5,Laura,,,,,contacts,created,DEV123,IMEI0001,
+contact,C006,2025-07-10 08:10:00,,,,hash_11f6,Sophie,,,,,contacts,created,DEV123,IMEI0001,
+contact,C007,2025-07-10 08:12:00,,,,hash_12g7,Administratif,,,,,contacts,created,DEV123,IMEI0001,
+contact,C008,2025-07-10 08:14:00,,,,hash_13h8,Samir,,,,,contacts,created,DEV123,IMEI0001,
+contact,C009,2025-07-10 08:16:00,,,,hash_14i9,Marine,,,,,contacts,created,DEV123,IMEI0001,
+contact,C010,2025-07-10 08:18:00,,,,hash_17l2,Thomas,,,,,contacts,created,DEV123,IMEI0001,
+contact,C011,2025-07-10 08:20:00,,,,hash_19n4,Lucas,,,,,contacts,created,DEV123,IMEI0001,
+contact,C012,2025-07-10 08:22:00,,,,hash_15j0,AgenceVoyage,,,,,contacts,created,DEV123,IMEI0001,
+contact,C013,2025-07-10 08:24:00,,,,hash_16k1,ServiceClient,,,,,contacts,created,DEV123,IMEI0001,
+contact,C014,2025-07-10 08:26:00,,,,hash_18m3,Livraison,,,,,contacts,created,DEV123,IMEI0001,
+location,LO0015,2025-07-10 09:01:00,,,,,,,,48.872247,2.349796,location_service,fix,DEV123,IMEI0001,position stable
+media,ME0016,2025-07-10 09:10:00,,,,,,,IMG_20250710_000015.jpg,48.850953,2.343748,gallery,photo_taken,DEV123,IMEI0001,photo intérieur
+call,CA0017,2025-07-10 09:11:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,,,,,phone,call_out,DEV123,IMEI0001,durée 00:08:26
+sms,SM0018,2025-07-10 09:21:00,outgoing,+33600000001,+33655555555,hash_10e5,Laura,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+sms,SM0019,2025-07-10 09:24:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,Tu peux m'envoyer le fichier stp ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0020,2025-07-10 09:30:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,,,,,phone,call_in,DEV123,IMEI0001,durée 00:00:46
+call,CA0021,2025-07-10 09:32:00,outgoing,+33600000001,+33677777777,hash_12g7,Administratif,,,,,phone,call_out,DEV123,IMEI0001,durée 00:10:39
+app_event,AP0022,2025-07-10 09:38:00,,,,,,,,,,whatsapp,open_note,DEV123,IMEI0001,
+contact,CO0023,2025-07-10 09:42:00,,,,,,,,,,,,DEV123,IMEI0001,
+media,ME0024,2025-07-10 09:44:00,,,,,,,IMG_20250710_000023.jpg,,,gallery,photo_taken,DEV123,IMEI0001,photo paysage
+sms,SM0025,2025-07-10 09:50:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,
+browser,BR0026,2025-07-10 09:52:00,,,,,,https://www.example.com/recettes/pates,,,,browser,visit,DEV123,IMEI0001,horaires
+call,CA0027,2025-07-10 09:56:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,,,,,phone,call_in,DEV123,IMEI0001,durée 00:10:44
+location,LO0028,2025-07-10 10:02:00,,,,,,,,48.875286,2.371040,location_service,fix,DEV123,IMEI0001,position stable
+app_event,AP0029,2025-07-10 10:08:00,,,,,,,,,,weather,route_requested,DEV123,IMEI0001,
+sms,SM0030,2025-07-10 10:18:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,"Bonne nuit, bisous.",,,,sms,received,DEV123,IMEI0001,
+call,CA0031,2025-07-10 10:26:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,,,,,phone,call_in,DEV123,IMEI0001,manqué
+media,ME0032,2025-07-10 10:35:00,,,,,,,VOICEMSG_20250710_000031.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+media,ME0033,2025-07-10 10:42:00,,,,,,,VOICEMSG_20250710_000032.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+call,CA0034,2025-07-10 10:45:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,,,,,phone,call_in,DEV123,IMEI0001,manqué
+contact,CO0035,2025-07-10 10:47:00,,,,,,,,,,,,DEV123,IMEI0001,
+sms,SM0036,2025-07-10 10:50:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0037,2025-07-10 11:00:00,incoming,+33688888888,+33600000001,hash_13h8,Samir,,,,,phone,call_in,DEV123,IMEI0001,durée 00:08:55
+email,EM0038,2025-07-10 11:02:00,outgoing,user@example.com,team@example.com,hash_email8,Newsletter,Confirmation : votre réservation est effective.,,,,email,sent,DEV123,IMEI0001,
+sms,SM0039,2025-07-10 11:03:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0040,2025-07-10 11:05:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,,,,,phone,call_in,DEV123,IMEI0001,durée 00:10:32
+location,LO0041,2025-07-10 11:08:00,,,,,,,,48.861217,2.346462,location_service,fix,DEV123,IMEI0001,
+location,LO0042,2025-07-10 11:16:00,,,,,,,,48.850584,2.377164,location_service,fix,DEV123,IMEI0001,promenade
+sms,SM0043,2025-07-10 11:20:00,outgoing,+33600000001,+33612121212,hash_17l2,Thomas,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+app_event,AP0044,2025-07-10 11:29:00,,,,,,"uber://request?to=48.8566,2.3522",,,,gallery,event_created,DEV123,IMEI0001,
+call,CA0045,2025-07-10 11:38:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,,,,,phone,call_in,DEV123,IMEI0001,durée 00:09:27
+email,EM0046,2025-07-10 11:47:00,incoming,hr@example.com,user@example.com,hash_email26,Newsletter,Confirmation : votre réservation est effective.,,,,email,received,DEV123,IMEI0001,
+app_event,AP0047,2025-07-10 11:55:00,,,,,,whatsapp://chat?u=emma,,,,browser,play,DEV123,IMEI0001,
+sms,SM0048,2025-07-10 11:56:00,outgoing,+33600000001,+33612121212,hash_17l2,Thomas,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+contact,CO0049,2025-07-10 11:57:00,,,,,,,,,,,,DEV123,IMEI0001,
+sms,SM0050,2025-07-10 11:58:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,Tu peux m'envoyer le fichier stp ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0051,2025-07-10 12:06:00,outgoing,+33600000001,+33644444444,hash_09d4,Benjamin,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+call,CA0052,2025-07-10 12:14:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,,,,,phone,call_in,DEV123,IMEI0001,durée 00:01:42
+call,CA0053,2025-07-10 12:21:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,,,,,phone,call_in,DEV123,IMEI0001,durée 00:00:43
+browser,BR0054,2025-07-10 12:23:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,recherche
+browser,BR0055,2025-07-10 12:25:00,,,,,,https://www.example.com/transport/metro,,,,browser,visit,DEV123,IMEI0001,horaires
+sms,SM0056,2025-07-10 12:33:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,"Merci, j'ai bien reçu.",,,,sms,received,DEV123,IMEI0001,
+call,CA0057,2025-07-10 12:35:00,incoming,+33688888888,+33600000001,hash_13h8,Samir,,,,,phone,call_in,DEV123,IMEI0001,manqué
+browser,BR0058,2025-07-10 12:44:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,lecture article
+email,EM0059,2025-07-10 12:48:00,incoming,alerts@example.com,user@example.com,hash_email32,Service,Votre entretien est confirmé.,,,,email,received,DEV123,IMEI0001,
+app_event,AP0060,2025-07-10 12:49:00,,,,,,,,,,voice_recorder,request,DEV123,IMEI0001,
+email,EM0061,2025-07-10 12:54:00,outgoing,user@example.com,team@example.com,hash_email28,Service,Votre entretien est confirmé.,,,,email,sent,DEV123,IMEI0001,
+sms,SM0062,2025-07-10 12:58:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0063,2025-07-10 13:06:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,"Salut, on se voit à le parc ?",,,,sms,sent,DEV123,IMEI0001,
+sms,SM0064,2025-07-10 13:09:00,outgoing,+33600000001,+33622222222,hash_07b2,Paul Martin,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+sms,SM0065,2025-07-10 13:19:00,outgoing,+33600000001,+33644444444,hash_09d4,Benjamin,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+call,CA0066,2025-07-10 13:29:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,,,,,phone,call_in,DEV123,IMEI0001,durée 00:04:13
+browser,BR0067,2025-07-10 13:35:00,,,,,,https://www.example.com/transport/metro,,,,browser,visit,DEV123,IMEI0001,réservation
+call,CA0068,2025-07-10 13:40:00,incoming,+33688888888,+33600000001,hash_13h8,Samir,,,,,phone,call_in,DEV123,IMEI0001,durée 00:01:00
+call,CA0069,2025-07-10 13:50:00,outgoing,+33600000001,+33622222222,hash_07b2,Paul Martin,,,,,phone,call_out,DEV123,IMEI0001,durée 00:08:16
+sms,SM0070,2025-07-10 13:56:00,outgoing,+33600000001,+33622222222,hash_07b2,Paul Martin,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0071,2025-07-10 14:05:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+contact,CO0072,2025-07-10 14:14:00,,,,,,,,,,,,DEV123,IMEI0001,
+sms,SM0073,2025-07-10 14:16:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,Tu peux m'envoyer le fichier stp ?,,,,sms,received,DEV123,IMEI0001,
+media,ME0074,2025-07-10 14:19:00,,,,,,,VOICEMSG_20250710_000073.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+sms,SM0075,2025-07-10 14:23:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,"Bonne nuit, bisous.",,,,sms,received,DEV123,IMEI0001,
+call,CA0076,2025-07-10 14:28:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,,,,,phone,call_out,DEV123,IMEI0001,manqué
+call,CA0077,2025-07-10 14:33:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,,,,,phone,call_out,DEV123,IMEI0001,durée 00:02:40
+email,EM0078,2025-07-10 14:36:00,outgoing,user@example.com,archive@example.com,hash_email36,Paul Martin,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,sent,DEV123,IMEI0001,
+sms,SM0079,2025-07-10 14:39:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+location,LO0080,2025-07-10 14:46:00,,,,,,,,48.853823,2.352330,location_service,fix,DEV123,IMEI0001,
+app_event,AP0081,2025-07-10 14:50:00,,,,,,,,,,calendar,backup,DEV123,IMEI0001,
+call,CA0082,2025-07-10 14:59:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:59
+email,EM0083,2025-07-10 15:02:00,incoming,alerts@example.com,user@example.com,hash_email2,HR,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+media,ME0084,2025-07-10 15:09:00,,,,,,,IMG_20250710_000083.jpg,48.873621,2.344324,gallery,photo_taken,DEV123,IMEI0001,photo terrasse
+app_event,AP0085,2025-07-10 15:13:00,,,,,,calendar://event?id=meet_18h,,,,whatsapp,forecast_view,DEV123,IMEI0001,
+sms,SM0086,2025-07-10 15:17:00,outgoing,+33600000001,+33644444444,hash_09d4,Benjamin,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+sms,SM0087,2025-07-10 15:19:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0088,2025-07-10 15:28:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,,,,,phone,call_out,DEV123,IMEI0001,manqué
+email,EM0089,2025-07-10 15:31:00,outgoing,user@example.com,client@example.com,hash_email7,Service,"Les événements du weekend : expo, concert, cinéma.",,,,email,sent,DEV123,IMEI0001,
+browser,BR0090,2025-07-10 15:37:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,lecture article
+call,CA0091,2025-07-10 15:47:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,,,,,phone,call_in,DEV123,IMEI0001,manqué
+call,CA0092,2025-07-10 15:56:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,,,,,phone,call_in,DEV123,IMEI0001,durée 00:10:12
+call,CA0093,2025-07-10 15:58:00,incoming,+33733333333,+33600000001,hash_19n4,Lucas,,,,,phone,call_in,DEV123,IMEI0001,durée 00:10:54
+sms,SM0094,2025-07-10 16:03:00,incoming,+33699999999,+33600000001,hash_14i9,Mohammed,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0095,2025-07-10 16:08:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,,,,,phone,call_out,DEV123,IMEI0001,durée 00:10:24
+browser,BR0096,2025-07-10 16:11:00,,,,,,https://www.example.com/recettes/pates,,,,browser,visit,DEV123,IMEI0001,réservation
+call,CA0097,2025-07-10 16:12:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,,,,,phone,call_in,DEV123,IMEI0001,durée 00:09:38
+browser,BR0098,2025-07-10 16:20:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,recherche
+browser,BR0099,2025-07-10 16:29:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,horaires
+browser,BR0100,2025-07-10 16:34:00,,,,,,https://www.example.com/recettes/pates,,,,browser,visit,DEV123,IMEI0001,réservation
+sms,SM0101,2025-07-10 16:38:00,incoming,+33733333333,+33600000001,hash_19n4,Lucas,"Bonne nuit, bisous.",,,,sms,received,DEV123,IMEI0001,
+sms,SM0102,2025-07-10 16:39:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0103,2025-07-10 16:49:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:07:25
+sms,SM0104,2025-07-10 16:50:00,outgoing,+33600000001,+33711111111,hash_16k1,ServiceClient,Tu as vu mon message ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0105,2025-07-10 16:59:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,Quel est le plan pour ce weekend ?,,,,sms,sent,DEV123,IMEI0001,
+email,EM0106,2025-07-10 17:01:00,outgoing,user@example.com,friend@example.com,hash_email30,Newsletter,Confirmation : votre réservation est effective.,,,,email,sent,DEV123,IMEI0001,
+location,LO0107,2025-07-10 17:10:00,,,,,,,,48.862802,2.376274,location_service,fix,DEV123,IMEI0001,trajet
+app_event,AP0108,2025-07-10 17:18:00,,,,,,notes://open?id=note_1,,,,backup,route_requested,DEV123,IMEI0001,
+sms,SM0109,2025-07-10 17:23:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,"Bonne nuit, bisous.",,,,sms,received,DEV123,IMEI0001,
+call,CA0110,2025-07-10 17:28:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:08:05
+sms,SM0111,2025-07-10 17:32:00,outgoing,+33600000001,+33677777777,hash_12g7,Administratif,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+call,CA0112,2025-07-10 17:38:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,,,,,phone,call_in,DEV123,IMEI0001,durée 00:03:53
+call,CA0113,2025-07-10 17:48:00,outgoing,+33600000001,+33700000000,hash_15j0,AgenceVoyage,,,,,phone,call_out,DEV123,IMEI0001,durée 00:09:24
+call,CA0114,2025-07-10 17:54:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,,,,,phone,call_in,DEV123,IMEI0001,durée 00:06:34
+media,ME0115,2025-07-10 18:03:00,,,,,,,IMG_20250710_000114.jpg,48.858188,2.359426,gallery,photo_taken,DEV123,IMEI0001,photo paysage
+sms,SM0116,2025-07-10 18:10:00,outgoing,+33600000001,+33700000000,hash_15j0,AgenceVoyage,Je réserve pour 2 personnes.,,,,sms,sent,DEV123,IMEI0001,
+email,EM0117,2025-07-10 18:19:00,incoming,alerts@example.com,user@example.com,hash_email38,Paul Martin,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,received,DEV123,IMEI0001,
+location,LO0118,2025-07-10 18:22:00,,,,,,,,48.876006,2.347269,location_service,fix,DEV123,IMEI0001,promenade
+call,CA0119,2025-07-10 18:26:00,incoming,+33688888888,+33600000001,hash_13h8,Samir,,,,,phone,call_in,DEV123,IMEI0001,durée 00:06:17
+media,ME0120,2025-07-10 18:33:00,,,,,,,VOICEMSG_20250710_000119.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+app_event,AP0121,2025-07-10 18:41:00,,,,,,spotify://track/12345,,,,sms,open_note,DEV123,IMEI0001,
+sms,SM0122,2025-07-10 18:47:00,outgoing,+33600000001,+33644444444,hash_09d4,Benjamin,"Salut, on se voit à la terrasse ?",,,,sms,sent,DEV123,IMEI0001,
+email,EM0123,2025-07-10 18:51:00,incoming,service@example.com,user@example.com,hash_email10,HR,Votre entretien est confirmé.,,,,email,received,DEV123,IMEI0001,
+call,CA0124,2025-07-10 18:53:00,outgoing,+33600000001,+33612121212,hash_17l2,Thomas,,,,,phone,call_out,DEV123,IMEI0001,durée 00:04:49
+call,CA0125,2025-07-10 19:03:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:19
+sms,SM0126,2025-07-10 19:04:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0127,2025-07-10 19:08:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+media,ME0128,2025-07-10 19:18:00,,,,,,,IMG_20250710_000127.jpg,48.862851,2.354823,gallery,photo_taken,DEV123,IMEI0001,photo amis
+location,LO0129,2025-07-10 19:19:00,,,,,,,,48.875487,2.372893,location_service,fix,DEV123,IMEI0001,
+call,CA0130,2025-07-10 19:25:00,incoming,+33733333333,+33600000001,hash_19n4,Lucas,,,,,phone,call_in,DEV123,IMEI0001,durée 00:06:11
+media,ME0131,2025-07-10 19:30:00,,,,,,,VOICEMSG_20250710_000130.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+call,CA0132,2025-07-10 19:40:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,,,,,phone,call_in,DEV123,IMEI0001,durée 00:01:17
+app_event,AP0133,2025-07-10 19:44:00,,,,,,spotify://track/12345,,,,backup,update_check,DEV123,IMEI0001,
+browser,BR0134,2025-07-10 19:50:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,recherche
+app_event,AP0135,2025-07-10 19:53:00,,,,,,calendar://event?id=meet_18h,,,,system,play,DEV123,IMEI0001,
+media,ME0136,2025-07-10 19:59:00,,,,,,,VOICEMSG_20250710_000135.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+app_event,AP0137,2025-07-10 20:04:00,,,,,,whatsapp://chat?u=emma,,,,sms,start,DEV123,IMEI0001,
+sms,SM0138,2025-07-10 20:11:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,Je réserve pour 2 personnes.,,,,sms,sent,DEV123,IMEI0001,
+call,CA0139,2025-07-10 20:12:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:03:19
+browser,BR0140,2025-07-10 20:18:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,réservation
+call,CA0141,2025-07-10 20:27:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,,,,,phone,call_in,DEV123,IMEI0001,durée 00:04:19
+sms,SM0142,2025-07-10 20:29:00,outgoing,+33600000001,+33700000000,hash_15j0,AgenceVoyage,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+media,ME0143,2025-07-10 20:32:00,,,,,,,IMG_20250710_000142.jpg,48.864526,2.368983,gallery,photo_taken,DEV123,IMEI0001,photo amis
+location,LO0144,2025-07-10 20:34:00,,,,,,,,48.874979,2.351850,location_service,fix,DEV123,IMEI0001,promenade
+sms,SM0145,2025-07-10 20:35:00,outgoing,+33600000001,+33700000000,hash_15j0,AgenceVoyage,Je serai en retard de 10 minutes.,,,,sms,sent,DEV123,IMEI0001,
+email,EM0146,2025-07-10 20:44:00,outgoing,user@example.com,friend@example.com,hash_email41,Service,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,sent,DEV123,IMEI0001,
+app_event,AP0147,2025-07-10 20:54:00,,,,,,"maps://route?to=48.8606,2.3376",,,,maps,forecast_view,DEV123,IMEI0001,
+call,CA0148,2025-07-10 20:57:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,,,,,phone,call_in,DEV123,IMEI0001,durée 00:07:07
+app_event,AP0149,2025-07-10 21:04:00,,,,,,spotify://track/12345,,,,system,open_chat,DEV123,IMEI0001,
+location,LO0150,2025-07-10 21:05:00,,,,,,,,48.854552,2.372446,location_service,fix,DEV123,IMEI0001,promenade
+sms,SM0151,2025-07-10 21:09:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+media,ME0152,2025-07-10 21:13:00,,,,,,,VOICEMSG_20250710_000151.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+call,CA0153,2025-07-10 21:21:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,,,,,phone,call_in,DEV123,IMEI0001,durée 00:04:36
+location,LO0154,2025-07-10 21:31:00,,,,,,,,48.878803,2.343969,location_service,fix,DEV123,IMEI0001,position stable
+location,LO0155,2025-07-10 21:36:00,,,,,,,,48.869813,2.346282,location_service,fix,DEV123,IMEI0001,position stable
+location,LO0156,2025-07-10 21:39:00,,,,,,,,48.850080,2.358020,location_service,fix,DEV123,IMEI0001,trajet
+sms,SM0157,2025-07-10 21:43:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+browser,BR0158,2025-07-10 21:48:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,horaires
+call,CA0159,2025-07-10 21:57:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,,,,,phone,call_in,DEV123,IMEI0001,manqué
+sms,SM0160,2025-07-10 22:00:00,outgoing,+33600000001,+33622222222,hash_07b2,Paul Martin,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+location,LO0161,2025-07-10 22:10:00,,,,,,,,48.877636,2.357566,location_service,fix,DEV123,IMEI0001,trajet
+browser,BR0162,2025-07-10 22:17:00,,,,,,https://www.example.com/restaurant/reservation,,,,browser,visit,DEV123,IMEI0001,recherche
+call,CA0163,2025-07-10 22:27:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,,,,,phone,call_in,DEV123,IMEI0001,durée 00:09:16
+contact,CO0164,2025-07-10 22:31:00,,,,,,,,,,,,DEV123,IMEI0001,
+email,EM0165,2025-07-10 22:41:00,incoming,hr@example.com,user@example.com,hash_email37,Paul Martin,Votre entretien est confirmé.,,,,email,received,DEV123,IMEI0001,
+call,CA0166,2025-07-10 22:49:00,outgoing,+33600000001,+33655555555,hash_10e5,Laura,,,,,phone,call_out,DEV123,IMEI0001,durée 00:06:40
+app_event,AP0167,2025-07-10 22:51:00,,,,,,"maps://route?to=48.8606,2.3376",,,,system,reminder_set,DEV123,IMEI0001,
+sms,SM0168,2025-07-10 22:53:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+browser,BR0169,2025-07-10 22:58:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,recherche
+app_event,AP0170,2025-07-10 23:07:00,,,,,,,,,,phone,forecast_view,DEV123,IMEI0001,
+sms,SM0171,2025-07-10 23:13:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+browser,BR0172,2025-07-10 23:22:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,recherche
+sms,SM0173,2025-07-10 23:31:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+sms,SM0174,2025-07-10 23:40:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+sms,SM0175,2025-07-10 23:50:00,outgoing,+33600000001,+33711111111,hash_16k1,ServiceClient,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+location,LO0176,2025-07-10 23:59:00,,,,,,,,48.862240,2.348988,location_service,fix,DEV123,IMEI0001,
+call,CA0177,2025-07-11 00:01:00,outgoing,+33600000001,+33733333333,hash_19n4,Lucas,,,,,phone,call_out,DEV123,IMEI0001,durée 00:04:32
+browser,BR0178,2025-07-11 00:08:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,recherche
+sms,SM0179,2025-07-11 00:17:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,"Bonne nuit, bisous.",,,,sms,received,DEV123,IMEI0001,
+call,CA0180,2025-07-11 00:20:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,,,,,phone,call_out,DEV123,IMEI0001,durée 00:06:21
+email,EM0181,2025-07-11 00:29:00,outgoing,user@example.com,client@example.com,hash_email19,Newsletter,Compte-rendu envoyé : merci de confirmer réception.,,,,email,sent,DEV123,IMEI0001,
+location,LO0182,2025-07-11 00:37:00,,,,,,,,48.875958,2.357862,location_service,fix,DEV123,IMEI0001,trajet
+sms,SM0183,2025-07-11 00:46:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+app_event,AP0184,2025-07-11 00:50:00,,,,,,notes://open?id=note_1,,,,weather,play,DEV123,IMEI0001,
+media,ME0185,2025-07-11 00:51:00,,,,,,,VOICEMSG_20250710_000184.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+media,ME0186,2025-07-11 00:58:00,,,,,,,VOICEMSG_20250710_000185.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+email,EM0187,2025-07-11 01:01:00,outgoing,user@example.com,client@example.com,hash_email9,Newsletter,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,sent,DEV123,IMEI0001,
+app_event,AP0188,2025-07-11 01:09:00,,,,,,"maps://route?to=48.8606,2.3376",,,,browser,start,DEV123,IMEI0001,
+contact,CO0189,2025-07-11 01:12:00,,,,,,,,,,,,DEV123,IMEI0001,
+call,CA0190,2025-07-11 01:15:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:04:21
+location,LO0191,2025-07-11 01:22:00,,,,,,,,48.869495,2.374071,location_service,fix,DEV123,IMEI0001,trajet
+email,EM0192,2025-07-11 01:30:00,incoming,service@example.com,user@example.com,hash_email5,HR,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+email,EM0193,2025-07-11 01:32:00,outgoing,user@example.com,client@example.com,hash_email49,Paul Martin,Confirmation : votre réservation est effective.,,,,email,sent,DEV123,IMEI0001,
+sms,SM0194,2025-07-11 01:37:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0195,2025-07-11 01:43:00,outgoing,+33600000001,+33677777777,hash_12g7,Administratif,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+call,CA0196,2025-07-11 01:46:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,,,,,phone,call_out,DEV123,IMEI0001,manqué
+app_event,AP0197,2025-07-11 01:56:00,,,,,,spotify://track/12345,,,,calendar,forecast_view,DEV123,IMEI0001,
+sms,SM0198,2025-07-11 02:04:00,incoming,+33733333333,+33600000001,hash_19n4,Lucas,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+browser,BR0199,2025-07-11 02:12:00,,,,,,https://www.example.com/restaurant/reservation,,,,browser,visit,DEV123,IMEI0001,horaires
+sms,SM0200,2025-07-11 02:18:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0201,2025-07-11 02:23:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:01:15
+call,CA0202,2025-07-11 02:29:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,,,,,phone,call_in,DEV123,IMEI0001,durée 00:04:01
+email,EM0203,2025-07-11 02:36:00,outgoing,user@example.com,client@example.com,hash_email37,Paul Martin,Compte-rendu envoyé : merci de confirmer réception.,,,,email,sent,DEV123,IMEI0001,
+media,ME0204,2025-07-11 02:41:00,,,,,,,IMG_20250710_000203.jpg,,,gallery,photo_taken,DEV123,IMEI0001,selfie
+sms,SM0205,2025-07-11 02:45:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,"Merci, j'ai bien reçu.",,,,sms,received,DEV123,IMEI0001,
+app_event,AP0206,2025-07-11 02:46:00,,,,,,"maps://route?to=48.8606,2.3376",,,,maps,fitness_start,DEV123,IMEI0001,
+contact,CO0207,2025-07-11 02:52:00,,,,,,,,,,,,DEV123,IMEI0001,
+media,ME0208,2025-07-11 02:54:00,,,,,,,VOICEMSG_20250710_000207.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+sms,SM0209,2025-07-11 03:01:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+app_event,AP0210,2025-07-11 03:07:00,,,,,,calendar://event?id=meet_18h,,,,fitness,start,DEV123,IMEI0001,
+app_event,AP0211,2025-07-11 03:12:00,,,,,,calendar://event?id=meet_18h,,,,system,fitness_start,DEV123,IMEI0001,
+media,ME0212,2025-07-11 03:18:00,,,,,,,IMG_20250710_000211.jpg,48.852259,2.370166,gallery,photo_taken,DEV123,IMEI0001,photo intérieur
+app_event,AP0213,2025-07-11 03:25:00,,,,,,notes://open?id=note_1,,,,ride_hailing,open_chat,DEV123,IMEI0001,
+call,CA0214,2025-07-11 03:30:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,,,,,phone,call_out,DEV123,IMEI0001,durée 00:10:47
+browser,BR0215,2025-07-11 03:40:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,réservation
+sms,SM0216,2025-07-11 03:44:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0217,2025-07-11 03:54:00,outgoing,+33600000001,+33644444444,hash_09d4,Benjamin,Je réserve pour 2 personnes.,,,,sms,sent,DEV123,IMEI0001,
+location,LO0218,2025-07-11 03:56:00,,,,,,,,48.854193,2.377850,location_service,fix,DEV123,IMEI0001,promenade
+email,EM0219,2025-07-11 03:58:00,incoming,newsletter@example.com,user@example.com,hash_email35,HR,Confirmation : votre réservation est effective.,,,,email,received,DEV123,IMEI0001,
+call,CA0220,2025-07-11 04:07:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:56
+call,CA0221,2025-07-11 04:09:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,,,,,phone,call_in,DEV123,IMEI0001,durée 00:04:02
+browser,BR0222,2025-07-11 04:13:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,recherche
+email,EM0223,2025-07-11 04:19:00,incoming,hr@example.com,user@example.com,hash_email35,Newsletter,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,received,DEV123,IMEI0001,
+call,CA0224,2025-07-11 04:23:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,,,,,phone,call_in,DEV123,IMEI0001,manqué
+sms,SM0225,2025-07-11 04:33:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+email,EM0226,2025-07-11 04:43:00,incoming,colleague@example.com,user@example.com,hash_email49,HR,Compte-rendu envoyé : merci de confirmer réception.,,,,email,received,DEV123,IMEI0001,
+sms,SM0227,2025-07-11 04:47:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0228,2025-07-11 04:50:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,"Merci, j'ai bien reçu.",,,,sms,received,DEV123,IMEI0001,
+browser,BR0229,2025-07-11 04:51:00,,,,,,https://www.example.com/transport/metro,,,,browser,visit,DEV123,IMEI0001,lecture article
+call,CA0230,2025-07-11 04:55:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,,,,,phone,call_in,DEV123,IMEI0001,manqué
+sms,SM0231,2025-07-11 04:58:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+media,ME0232,2025-07-11 05:06:00,,,,,,,VOICEMSG_20250710_000231.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+media,ME0233,2025-07-11 05:15:00,,,,,,,IMG_20250710_000232.jpg,48.856646,2.364604,gallery,photo_taken,DEV123,IMEI0001,photo amis
+sms,SM0234,2025-07-11 05:16:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+browser,BR0235,2025-07-11 05:24:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,recherche
+sms,SM0236,2025-07-11 05:26:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0237,2025-07-11 05:36:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0238,2025-07-11 05:44:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,,,,,phone,call_in,DEV123,IMEI0001,durée 00:01:54
+browser,BR0239,2025-07-11 05:53:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,horaires
+call,CA0240,2025-07-11 05:57:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,,,,,phone,call_in,DEV123,IMEI0001,durée 00:06:26
+browser,BR0241,2025-07-11 06:03:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,réservation
+browser,BR0242,2025-07-11 06:09:00,,,,,,https://www.example.com/transport/metro,,,,browser,visit,DEV123,IMEI0001,recherche
+sms,SM0243,2025-07-11 06:11:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,Tu peux m'envoyer le fichier stp ?,,,,sms,received,DEV123,IMEI0001,
+app_event,AP0244,2025-07-11 06:20:00,,,,,,spotify://track/12345,,,,phone,update_check,DEV123,IMEI0001,
+location,LO0245,2025-07-11 06:22:00,,,,,,,,48.862324,2.374944,location_service,fix,DEV123,IMEI0001,trajet
+app_event,AP0246,2025-07-11 06:23:00,,,,,,calendar://event?id=meet_18h,,,,maps,update_check,DEV123,IMEI0001,
+call,CA0247,2025-07-11 06:33:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,,,,,phone,call_out,DEV123,IMEI0001,durée 00:07:14
+app_event,AP0248,2025-07-11 06:39:00,,,,,,notes://open?id=note_1,,,,ride_hailing,open_chat,DEV123,IMEI0001,
+sms,SM0249,2025-07-11 06:43:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+location,LO0250,2025-07-11 06:52:00,,,,,,,,48.850788,2.377163,location_service,fix,DEV123,IMEI0001,promenade
+contact,CO0251,2025-07-11 06:57:00,,,,,,,,,,,,DEV123,IMEI0001,
+browser,BR0252,2025-07-11 07:02:00,,,,,,https://www.example.com/restaurant/reservation,,,,browser,visit,DEV123,IMEI0001,réservation
+contact,CO0253,2025-07-11 07:05:00,,,,,,,,,,,,DEV123,IMEI0001,
+location,LO0254,2025-07-11 07:12:00,,,,,,,,48.852088,2.369639,location_service,fix,DEV123,IMEI0001,
+sms,SM0255,2025-07-11 07:21:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0256,2025-07-11 07:27:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0257,2025-07-11 07:28:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+browser,BR0258,2025-07-11 07:33:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,recherche
+call,CA0259,2025-07-11 07:41:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,,,,,phone,call_in,DEV123,IMEI0001,durée 00:08:07
+sms,SM0260,2025-07-11 07:43:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+contact,CO0261,2025-07-11 07:50:00,,,,,,,,,,,,DEV123,IMEI0001,
+email,EM0262,2025-07-11 07:51:00,incoming,newsletter@example.com,user@example.com,hash_email20,HR,Votre entretien est confirmé.,,,,email,received,DEV123,IMEI0001,
+media,ME0263,2025-07-11 07:56:00,,,,,,,VOICEMSG_20250710_000262.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+sms,SM0264,2025-07-11 08:04:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,"Merci, j'ai bien reçu.",,,,sms,received,DEV123,IMEI0001,
+call,CA0265,2025-07-11 08:08:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,,,,,phone,call_in,DEV123,IMEI0001,durée 00:05:04
+call,CA0266,2025-07-11 08:09:00,outgoing,+33600000001,+33677777777,hash_12g7,Administratif,,,,,phone,call_out,DEV123,IMEI0001,durée 00:01:55
+sms,SM0267,2025-07-11 08:16:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0268,2025-07-11 08:17:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+app_event,AP0269,2025-07-11 08:23:00,,,,,,notes://open?id=note_1,,,,location_service,request,DEV123,IMEI0001,
+sms,SM0270,2025-07-11 08:30:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0271,2025-07-11 08:35:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:04
+call,CA0272,2025-07-11 08:37:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,,,,,phone,call_in,DEV123,IMEI0001,durée 00:05:22
+browser,BR0273,2025-07-11 08:40:00,,,,,,https://www.example.com/transport/metro,,,,browser,visit,DEV123,IMEI0001,lecture article
+sms,SM0274,2025-07-11 08:44:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+email,EM0275,2025-07-11 08:52:00,outgoing,user@example.com,archive@example.com,hash_email44,Newsletter,"Les événements du weekend : expo, concert, cinéma.",,,,email,sent,DEV123,IMEI0001,
+sms,SM0276,2025-07-11 08:54:00,incoming,+33688888888,+33600000001,hash_13h8,Samir,Je serai en retard de 10 minutes.,,,,sms,received,DEV123,IMEI0001,
+location,LO0277,2025-07-11 09:00:00,,,,,,,,48.865220,2.352416,location_service,fix,DEV123,IMEI0001,trajet
+contact,CO0278,2025-07-11 09:06:00,,,,,,,,,,,,DEV123,IMEI0001,
+app_event,AP0279,2025-07-11 09:08:00,,,,,,spotify://track/12345,,,,location_service,update_check,DEV123,IMEI0001,
+call,CA0280,2025-07-11 09:16:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,,,,,phone,call_in,DEV123,IMEI0001,durée 00:00:28
+app_event,AP0281,2025-07-11 09:26:00,,,,,,spotify://track/12345,,,,whatsapp,reminder_set,DEV123,IMEI0001,
+call,CA0282,2025-07-11 09:29:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,,,,,phone,call_in,DEV123,IMEI0001,manqué
+app_event,AP0283,2025-07-11 09:35:00,,,,,,"uber://request?to=48.8566,2.3522",,,,location_service,start,DEV123,IMEI0001,
+sms,SM0284,2025-07-11 09:39:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+call,CA0285,2025-07-11 09:42:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,,,,,phone,call_in,DEV123,IMEI0001,durée 00:06:26
+media,ME0286,2025-07-11 09:52:00,,,,,,,IMG_20250710_000285.jpg,,,gallery,photo_taken,DEV123,IMEI0001,selfie
+sms,SM0287,2025-07-11 09:54:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,Je serai en retard de 10 minutes.,,,,sms,received,DEV123,IMEI0001,
+browser,BR0288,2025-07-11 10:04:00,,,,,,https://www.example.com/transport/metro,,,,browser,visit,DEV123,IMEI0001,réservation
+sms,SM0289,2025-07-11 10:07:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+location,LO0290,2025-07-11 10:09:00,,,,,,,,48.859287,2.355067,location_service,fix,DEV123,IMEI0001,promenade
+app_event,AP0291,2025-07-11 10:18:00,,,,,,"uber://request?to=48.8566,2.3522",,,,location_service,backup,DEV123,IMEI0001,
+call,CA0292,2025-07-11 10:24:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,,,,,phone,call_in,DEV123,IMEI0001,durée 00:03:21
+email,EM0293,2025-07-11 10:32:00,incoming,newsletter@example.com,user@example.com,hash_email9,HR,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,received,DEV123,IMEI0001,
+sms,SM0294,2025-07-11 10:34:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0295,2025-07-11 10:41:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+media,ME0296,2025-07-11 10:44:00,,,,,,,VOICEMSG_20250710_000295.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+contact,CO0297,2025-07-11 10:50:00,,,,,,,,,,,,DEV123,IMEI0001,
+browser,BR0298,2025-07-11 10:54:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,réservation
+media,ME0299,2025-07-11 11:02:00,,,,,,,IMG_20250710_000298.jpg,48.859284,2.372345,gallery,photo_taken,DEV123,IMEI0001,photo paysage
+app_event,AP0300,2025-07-11 11:06:00,,,,,,spotify://track/12345,,,,ride_hailing,backup,DEV123,IMEI0001,
+email,EM0301,2025-07-11 11:14:00,outgoing,user@example.com,archive@example.com,hash_email33,Service,Votre entretien est confirmé.,,,,email,sent,DEV123,IMEI0001,
+app_event,AP0302,2025-07-11 11:24:00,,,,,,,,,,gallery,route_requested,DEV123,IMEI0001,
+location,LO0303,2025-07-11 11:30:00,,,,,,,,48.866636,2.344104,location_service,fix,DEV123,IMEI0001,
+sms,SM0304,2025-07-11 11:33:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+app_event,AP0305,2025-07-11 11:35:00,,,,,,calendar://event?id=meet_18h,,,,calendar,forecast_view,DEV123,IMEI0001,
+email,EM0306,2025-07-11 11:42:00,incoming,alerts@example.com,user@example.com,hash_email33,Newsletter,Votre entretien est confirmé.,,,,email,received,DEV123,IMEI0001,
+call,CA0307,2025-07-11 11:44:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,,,,,phone,call_out,DEV123,IMEI0001,manqué
+email,EM0308,2025-07-11 11:50:00,incoming,newsletter@example.com,user@example.com,hash_email3,Newsletter,Confirmation : votre réservation est effective.,,,,email,received,DEV123,IMEI0001,
+browser,BR0309,2025-07-11 11:53:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,recherche
+call,CA0310,2025-07-11 11:54:00,outgoing,+33600000001,+33622222222,hash_07b2,Paul Martin,,,,,phone,call_out,DEV123,IMEI0001,durée 00:02:35
+email,EM0311,2025-07-11 12:04:00,outgoing,user@example.com,client@example.com,hash_email50,Newsletter,Votre entretien est confirmé.,,,,email,sent,DEV123,IMEI0001,
+sms,SM0312,2025-07-11 12:05:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0313,2025-07-11 12:13:00,outgoing,+33600000001,+33612121212,hash_17l2,Thomas,Quel est le plan pour ce weekend ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0314,2025-07-11 12:16:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,"Salut, on se voit à le parc ?",,,,sms,received,DEV123,IMEI0001,
+call,CA0315,2025-07-11 12:26:00,outgoing,+33600000001,+33677777777,hash_12g7,Administratif,,,,,phone,call_out,DEV123,IMEI0001,durée 00:01:33
+email,EM0316,2025-07-11 12:28:00,incoming,alerts@example.com,user@example.com,hash_email31,Paul Martin,Confirmation : votre réservation est effective.,,,,email,received,DEV123,IMEI0001,
+email,EM0317,2025-07-11 12:33:00,incoming,hr@example.com,user@example.com,hash_email5,Newsletter,Votre entretien est confirmé.,,,,email,received,DEV123,IMEI0001,
+media,ME0318,2025-07-11 12:35:00,,,,,,,VOICEMSG_20250710_000317.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+sms,SM0319,2025-07-11 12:41:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,"Merci, j'ai bien reçu.",,,,sms,received,DEV123,IMEI0001,
+email,EM0320,2025-07-11 12:49:00,incoming,newsletter@example.com,user@example.com,hash_email5,Service,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,received,DEV123,IMEI0001,
+sms,SM0321,2025-07-11 12:50:00,outgoing,+33600000001,+33711111111,hash_16k1,ServiceClient,"Salut, on se voit à la gare ?",,,,sms,sent,DEV123,IMEI0001,
+email,EM0322,2025-07-11 12:59:00,outgoing,user@example.com,archive@example.com,hash_email17,Paul Martin,Votre entretien est confirmé.,,,,email,sent,DEV123,IMEI0001,
+sms,SM0323,2025-07-11 13:00:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,Je serai en retard de 10 minutes.,,,,sms,received,DEV123,IMEI0001,
+media,ME0324,2025-07-11 13:07:00,,,,,,,VOICEMSG_20250710_000323.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+media,ME0325,2025-07-11 13:14:00,,,,,,,VOICEMSG_20250710_000324.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+email,EM0326,2025-07-11 13:22:00,outgoing,user@example.com,team@example.com,hash_email34,Newsletter,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,sent,DEV123,IMEI0001,
+browser,BR0327,2025-07-11 13:24:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,horaires
+call,CA0328,2025-07-11 13:30:00,outgoing,+33600000001,+33622222222,hash_07b2,Paul Martin,,,,,phone,call_out,DEV123,IMEI0001,durée 00:04:19
+call,CA0329,2025-07-11 13:37:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,,,,,phone,call_in,DEV123,IMEI0001,durée 00:07:02
+browser,BR0330,2025-07-11 13:43:00,,,,,,https://www.example.com/recettes/pates,,,,browser,visit,DEV123,IMEI0001,recherche
+sms,SM0331,2025-07-11 13:44:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,
+media,ME0332,2025-07-11 13:47:00,,,,,,,IMG_20250710_000331.jpg,48.868227,2.371252,gallery,photo_taken,DEV123,IMEI0001,photo terrasse
+sms,SM0333,2025-07-11 13:51:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,
+email,EM0334,2025-07-11 13:52:00,incoming,alerts@example.com,user@example.com,hash_email24,Newsletter,Confirmation : votre réservation est effective.,,,,email,received,DEV123,IMEI0001,
+media,ME0335,2025-07-11 14:02:00,,,,,,,IMG_20250710_000334.jpg,48.861941,2.365982,gallery,photo_taken,DEV123,IMEI0001,photo intérieur
+email,EM0336,2025-07-11 14:03:00,incoming,alerts@example.com,user@example.com,hash_email34,Service,Compte-rendu envoyé : merci de confirmer réception.,,,,email,received,DEV123,IMEI0001,
+sms,SM0337,2025-07-11 14:08:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,"Bonne nuit, bisous.",,,,sms,received,DEV123,IMEI0001,
+sms,SM0338,2025-07-11 14:16:00,outgoing,+33600000001,+33644444444,hash_09d4,Benjamin,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+call,CA0339,2025-07-11 14:24:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:05:42
+sms,SM0340,2025-07-11 14:26:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,Je serai en retard de 10 minutes.,,,,sms,received,DEV123,IMEI0001,
+browser,BR0341,2025-07-11 14:29:00,,,,,,https://www.example.com/restaurant/reservation,,,,browser,visit,DEV123,IMEI0001,horaires
+sms,SM0342,2025-07-11 14:33:00,outgoing,+33600000001,+33711111111,hash_16k1,ServiceClient,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+contact,CO0343,2025-07-11 14:42:00,,,,,,,,,,,,DEV123,IMEI0001,
+location,LO0344,2025-07-11 14:50:00,,,,,,,,48.874110,2.362066,location_service,fix,DEV123,IMEI0001,
+sms,SM0345,2025-07-11 14:57:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+media,ME0346,2025-07-11 15:07:00,,,,,,,IMG_20250710_000345.jpg,48.859511,2.342967,gallery,photo_taken,DEV123,IMEI0001,photo paysage
+browser,BR0347,2025-07-11 15:13:00,,,,,,https://www.example.com/transport/metro,,,,browser,visit,DEV123,IMEI0001,horaires
+media,ME0348,2025-07-11 15:16:00,,,,,,,VOICEMSG_20250710_000347.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+call,CA0349,2025-07-11 15:17:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,,,,,phone,call_out,DEV123,IMEI0001,durée 00:04:10
+sms,SM0350,2025-07-11 15:21:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,Tu peux m'envoyer le fichier stp ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0351,2025-07-11 15:30:00,outgoing,+33600000001,+33655555555,hash_10e5,Laura,Je serai en retard de 10 minutes.,,,,sms,sent,DEV123,IMEI0001,
+call,CA0352,2025-07-11 15:39:00,outgoing,+33600000001,+33733333333,hash_19n4,Lucas,,,,,phone,call_out,DEV123,IMEI0001,durée 00:09:09
+sms,SM0353,2025-07-11 15:49:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+app_event,AP0354,2025-07-11 15:50:00,,,,,,"uber://request?to=48.8566,2.3522",,,,location_service,open,DEV123,IMEI0001,
+media,ME0355,2025-07-11 15:55:00,,,,,,,IMG_20250710_000354.jpg,,,gallery,photo_taken,DEV123,IMEI0001,photo paysage
+location,LO0356,2025-07-11 15:56:00,,,,,,,,48.864941,2.365087,location_service,fix,DEV123,IMEI0001,promenade
+location,LO0357,2025-07-11 16:01:00,,,,,,,,48.864488,2.372188,location_service,fix,DEV123,IMEI0001,trajet
+sms,SM0358,2025-07-11 16:03:00,outgoing,+33600000001,+33700000000,hash_15j0,AgenceVoyage,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+call,CA0359,2025-07-11 16:11:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:05:55
+browser,BR0360,2025-07-11 16:17:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,horaires
+media,ME0361,2025-07-11 16:26:00,,,,,,,IMG_20250710_000360.jpg,48.863994,2.350699,gallery,photo_taken,DEV123,IMEI0001,photo intérieur
+sms,SM0362,2025-07-11 16:27:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0363,2025-07-11 16:30:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0364,2025-07-11 16:33:00,incoming,+33688888888,+33600000001,hash_13h8,Samir,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+call,CA0365,2025-07-11 16:35:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,,,,,phone,call_in,DEV123,IMEI0001,durée 00:03:13
+location,LO0366,2025-07-11 16:36:00,,,,,,,,48.851516,2.359796,location_service,fix,DEV123,IMEI0001,trajet
+sms,SM0367,2025-07-11 16:37:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,Tu as vu mon message ?,,,,sms,sent,DEV123,IMEI0001,
+app_event,AP0368,2025-07-11 16:43:00,,,,,,,,,,weather,reminder_set,DEV123,IMEI0001,
+call,CA0369,2025-07-11 16:53:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,,,,,phone,call_out,DEV123,IMEI0001,durée 00:04:04
+call,CA0370,2025-07-11 17:01:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,,,,,phone,call_in,DEV123,IMEI0001,durée 00:09:43
+location,LO0371,2025-07-11 17:04:00,,,,,,,,48.879252,2.355756,location_service,fix,DEV123,IMEI0001,promenade
+location,LO0372,2025-07-11 17:10:00,,,,,,,,48.872649,2.347962,location_service,fix,DEV123,IMEI0001,trajet
+call,CA0373,2025-07-11 17:11:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,,,,,phone,call_out,DEV123,IMEI0001,durée 00:07:33
+call,CA0374,2025-07-11 17:21:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,,,,,phone,call_out,DEV123,IMEI0001,durée 00:09:20
+sms,SM0375,2025-07-11 17:31:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0376,2025-07-11 17:40:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,,,,,phone,call_in,DEV123,IMEI0001,durée 00:04:30
+app_event,AP0377,2025-07-11 17:46:00,,,,,,,,,,spotify,backup,DEV123,IMEI0001,
+email,EM0378,2025-07-11 17:56:00,outgoing,user@example.com,client@example.com,hash_email39,Service,"Les événements du weekend : expo, concert, cinéma.",,,,email,sent,DEV123,IMEI0001,
+email,EM0379,2025-07-11 18:06:00,incoming,colleague@example.com,user@example.com,hash_email38,Service,Votre entretien est confirmé.,,,,email,received,DEV123,IMEI0001,
+call,CA0380,2025-07-11 18:16:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,,,,,phone,call_in,DEV123,IMEI0001,manqué
+browser,BR0381,2025-07-11 18:17:00,,,,,,https://www.example.com/recettes/pates,,,,browser,visit,DEV123,IMEI0001,lecture article
+sms,SM0382,2025-07-11 18:25:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,"Merci, j'ai bien reçu.",,,,sms,received,DEV123,IMEI0001,
+browser,BR0383,2025-07-11 18:32:00,,,,,,https://www.example.com/recettes/pates,,,,browser,visit,DEV123,IMEI0001,recherche
+app_event,AP0384,2025-07-11 18:33:00,,,,,,whatsapp://chat?u=emma,,,,gallery,start,DEV123,IMEI0001,
+location,LO0385,2025-07-11 18:41:00,,,,,,,,48.865764,2.352550,location_service,fix,DEV123,IMEI0001,position stable
+call,CA0386,2025-07-11 18:50:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,,,,,phone,call_in,DEV123,IMEI0001,durée 00:10:41
+media,ME0387,2025-07-11 18:55:00,,,,,,,VOICEMSG_20250710_000386.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+sms,SM0388,2025-07-11 18:59:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,"Bonne nuit, bisous.",,,,sms,received,DEV123,IMEI0001,
+media,ME0389,2025-07-11 19:03:00,,,,,,,VOICEMSG_20250710_000388.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+sms,SM0390,2025-07-11 19:09:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,Je serai en retard de 10 minutes.,,,,sms,received,DEV123,IMEI0001,
+location,LO0391,2025-07-11 19:18:00,,,,,,,,48.861391,2.379206,location_service,fix,DEV123,IMEI0001,promenade
+email,EM0392,2025-07-11 19:21:00,outgoing,user@example.com,client@example.com,hash_email19,Paul Martin,"Les événements du weekend : expo, concert, cinéma.",,,,email,sent,DEV123,IMEI0001,
+email,EM0393,2025-07-11 19:26:00,outgoing,user@example.com,friend@example.com,hash_email13,Newsletter,Compte-rendu envoyé : merci de confirmer réception.,,,,email,sent,DEV123,IMEI0001,
+browser,BR0394,2025-07-11 19:29:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,horaires
+sms,SM0395,2025-07-11 19:38:00,outgoing,+33600000001,+33644444444,hash_09d4,Benjamin,"Salut, on se voit à la terrasse ?",,,,sms,sent,DEV123,IMEI0001,
+call,CA0396,2025-07-11 19:46:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:00:35
+email,EM0397,2025-07-11 19:49:00,outgoing,user@example.com,archive@example.com,hash_email31,HR,"Les événements du weekend : expo, concert, cinéma.",,,,email,sent,DEV123,IMEI0001,
+sms,SM0398,2025-07-11 19:50:00,outgoing,+33600000001,+33711111111,hash_16k1,ServiceClient,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+call,CA0399,2025-07-11 19:51:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:59
+email,EM0400,2025-07-11 19:58:00,outgoing,user@example.com,friend@example.com,hash_email48,Newsletter,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,sent,DEV123,IMEI0001,
+contact,CO0401,2025-07-11 20:08:00,,,,,,,,,,,,DEV123,IMEI0001,
+location,LO0402,2025-07-11 20:14:00,,,,,,,,48.858537,2.379564,location_service,fix,DEV123,IMEI0001,trajet
+app_event,AP0403,2025-07-11 20:17:00,,,,,,calendar://event?id=meet_18h,,,,fitness,forecast_view,DEV123,IMEI0001,
+sms,SM0404,2025-07-11 20:19:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,Je réserve pour 2 personnes.,,,,sms,sent,DEV123,IMEI0001,
+browser,BR0405,2025-07-11 20:20:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,réservation
+media,ME0406,2025-07-11 20:30:00,,,,,,,IMG_20250710_000405.jpg,48.875684,2.375882,gallery,photo_taken,DEV123,IMEI0001,photo paysage
+call,CA0407,2025-07-11 20:32:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,,,,,phone,call_in,DEV123,IMEI0001,manqué
+email,EM0408,2025-07-11 20:40:00,outgoing,user@example.com,friend@example.com,hash_email1,Newsletter,Confirmation : votre réservation est effective.,,,,email,sent,DEV123,IMEI0001,
+sms,SM0409,2025-07-11 20:45:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+contact,CO0410,2025-07-11 20:51:00,,,,,,,,,,,,DEV123,IMEI0001,
+browser,BR0411,2025-07-11 20:52:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,lecture article
+call,CA0412,2025-07-11 20:55:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,,,,,phone,call_in,DEV123,IMEI0001,durée 00:04:44
+sms,SM0413,2025-07-11 21:00:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+call,CA0414,2025-07-11 21:08:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,,,,,phone,call_in,DEV123,IMEI0001,durée 00:08:58
+call,CA0415,2025-07-11 21:17:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,,,,,phone,call_in,DEV123,IMEI0001,durée 00:03:43
+media,ME0416,2025-07-11 21:19:00,,,,,,,VOICEMSG_20250710_000415.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+call,CA0417,2025-07-11 21:25:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,,,,,phone,call_in,DEV123,IMEI0001,manqué
+app_event,AP0418,2025-07-11 21:34:00,,,,,,spotify://track/12345,,,,whatsapp,update_check,DEV123,IMEI0001,
+sms,SM0419,2025-07-11 21:40:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,Tu peux m'envoyer le fichier stp ?,,,,sms,received,DEV123,IMEI0001,
+browser,BR0420,2025-07-11 21:48:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,recherche
+media,ME0421,2025-07-11 21:56:00,,,,,,,IMG_20250710_000420.jpg,48.863704,2.342309,gallery,photo_taken,DEV123,IMEI0001,photo paysage
+browser,BR0422,2025-07-11 22:01:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,lecture article
+call,CA0423,2025-07-11 22:02:00,outgoing,+33600000001,+33700000000,hash_15j0,AgenceVoyage,,,,,phone,call_out,DEV123,IMEI0001,durée 00:00:27
+sms,SM0424,2025-07-11 22:04:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+contact,CO0425,2025-07-11 22:11:00,,,,,,,,,,,,DEV123,IMEI0001,
+sms,SM0426,2025-07-11 22:14:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0427,2025-07-11 22:21:00,outgoing,+33600000001,+33677777777,hash_12g7,Administratif,,,,,phone,call_out,DEV123,IMEI0001,durée 00:10:55
+call,CA0428,2025-07-11 22:27:00,outgoing,+33600000001,+33622222222,hash_07b2,Paul Martin,,,,,phone,call_out,DEV123,IMEI0001,durée 00:06:33
+sms,SM0429,2025-07-11 22:31:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,"Salut, on se voit à la gare pour que je te vende la beuh ?",,,,sms,sent,DEV123,IMEI0001,
+call,CA0430,2025-07-11 22:40:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,,,,,phone,call_in,DEV123,IMEI0001,durée 00:03:15
+call,CA0431,2025-07-11 22:43:00,outgoing,+33600000001,+33655555555,hash_10e5,Laura,,,,,phone,call_out,DEV123,IMEI0001,durée 00:01:02
+media,ME0432,2025-07-11 22:50:00,,,,,,,IMG_20250710_000431.jpg,48.852019,2.363758,gallery,photo_taken,DEV123,IMEI0001,photo paysage
+location,LO0433,2025-07-11 22:51:00,,,,,,,,48.857342,2.341769,location_service,fix,DEV123,IMEI0001,trajet
+sms,SM0434,2025-07-11 22:55:00,outgoing,+33600000001,+33711111111,hash_16k1,ServiceClient,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+email,EM0435,2025-07-11 22:59:00,outgoing,user@example.com,team@example.com,hash_email16,Newsletter,Votre entretien est confirmé.,,,,email,sent,DEV123,IMEI0001,
+email,EM0436,2025-07-11 23:08:00,incoming,alerts@example.com,user@example.com,hash_email20,Newsletter,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,received,DEV123,IMEI0001,
+location,LO0437,2025-07-11 23:18:00,,,,,,,,48.876391,2.376463,location_service,fix,DEV123,IMEI0001,trajet
+location,LO0438,2025-07-11 23:19:00,,,,,,,,48.879169,2.377663,location_service,fix,DEV123,IMEI0001,trajet
+media,ME0439,2025-07-11 23:25:00,,,,,,,VOICEMSG_20250710_000438.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+call,CA0440,2025-07-11 23:30:00,outgoing,+33600000001,+33677777777,hash_12g7,Administratif,,,,,phone,call_out,DEV123,IMEI0001,durée 00:07:15
+app_event,AP0441,2025-07-11 23:35:00,,,,,,"maps://route?to=48.8606,2.3376",,,,gallery,fitness_start,DEV123,IMEI0001,
+email,EM0442,2025-07-11 23:44:00,outgoing,user@example.com,archive@example.com,hash_email36,HR,Confirmation : votre réservation est effective.,,,,email,sent,DEV123,IMEI0001,
+sms,SM0443,2025-07-11 23:48:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,Je réserve pour 2 personnes.,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0444,2025-07-11 23:52:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+location,LO0445,2025-07-11 23:54:00,,,,,,,,48.855645,2.370468,location_service,fix,DEV123,IMEI0001,position stable
+call,CA0446,2025-07-12 00:00:00,outgoing,+33600000001,+33655555555,hash_10e5,Laura,,,,,phone,call_out,DEV123,IMEI0001,durée 00:03:47
+sms,SM0447,2025-07-12 00:08:00,outgoing,+33600000001,+33644444444,hash_09d4,Benjamin, Donne moi l'heure du rendez vous pour récuperer la drogue,,,,sms,sent,DEV123,IMEI0001,
+location,LO0448,2025-07-12 00:13:00,,,,,,,,48.861420,2.361346,location_service,fix,DEV123,IMEI0001,promenade
+sms,SM0449,2025-07-12 00:19:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+media,ME0450,2025-07-12 00:27:00,,,,,,,VOICEMSG_20250710_000449.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+email,EM0451,2025-07-12 00:33:00,outgoing,user@example.com,archive@example.com,hash_email3,HR,Votre entretien est confirmé.,,,,email,sent,DEV123,IMEI0001,
+contact,CO0452,2025-07-12 00:42:00,,,,,,,,,,,,DEV123,IMEI0001,
+email,EM0453,2025-07-12 00:52:00,outgoing,user@example.com,team@example.com,hash_email10,HR,"J'ai ce qui te faut",,,,email,sent,DEV123,IMEI0001,
+sms,SM0454,2025-07-12 01:02:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,Je réserve pour 2 personnes.,,,,sms,sent,DEV123,IMEI0001,
+browser,BR0455,2025-07-12 01:08:00,,,,,,https://www.example.com/restaurant/reservation,,,,browser,visit,DEV123,IMEI0001,recherche
+email,EM0456,2025-07-12 01:16:00,outgoing,user@example.com,friend@example.com,hash_email47,Newsletter,Votre entretien est confirmé.,,,,email,sent,DEV123,IMEI0001,
+sms,SM0457,2025-07-12 01:25:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,Quel est le plan pour ce weekend ? On se détruit la gueule ?,,,,sms,sent,DEV123,IMEI0001,
+call,CA0458,2025-07-12 01:27:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,,,,,phone,call_in,DEV123,IMEI0001,manqué
+contact,CO0459,2025-07-12 01:30:00,,,,,,,,,,,,DEV123,IMEI0001,
+app_event,AP0460,2025-07-12 01:34:00,,,,,,whatsapp://chat?u=emma,,,,location_service,open_note,DEV123,IMEI0001,
+contact,CO0461,2025-07-12 01:43:00,,,,,,,,,,,,DEV123,IMEI0001,
+call,CA0462,2025-07-12 01:44:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,,,,,phone,call_in,DEV123,IMEI0001,durée 00:09:58
+call,CA0463,2025-07-12 01:52:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,,,,,phone,call_out,DEV123,IMEI0001,durée 00:06:00
+contact,CO0464,2025-07-12 01:57:00,,,,,,,,,,,,DEV123,IMEI0001,
+call,CA0465,2025-07-12 02:02:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,,,,,phone,call_in,DEV123,IMEI0001,durée 00:10:27
+media,ME0466,2025-07-12 02:05:00,,,,,,,IMG_20250710_000465.jpg,,,gallery,photo_taken,DEV123,IMEI0001,photo amis
+sms,SM0467,2025-07-12 02:09:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,On garde la même heure pour demain ? J'ai de la cocaine et de l'exta.,,,,sms,received,DEV123,IMEI0001,
+media,ME0468,2025-07-12 02:11:00,,,,,,,VOICEMSG_20250710_000467.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+email,EM0469,2025-07-12 02:19:00,incoming,newsletter@example.com,user@example.com,hash_email20,Paul Martin,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,received,DEV123,IMEI0001,
+sms,SM0470,2025-07-12 02:26:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,"Salut, on se voit à la terrasse ?",,,,sms,received,DEV123,IMEI0001,
+browser,BR0471,2025-07-12 02:28:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,recherche
+location,LO0472,2025-07-12 02:34:00,,,,,,,,48.866976,2.374318,location_service,fix,DEV123,IMEI0001,
+app_event,AP0473,2025-07-12 02:35:00,,,,,,notes://open?id=note_1,,,,calendar,play,DEV123,IMEI0001,
+browser,BR0474,2025-07-12 02:45:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,réservation
+contact,CO0475,2025-07-12 02:47:00,,,,,,,,,,,,DEV123,IMEI0001,
+browser,BR0476,2025-07-12 02:52:00,,,,,,https://www.example.com/recettes/pates,,,,browser,visit,DEV123,IMEI0001,lecture article
+sms,SM0477,2025-07-12 02:58:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,J'avoue nik la police,,,,sms,sent,DEV123,IMEI0001,
+media,ME0478,2025-07-12 03:05:00,,,,,,,IMG_20250710_000477.jpg,48.866919,2.362668,gallery,photo_taken,DEV123,IMEI0001,photo paysage
+browser,BR0479,2025-07-12 03:14:00,,,,,,https://www.example.com/restaurant/reservation,,,,browser,visit,DEV123,IMEI0001,recherche
+media,ME0480,2025-07-12 03:17:00,,,,,,,IMG_20250710_000479.jpg,48.879230,2.342148,gallery,photo_taken,DEV123,IMEI0001,photo paysage
+sms,SM0481,2025-07-12 03:19:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,
+location,LO0482,2025-07-12 03:27:00,,,,,,,,48.864718,2.354232,location_service,fix,DEV123,IMEI0001,trajet
+call,CA0483,2025-07-12 03:37:00,incoming,+33733333333,+33600000001,hash_19n4,Lucas,,,,,phone,call_in,DEV123,IMEI0001,manqué
+location,LO0484,2025-07-12 03:41:00,,,,,,,,48.871393,2.343282,location_service,fix,DEV123,IMEI0001,position stable
+call,CA0485,2025-07-12 03:44:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,,,,,phone,call_in,DEV123,IMEI0001,durée 00:01:05
+contact,CO0486,2025-07-12 03:49:00,,,,,,,,,,,,DEV123,IMEI0001,
+call,CA0487,2025-07-12 03:54:00,outgoing,+33600000001,+33622222222,hash_07b2,Paul Martin,,,,,phone,call_out,DEV123,IMEI0001,manqué
+call,CA0488,2025-07-12 04:03:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,,,,,phone,call_in,DEV123,IMEI0001,durée 00:00:05
+call,CA0489,2025-07-12 04:05:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,,,,,phone,call_in,DEV123,IMEI0001,durée 00:06:00
+sms,SM0490,2025-07-12 04:12:00,outgoing,+33600000001,+33711111111,hash_16k1,ServiceClient,Quel est le plan pour ce weekend ?,,,,sms,sent,DEV123,IMEI0001,
+location,LO0491,2025-07-12 04:15:00,,,,,,,,48.870559,2.346780,location_service,fix,DEV123,IMEI0001,promenade
+sms,SM0492,2025-07-12 04:23:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+sms,SM0493,2025-07-12 04:28:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+email,EM0494,2025-07-12 04:36:00,incoming,alerts@example.com,user@example.com,hash_email7,HR,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+contact,CO0495,2025-07-12 04:43:00,,,,,,,,,,,,DEV123,IMEI0001,
+sms,SM0496,2025-07-12 04:53:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+call,CA0497,2025-07-12 05:03:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,,,,,phone,call_in,DEV123,IMEI0001,durée 00:03:30
+sms,SM0498,2025-07-12 05:10:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+media,ME0499,2025-07-12 05:16:00,,,,,,,VOICEMSG_20250710_000498.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+sms,SM0500,2025-07-12 05:23:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+location,LO0501,2025-07-12 05:32:00,,,,,,,,48.855398,2.370705,location_service,fix,DEV123,IMEI0001,
+email,EM0502,2025-07-12 05:40:00,incoming,alerts@example.com,user@example.com,hash_email19,Paul Martin,Confirmation : votre réservation est effective.,,,,email,received,DEV123,IMEI0001,
+browser,BR0503,2025-07-12 05:43:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,réservation
+sms,SM0504,2025-07-12 05:46:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0505,2025-07-12 05:56:00,incoming,+33688888888,+33600000001,hash_13h8,Samir,,,,,phone,call_in,DEV123,IMEI0001,durée 00:08:59
+email,EM0506,2025-07-12 06:03:00,incoming,hr@example.com,user@example.com,hash_email45,Paul Martin,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,received,DEV123,IMEI0001,
+media,ME0507,2025-07-12 06:09:00,,,,,,,IMG_20250710_000506.jpg,,,gallery,photo_taken,DEV123,IMEI0001,photo terrasse
+location,LO0508,2025-07-12 06:16:00,,,,,,,,48.879004,2.353264,location_service,fix,DEV123,IMEI0001,trajet
+sms,SM0509,2025-07-12 06:18:00,outgoing,+33600000001,+33655555555,hash_10e5,Laura,Quel est le plan pour ce weekend ?,,,,sms,sent,DEV123,IMEI0001,
+location,LO0510,2025-07-12 06:28:00,,,,,,,,48.856631,2.354965,location_service,fix,DEV123,IMEI0001,trajet
+media,ME0511,2025-07-12 06:38:00,,,,,,,IMG_20250710_000510.jpg,48.850737,2.344182,gallery,photo_taken,DEV123,IMEI0001,photo paysage
+email,EM0512,2025-07-12 06:40:00,incoming,newsletter@example.com,user@example.com,hash_email23,Newsletter,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+call,CA0513,2025-07-12 06:44:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,,,,,phone,call_in,DEV123,IMEI0001,durée 00:01:28
+browser,BR0514,2025-07-12 06:52:00,,,,,,https://www.example.com/restaurant/reservation,,,,browser,visit,DEV123,IMEI0001,lecture article
+sms,SM0515,2025-07-12 06:54:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,Tu peux m'envoyer le fichier stp ?,,,,sms,received,DEV123,IMEI0001,
+email,EM0516,2025-07-12 06:58:00,incoming,service@example.com,user@example.com,hash_email11,Newsletter,Compte-rendu envoyé : merci de confirmer réception.,,,,email,received,DEV123,IMEI0001,
+call,CA0517,2025-07-12 07:06:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:40
+browser,BR0518,2025-07-12 07:13:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,horaires
+call,CA0519,2025-07-12 07:20:00,outgoing,+33600000001,+33677777777,hash_12g7,Administratif,,,,,phone,call_out,DEV123,IMEI0001,durée 00:03:17
+media,ME0520,2025-07-12 07:22:00,,,,,,,IMG_20250710_000519.jpg,,,gallery,photo_taken,DEV123,IMEI0001,photo amis
+sms,SM0521,2025-07-12 07:28:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,Tu peux m'envoyer le fichier stp ?,,,,sms,received,DEV123,IMEI0001,
+browser,BR0522,2025-07-12 07:36:00,,,,,,https://www.example.com/recettes/pates,,,,browser,visit,DEV123,IMEI0001,réservation
+location,LO0523,2025-07-12 07:46:00,,,,,,,,48.861776,2.344569,location_service,fix,DEV123,IMEI0001,promenade
+app_event,AP0524,2025-07-12 07:56:00,,,,,,"uber://request?to=48.8566,2.3522",,,,voice_recorder,backup,DEV123,IMEI0001,
+media,ME0525,2025-07-12 08:06:00,,,,,,,IMG_20250710_000524.jpg,,,gallery,photo_taken,DEV123,IMEI0001,selfie
+sms,SM0526,2025-07-12 08:11:00,outgoing,+33600000001,+33622222222,hash_07b2,Paul Martin,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+call,CA0527,2025-07-12 08:18:00,outgoing,+33600000001,+33612121212,hash_17l2,Thomas,,,,,phone,call_out,DEV123,IMEI0001,durée 00:06:11
+call,CA0528,2025-07-12 08:27:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:35
+sms,SM0529,2025-07-12 08:32:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+location,LO0530,2025-07-12 08:38:00,,,,,,,,48.878555,2.359384,location_service,fix,DEV123,IMEI0001,position stable
+app_event,AP0531,2025-07-12 08:47:00,,,,,,"maps://route?to=48.8606,2.3376",,,,fitness,backup,DEV123,IMEI0001,
+call,CA0532,2025-07-12 08:55:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,,,,,phone,call_in,DEV123,IMEI0001,durée 00:07:10
+sms,SM0533,2025-07-12 08:56:00,outgoing,+33600000001,+33711111111,hash_16k1,ServiceClient,Je serai en retard de 10 minutes.,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0534,2025-07-12 09:05:00,outgoing,+33600000001,+33655555555,hash_10e5,Laura,Je réserve pour 2 personnes.,,,,sms,sent,DEV123,IMEI0001,
+media,ME0535,2025-07-12 09:13:00,,,,,,,IMG_20250710_000534.jpg,48.858037,2.361724,gallery,photo_taken,DEV123,IMEI0001,selfie
+call,CA0536,2025-07-12 09:14:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,,,,,phone,call_in,DEV123,IMEI0001,durée 00:03:27
+sms,SM0537,2025-07-12 09:18:00,outgoing,+33600000001,+33655555555,hash_10e5,Laura,Je réserve pour 2 personnes.,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0538,2025-07-12 09:20:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+app_event,AP0539,2025-07-12 09:30:00,,,,,,spotify://track/12345,,,,ride_hailing,open_note,DEV123,IMEI0001,
+location,LO0540,2025-07-12 09:33:00,,,,,,,,48.868485,2.371394,location_service,fix,DEV123,IMEI0001,position stable
+media,ME0541,2025-07-12 09:43:00,,,,,,,VOICEMSG_20250710_000540.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+call,CA0542,2025-07-12 09:53:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,,,,,phone,call_out,DEV123,IMEI0001,durée 00:04:18
+location,LO0543,2025-07-12 10:02:00,,,,,,,,48.879565,2.367172,location_service,fix,DEV123,IMEI0001,
+sms,SM0544,2025-07-12 10:09:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,"Merci, j'ai bien reçu.",,,,sms,received,DEV123,IMEI0001,
+sms,SM0545,2025-07-12 10:15:00,outgoing,+33600000001,+33722222222,hash_18m3,Vendeur de drogue,Tu as vu mon message ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0546,2025-07-12 10:20:00,incoming,+33733333333,+33600000001,hash_19n4,Lucas,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0547,2025-07-12 10:22:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,
+email,EM0548,2025-07-12 10:28:00,incoming,colleague@example.com,user@example.com,hash_email47,Service,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+app_event,AP0549,2025-07-12 10:37:00,,,,,,"maps://route?to=48.8606,2.3376",,,,weather,play,DEV123,IMEI0001,
+app_event,AP0550,2025-07-12 10:45:00,,,,,,notes://open?id=note_1,,,,email,reminder_set,DEV123,IMEI0001,
+sms,SM0551,2025-07-12 10:54:00,outgoing,+33600000001,+33612121212,hash_17l2,Thomas,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+media,ME0552,2025-07-12 10:55:00,,,,,,,IMG_20250710_000551.jpg,48.873517,2.358383,gallery,photo_taken,DEV123,IMEI0001,photo terrasse
+email,EM0553,2025-07-12 10:58:00,outgoing,user@example.com,archive@example.com,hash_email1,Service,Votre entretien est confirmé.,,,,email,sent,DEV123,IMEI0001,
+email,EM0554,2025-07-12 11:01:00,outgoing,user@example.com,friend@example.com,hash_email18,Paul Martin,"Les événements du weekend : expo, concert, cinéma.",,,,email,sent,DEV123,IMEI0001,
+sms,SM0555,2025-07-12 11:07:00,outgoing,+33600000001,+33733333333,hash_19n4,Lucas,"Salut, on se voit à le cinéma ?",,,,sms,sent,DEV123,IMEI0001,
+location,LO0556,2025-07-12 11:11:00,,,,,,,,48.862877,2.343648,location_service,fix,DEV123,IMEI0001,
+contact,CO0557,2025-07-12 11:19:00,,,,,,,,,,,,DEV123,IMEI0001,
+sms,SM0558,2025-07-12 11:29:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,"Salut, on se voit à la terrasse ?",,,,sms,received,DEV123,IMEI0001,
+browser,BR0559,2025-07-12 11:31:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,horaires
+call,CA0560,2025-07-12 11:35:00,outgoing,+33600000001,+33677777777,hash_12g7,Administratif,,,,,phone,call_out,DEV123,IMEI0001,durée 00:01:06
+sms,SM0561,2025-07-12 11:40:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,"Merci, j'ai bien reçu.",,,,sms,received,DEV123,IMEI0001,
+sms,SM0562,2025-07-12 11:50:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,Je réserve pour 2 personnes.,,,,sms,sent,DEV123,IMEI0001,
+browser,BR0563,2025-07-12 11:53:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,recherche
+app_event,AP0564,2025-07-12 11:55:00,,,,,,notes://open?id=note_1,,,,browser,event_created,DEV123,IMEI0001,
+sms,SM0565,2025-07-12 12:02:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0566,2025-07-12 12:04:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,"Salut, on se voit à la gare ?",,,,sms,received,DEV123,IMEI0001,
+sms,SM0567,2025-07-12 12:14:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,Tu as vu mon message ?,,,,sms,sent,DEV123,IMEI0001,
+location,LO0568,2025-07-12 12:18:00,,,,,,,,48.864847,2.344510,location_service,fix,DEV123,IMEI0001,trajet
+location,LO0569,2025-07-12 12:20:00,,,,,,,,48.865849,2.379108,location_service,fix,DEV123,IMEI0001,promenade
+email,EM0570,2025-07-12 12:23:00,outgoing,user@example.com,archive@example.com,hash_email24,HR,Confirmation : votre réservation est effective.,,,,email,sent,DEV123,IMEI0001,
+email,EM0571,2025-07-12 12:25:00,incoming,service@example.com,user@example.com,hash_email5,Paul Martin,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+sms,SM0572,2025-07-12 12:26:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+location,LO0573,2025-07-12 12:35:00,,,,,,,,48.873013,2.356943,location_service,fix,DEV123,IMEI0001,trajet
+sms,SM0574,2025-07-12 12:44:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,Je serai en retard de 10 minutes.,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0575,2025-07-12 12:53:00,outgoing,+33600000001,+33644444444,hash_09d4,Benjamin,Quel est le plan pour ce weekend ?,,,,sms,sent,DEV123,IMEI0001,
+call,CA0576,2025-07-12 12:55:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,,,,,phone,call_in,DEV123,IMEI0001,durée 00:03:03
+sms,SM0577,2025-07-12 13:02:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0578,2025-07-12 13:05:00,outgoing,+33600000001,+33622222222,hash_07b2,Paul Martin,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+sms,SM0579,2025-07-12 13:11:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,"Merci, j'ai bien reçu.",,,,sms,received,DEV123,IMEI0001,
+sms,SM0580,2025-07-12 13:16:00,outgoing,+33600000001,+33700000000,hash_15j0,AgenceVoyage,"Salut, on se voit à la gare ?",,,,sms,sent,DEV123,IMEI0001,
+media,ME0581,2025-07-12 13:21:00,,,,,,,IMG_20250710_000580.jpg,48.879252,2.365101,gallery,photo_taken,DEV123,IMEI0001,photo paysage
+call,CA0582,2025-07-12 13:27:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:23
+sms,SM0583,2025-07-12 13:29:00,outgoing,+33600000001,+33612121212,hash_17l2,Thomas,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+contact,CO0584,2025-07-12 13:30:00,,,,,,,,,,,,DEV123,IMEI0001,
+sms,SM0585,2025-07-12 13:38:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,"Merci, j'ai bien reçu.",,,,sms,received,DEV123,IMEI0001,
+email,EM0586,2025-07-12 13:39:00,outgoing,user@example.com,friend@example.com,hash_email21,HR,Confirmation : votre réservation est effective.,,,,email,sent,DEV123,IMEI0001,
+email,EM0587,2025-07-12 13:45:00,outgoing,user@example.com,client@example.com,hash_email37,Newsletter,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,sent,DEV123,IMEI0001,
+call,CA0588,2025-07-12 13:46:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,,,,,phone,call_out,DEV123,IMEI0001,durée 00:00:25
+sms,SM0589,2025-07-12 13:54:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,Je serai en retard de 10 minutes.,,,,sms,received,DEV123,IMEI0001,
+sms,SM0590,2025-07-12 14:02:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,"Bonne nuit, bisous.",,,,sms,received,DEV123,IMEI0001,
+location,LO0591,2025-07-12 14:07:00,,,,,,,,48.872187,2.349703,location_service,fix,DEV123,IMEI0001,promenade
+location,LO0592,2025-07-12 14:15:00,,,,,,,,48.879934,2.371035,location_service,fix,DEV123,IMEI0001,position stable
+sms,SM0593,2025-07-12 14:22:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,Quel est le plan pour ce weekend ?,,,,sms,sent,DEV123,IMEI0001,
+location,LO0594,2025-07-12 14:23:00,,,,,,,,48.878530,2.340058,location_service,fix,DEV123,IMEI0001,trajet
+app_event,AP0595,2025-07-12 14:28:00,,,,,,spotify://track/12345,,,,browser,play,DEV123,IMEI0001,
+email,EM0596,2025-07-12 14:35:00,outgoing,user@example.com,client@example.com,hash_email10,Newsletter,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,sent,DEV123,IMEI0001,
+contact,CO0597,2025-07-12 14:39:00,,,,,,,,,,,,DEV123,IMEI0001,
+app_event,AP0598,2025-07-12 14:48:00,,,,,,calendar://event?id=meet_18h,,,,notes,open_note,DEV123,IMEI0001,
+call,CA0599,2025-07-12 14:50:00,outgoing,+33600000001,+33612121212,hash_17l2,Thomas,,,,,phone,call_out,DEV123,IMEI0001,durée 00:10:52
+call,CA0600,2025-07-12 15:00:00,outgoing,+33600000001,+33612121212,hash_17l2,Thomas,,,,,phone,call_out,DEV123,IMEI0001,durée 00:02:15
+sms,SM0601,2025-07-12 15:06:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0602,2025-07-12 15:10:00,outgoing,+33600000001,+33622222222,hash_07b2,Paul Martin,,,,,phone,call_out,DEV123,IMEI0001,manqué
+media,ME0603,2025-07-12 15:12:00,,,,,,,IMG_20250710_000602.jpg,48.863487,2.352561,gallery,photo_taken,DEV123,IMEI0001,photo terrasse
+call,CA0604,2025-07-12 15:16:00,incoming,+33688888888,+33600000001,hash_13h8,Samir,,,,,phone,call_in,DEV123,IMEI0001,durée 00:01:05
+sms,SM0605,2025-07-12 15:21:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+sms,SM0606,2025-07-12 15:25:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+browser,BR0607,2025-07-12 15:30:00,,,,,,https://www.example.com/transport/metro,,,,browser,visit,DEV123,IMEI0001,lecture article
+email,EM0608,2025-07-12 15:38:00,incoming,colleague@example.com,user@example.com,hash_email30,Paul Martin,Votre entretien est confirmé.,,,,email,received,DEV123,IMEI0001,
+sms,SM0609,2025-07-12 15:39:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+app_event,AP0610,2025-07-12 15:45:00,,,,,,spotify://track/12345,,,,location_service,update_check,DEV123,IMEI0001,
+sms,SM0611,2025-07-12 15:47:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+media,ME0612,2025-07-12 15:49:00,,,,,,,VOICEMSG_20250710_000611.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+sms,SM0613,2025-07-12 15:57:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+app_event,AP0614,2025-07-12 16:04:00,,,,,,"maps://route?to=48.8606,2.3376",,,,system,open,DEV123,IMEI0001,
+browser,BR0615,2025-07-12 16:07:00,,,,,,https://www.example.com/restaurant/reservation,,,,browser,visit,DEV123,IMEI0001,horaires
+app_event,AP0616,2025-07-12 16:12:00,,,,,,whatsapp://chat?u=emma,,,,email,forecast_view,DEV123,IMEI0001,
+contact,CO0617,2025-07-12 16:22:00,,,,,,,,,,,,DEV123,IMEI0001,
+location,LO0618,2025-07-12 16:27:00,,,,,,,,48.864967,2.375311,location_service,fix,DEV123,IMEI0001,trajet
+sms,SM0619,2025-07-12 16:32:00,outgoing,+33600000001,+33677777777,hash_12g7,Administratif,Tu as vu mon message ?,,,,sms,sent,DEV123,IMEI0001,
+location,LO0620,2025-07-12 16:41:00,,,,,,,,48.857474,2.379763,location_service,fix,DEV123,IMEI0001,
+email,EM0621,2025-07-12 16:47:00,outgoing,user@example.com,archive@example.com,hash_email23,Newsletter,Confirmation : votre réservation est effective.,,,,email,sent,DEV123,IMEI0001,
+sms,SM0622,2025-07-12 16:48:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,"Salut, on se voit à la gare ?",,,,sms,sent,DEV123,IMEI0001,
+sms,SM0623,2025-07-12 16:56:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+email,EM0624,2025-07-12 16:58:00,incoming,newsletter@example.com,user@example.com,hash_email18,Paul Martin,Votre entretien est confirmé.,,,,email,received,DEV123,IMEI0001,
+location,LO0625,2025-07-12 17:05:00,,,,,,,,48.860644,2.373569,location_service,fix,DEV123,IMEI0001,position stable
+sms,SM0626,2025-07-12 17:15:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+browser,BR0627,2025-07-12 17:21:00,,,,,,https://www.example.com/recettes/pates,,,,browser,visit,DEV123,IMEI0001,horaires
+location,LO0628,2025-07-12 17:25:00,,,,,,,,48.875101,2.372416,location_service,fix,DEV123,IMEI0001,trajet
+call,CA0629,2025-07-12 17:28:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,,,,,phone,call_out,DEV123,IMEI0001,manqué
+sms,SM0630,2025-07-12 17:32:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,"Salut, on se voit à la gare ?",,,,sms,received,DEV123,IMEI0001,
+email,EM0631,2025-07-12 17:36:00,incoming,hr@example.com,user@example.com,hash_email46,HR,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+sms,SM0632,2025-07-12 17:39:00,outgoing,+33600000001,+33612121212,hash_17l2,Thomas,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+app_event,AP0633,2025-07-12 17:41:00,,,,,,"uber://request?to=48.8566,2.3522",,,,ride_hailing,open_note,DEV123,IMEI0001,
+call,CA0634,2025-07-12 17:43:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:46
+email,EM0635,2025-07-12 17:51:00,outgoing,user@example.com,friend@example.com,hash_email46,Newsletter,Votre entretien est confirmé.,,,,email,sent,DEV123,IMEI0001,
+browser,BR0636,2025-07-12 17:54:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,réservation
+media,ME0637,2025-07-12 17:59:00,,,,,,,IMG_20250710_000636.jpg,48.850054,2.368080,gallery,photo_taken,DEV123,IMEI0001,photo amis
+call,CA0638,2025-07-12 18:09:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,,,,,phone,call_out,DEV123,IMEI0001,durée 00:09:14
+location,LO0639,2025-07-12 18:11:00,,,,,,,,48.878101,2.345626,location_service,fix,DEV123,IMEI0001,
+sms,SM0640,2025-07-12 18:17:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+contact,CO0641,2025-07-12 18:21:00,,,,,,,,,,,,DEV123,IMEI0001,
+sms,SM0642,2025-07-12 18:23:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,Tu peux m'envoyer le fichier stp ?,,,,sms,received,DEV123,IMEI0001,
+contact,CO0643,2025-07-12 18:31:00,,,,,,,,,,,,DEV123,IMEI0001,
+media,ME0644,2025-07-12 18:34:00,,,,,,,VOICEMSG_20250710_000643.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+call,CA0645,2025-07-12 18:41:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,,,,,phone,call_in,DEV123,IMEI0001,durée 00:07:50
+app_event,AP0646,2025-07-12 18:45:00,,,,,,,,,,voice_recorder,forecast_view,DEV123,IMEI0001,
+media,ME0647,2025-07-12 18:46:00,,,,,,,VOICEMSG_20250710_000646.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+contact,CO0648,2025-07-12 18:51:00,,,,,,,,,,,,DEV123,IMEI0001,
+email,EM0649,2025-07-12 18:53:00,outgoing,user@example.com,friend@example.com,hash_email25,HR,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,sent,DEV123,IMEI0001,
+call,CA0650,2025-07-12 18:55:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,,,,,phone,call_in,DEV123,IMEI0001,durée 00:07:45
+contact,CO0651,2025-07-12 18:58:00,,,,,,,,,,,,DEV123,IMEI0001,
+location,LO0652,2025-07-12 19:05:00,,,,,,,,48.854713,2.344050,location_service,fix,DEV123,IMEI0001,position stable
+email,EM0653,2025-07-12 19:12:00,outgoing,user@example.com,team@example.com,hash_email20,HR,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,sent,DEV123,IMEI0001,
+contact,CO0654,2025-07-12 19:22:00,,,,,,,,,,,,DEV123,IMEI0001,
+call,CA0655,2025-07-12 19:30:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,,,,,phone,call_out,DEV123,IMEI0001,durée 00:06:05
+sms,SM0656,2025-07-12 19:40:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0657,2025-07-12 19:45:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,Tu peux m'envoyer le fichier stp ?,,,,sms,received,DEV123,IMEI0001,
+media,ME0658,2025-07-12 19:53:00,,,,,,,VOICEMSG_20250710_000657.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+app_event,AP0659,2025-07-12 19:58:00,,,,,,spotify://track/12345,,,,location_service,backup,DEV123,IMEI0001,
+call,CA0660,2025-07-12 20:04:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,,,,,phone,call_in,DEV123,IMEI0001,durée 00:00:16
+call,CA0661,2025-07-12 20:09:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:48
+browser,BR0662,2025-07-12 20:11:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,réservation
+media,ME0663,2025-07-12 20:18:00,,,,,,,IMG_20250710_000662.jpg,48.875224,2.372736,gallery,photo_taken,DEV123,IMEI0001,photo paysage
+email,EM0664,2025-07-12 20:26:00,incoming,alerts@example.com,user@example.com,hash_email20,Paul Martin,Confirmation : votre réservation est effective.,,,,email,received,DEV123,IMEI0001,
+app_event,AP0665,2025-07-12 20:27:00,,,,,,spotify://track/12345,,,,fitness,update_check,DEV123,IMEI0001,
+media,ME0666,2025-07-12 20:37:00,,,,,,,IMG_20250710_000665.jpg,48.872716,2.346915,gallery,photo_taken,DEV123,IMEI0001,photo intérieur
+email,EM0667,2025-07-12 20:41:00,incoming,colleague@example.com,user@example.com,hash_email28,Paul Martin,Confirmation : votre réservation est effective.,,,,email,received,DEV123,IMEI0001,
+sms,SM0668,2025-07-12 20:44:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0669,2025-07-12 20:53:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,Je serai en retard de 10 minutes.,,,,sms,received,DEV123,IMEI0001,
+call,CA0670,2025-07-12 20:54:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,,,,,phone,call_in,DEV123,IMEI0001,durée 00:08:50
+call,CA0671,2025-07-12 21:01:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,,,,,phone,call_out,DEV123,IMEI0001,durée 00:09:48
+email,EM0672,2025-07-12 21:03:00,incoming,service@example.com,user@example.com,hash_email50,Paul Martin,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+app_event,AP0673,2025-07-12 21:09:00,,,,,,"maps://route?to=48.8606,2.3376",,,,notes,route_requested,DEV123,IMEI0001,
+browser,BR0674,2025-07-12 21:19:00,,,,,,https://www.example.com/recettes/pates,,,,browser,visit,DEV123,IMEI0001,recherche
+contact,CO0675,2025-07-12 21:24:00,,,,,,,,,,,,DEV123,IMEI0001,
+call,CA0676,2025-07-12 21:34:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,,,,,phone,call_in,DEV123,IMEI0001,durée 00:00:25
+app_event,AP0677,2025-07-12 21:40:00,,,,,,"uber://request?to=48.8566,2.3522",,,,calendar,open,DEV123,IMEI0001,
+call,CA0678,2025-07-12 21:45:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,,,,,phone,call_out,DEV123,IMEI0001,durée 00:04:19
+sms,SM0679,2025-07-12 21:53:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+sms,SM0680,2025-07-12 22:01:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,Je serai en retard de 10 minutes.,,,,sms,received,DEV123,IMEI0001,
+location,LO0681,2025-07-12 22:03:00,,,,,,,,48.855638,2.348456,location_service,fix,DEV123,IMEI0001,trajet
+media,ME0682,2025-07-12 22:12:00,,,,,,,VOICEMSG_20250710_000681.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+app_event,AP0683,2025-07-12 22:21:00,,,,,,calendar://event?id=meet_18h,,,,voice_recorder,open_chat,DEV123,IMEI0001,
+browser,BR0684,2025-07-12 22:28:00,,,,,,https://www.example.com/transport/metro,,,,browser,visit,DEV123,IMEI0001,lecture article
+sms,SM0685,2025-07-12 22:32:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+call,CA0686,2025-07-12 22:38:00,outgoing,+33600000001,+33700000000,hash_15j0,AgenceVoyage,,,,,phone,call_out,DEV123,IMEI0001,durée 00:07:32
+call,CA0687,2025-07-12 22:40:00,outgoing,+33600000001,+33733333333,hash_19n4,Lucas,,,,,phone,call_out,DEV123,IMEI0001,durée 00:07:38
+call,CA0688,2025-07-12 22:48:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:53
+app_event,AP0689,2025-07-12 22:50:00,,,,,,"maps://route?to=48.8606,2.3376",,,,maps,open,DEV123,IMEI0001,
+contact,CO0690,2025-07-12 23:00:00,,,,,,,,,,,,DEV123,IMEI0001,
+media,ME0691,2025-07-12 23:04:00,,,,,,,IMG_20250710_000690.jpg,,,gallery,photo_taken,DEV123,IMEI0001,photo intérieur
+sms,SM0692,2025-07-12 23:11:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,"Salut, on se voit à le cinéma ?",,,,sms,sent,DEV123,IMEI0001,
+email,EM0693,2025-07-12 23:14:00,incoming,newsletter@example.com,user@example.com,hash_email17,Newsletter,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+call,CA0694,2025-07-12 23:21:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,,,,,phone,call_in,DEV123,IMEI0001,durée 00:03:29
+sms,SM0695,2025-07-12 23:30:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+contact,CO0696,2025-07-12 23:36:00,,,,,,,,,,,,DEV123,IMEI0001,
+location,LO0697,2025-07-12 23:46:00,,,,,,,,48.868272,2.351939,location_service,fix,DEV123,IMEI0001,
+call,CA0698,2025-07-12 23:52:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,,,,,phone,call_in,DEV123,IMEI0001,durée 00:04:16
+browser,BR0699,2025-07-12 23:57:00,,,,,,https://www.example.com/transport/metro,,,,browser,visit,DEV123,IMEI0001,horaires
+call,CA0700,2025-07-13 00:01:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,,,,,phone,call_in,DEV123,IMEI0001,durée 00:05:43
+sms,SM0701,2025-07-13 00:02:00,incoming,+33733333333,+33600000001,hash_19n4,Lucas,Je serai en retard de 10 minutes.,,,,sms,received,DEV123,IMEI0001,
+app_event,AP0702,2025-07-13 00:09:00,,,,,,,,,,weather,open_note,DEV123,IMEI0001,
+location,LO0703,2025-07-13 00:19:00,,,,,,,,48.874480,2.353727,location_service,fix,DEV123,IMEI0001,position stable
+browser,BR0704,2025-07-13 00:27:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,réservation
+call,CA0705,2025-07-13 00:30:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:18
+sms,SM0706,2025-07-13 00:33:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+email,EM0707,2025-07-13 00:39:00,incoming,newsletter@example.com,user@example.com,hash_email23,HR,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+call,CA0708,2025-07-13 00:45:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,,,,,phone,call_in,DEV123,IMEI0001,durée 00:07:54
+sms,SM0709,2025-07-13 00:46:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,Je réserve pour 2 personnes.,,,,sms,sent,DEV123,IMEI0001,
+call,CA0710,2025-07-13 00:53:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:08
+email,EM0711,2025-07-13 00:59:00,outgoing,user@example.com,archive@example.com,hash_email10,Newsletter,Votre entretien est confirmé.,,,,email,sent,DEV123,IMEI0001,
+media,ME0712,2025-07-13 01:07:00,,,,,,,VOICEMSG_20250710_000711.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+location,LO0713,2025-07-13 01:10:00,,,,,,,,48.859402,2.342321,location_service,fix,DEV123,IMEI0001,trajet
+sms,SM0714,2025-07-13 01:13:00,outgoing,+33600000001,+33612121212,hash_17l2,Thomas,Je réserve pour 2 personnes.,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0715,2025-07-13 01:20:00,incoming,+33733333333,+33600000001,hash_19n4,Lucas,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+email,EM0716,2025-07-13 01:27:00,incoming,colleague@example.com,user@example.com,hash_email35,HR,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+email,EM0717,2025-07-13 01:33:00,incoming,colleague@example.com,user@example.com,hash_email44,Paul Martin,Votre entretien est confirmé.,,,,email,received,DEV123,IMEI0001,
+sms,SM0718,2025-07-13 01:39:00,outgoing,+33600000001,+33655555555,hash_10e5,Laura,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+call,CA0719,2025-07-13 01:44:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,,,,,phone,call_out,DEV123,IMEI0001,durée 00:04:18
+call,CA0720,2025-07-13 01:53:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,,,,,phone,call_in,DEV123,IMEI0001,durée 00:10:08
+sms,SM0721,2025-07-13 02:01:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+contact,CO0722,2025-07-13 02:05:00,,,,,,,,,,,,DEV123,IMEI0001,
+browser,BR0723,2025-07-13 02:08:00,,,,,,https://www.example.com/transport/metro,,,,browser,visit,DEV123,IMEI0001,lecture article
+location,LO0724,2025-07-13 02:11:00,,,,,,,,48.853695,2.368444,location_service,fix,DEV123,IMEI0001,
+call,CA0725,2025-07-13 02:16:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,,,,,phone,call_in,DEV123,IMEI0001,durée 00:09:03
+browser,BR0726,2025-07-13 02:17:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,lecture article
+call,CA0727,2025-07-13 02:24:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:13
+browser,BR0728,2025-07-13 02:25:00,,,,,,https://www.example.com/restaurant/reservation,,,,browser,visit,DEV123,IMEI0001,recherche
+browser,BR0729,2025-07-13 02:34:00,,,,,,https://www.example.com/restaurant/reservation,,,,browser,visit,DEV123,IMEI0001,horaires
+call,CA0730,2025-07-13 02:36:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,,,,,phone,call_in,DEV123,IMEI0001,durée 00:04:07
+media,ME0731,2025-07-13 02:44:00,,,,,,,IMG_20250710_000730.jpg,,,gallery,photo_taken,DEV123,IMEI0001,selfie
+app_event,AP0732,2025-07-13 02:48:00,,,,,,"maps://route?to=48.8606,2.3376",,,,ride_hailing,open_note,DEV123,IMEI0001,
+sms,SM0733,2025-07-13 02:49:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,"Bonne nuit, bisous.",,,,sms,received,DEV123,IMEI0001,
+sms,SM0734,2025-07-13 02:50:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+browser,BR0735,2025-07-13 02:53:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,lecture article
+browser,BR0736,2025-07-13 02:55:00,,,,,,https://www.example.com/restaurant/reservation,,,,browser,visit,DEV123,IMEI0001,horaires
+call,CA0737,2025-07-13 03:00:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,,,,,phone,call_in,DEV123,IMEI0001,manqué
+app_event,AP0738,2025-07-13 03:01:00,,,,,,notes://open?id=note_1,,,,maps,reminder_set,DEV123,IMEI0001,
+browser,BR0739,2025-07-13 03:08:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,lecture article
+sms,SM0740,2025-07-13 03:09:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+call,CA0741,2025-07-13 03:17:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,,,,,phone,call_in,DEV123,IMEI0001,durée 00:01:23
+app_event,AP0742,2025-07-13 03:20:00,,,,,,"maps://route?to=48.8606,2.3376",,,,browser,request,DEV123,IMEI0001,
+email,EM0743,2025-07-13 03:25:00,outgoing,user@example.com,archive@example.com,hash_email27,HR,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,sent,DEV123,IMEI0001,
+sms,SM0744,2025-07-13 03:26:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+email,EM0745,2025-07-13 03:34:00,outgoing,user@example.com,friend@example.com,hash_email40,Service,"Les événements du weekend : expo, concert, cinéma.",,,,email,sent,DEV123,IMEI0001,
+location,LO0746,2025-07-13 03:37:00,,,,,,,,48.864492,2.359525,location_service,fix,DEV123,IMEI0001,trajet
+call,CA0747,2025-07-13 03:39:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,,,,,phone,call_in,DEV123,IMEI0001,durée 00:10:33
+media,ME0748,2025-07-13 03:49:00,,,,,,,IMG_20250710_000747.jpg,,,gallery,photo_taken,DEV123,IMEI0001,selfie
+call,CA0749,2025-07-13 03:59:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:03:30
+sms,SM0750,2025-07-13 04:06:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,"Salut, on se voit à le café ?",,,,sms,sent,DEV123,IMEI0001,
+call,CA0751,2025-07-13 04:14:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,,,,,phone,call_in,DEV123,IMEI0001,durée 00:01:48
+call,CA0752,2025-07-13 04:18:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,,,,,phone,call_in,DEV123,IMEI0001,manqué
+sms,SM0753,2025-07-13 04:25:00,outgoing,+33600000001,+33677777777,hash_12g7,Administratif,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+call,CA0754,2025-07-13 04:35:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,,,,,phone,call_out,DEV123,IMEI0001,durée 00:07:20
+sms,SM0755,2025-07-13 04:43:00,outgoing,+33600000001,+33700000000,hash_15j0,AgenceVoyage,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+call,CA0756,2025-07-13 04:52:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,,,,,phone,call_out,DEV123,IMEI0001,durée 00:09:39
+location,LO0757,2025-07-13 05:01:00,,,,,,,,48.866870,2.366184,location_service,fix,DEV123,IMEI0001,trajet
+email,EM0758,2025-07-13 05:07:00,incoming,newsletter@example.com,user@example.com,hash_email30,Newsletter,Compte-rendu envoyé : merci de confirmer réception.,,,,email,received,DEV123,IMEI0001,
+media,ME0759,2025-07-13 05:17:00,,,,,,,VOICEMSG_20250710_000758.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+browser,BR0760,2025-07-13 05:23:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,recherche
+sms,SM0761,2025-07-13 05:27:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0762,2025-07-13 05:33:00,outgoing,+33600000001,+33700000000,hash_15j0,AgenceVoyage,,,,,phone,call_out,DEV123,IMEI0001,manqué
+sms,SM0763,2025-07-13 05:36:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,Tu peux m'envoyer le fichier stp ?,,,,sms,received,DEV123,IMEI0001,
+location,LO0764,2025-07-13 05:40:00,,,,,,,,48.853622,2.374088,location_service,fix,DEV123,IMEI0001,position stable
+call,CA0765,2025-07-13 05:44:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,,,,,phone,call_in,DEV123,IMEI0001,manqué
+call,CA0766,2025-07-13 05:54:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:09:32
+sms,SM0767,2025-07-13 06:02:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,Quel est le plan pour ce weekend ?,,,,sms,sent,DEV123,IMEI0001,
+app_event,AP0768,2025-07-13 06:10:00,,,,,,whatsapp://chat?u=emma,,,,fitness,fitness_start,DEV123,IMEI0001,
+browser,BR0769,2025-07-13 06:13:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,horaires
+sms,SM0770,2025-07-13 06:23:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0771,2025-07-13 06:33:00,outgoing,+33600000001,+33700000000,hash_15j0,AgenceVoyage,,,,,phone,call_out,DEV123,IMEI0001,durée 00:05:18
+call,CA0772,2025-07-13 06:36:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,,,,,phone,call_in,DEV123,IMEI0001,durée 00:08:19
+app_event,AP0773,2025-07-13 06:45:00,,,,,,"uber://request?to=48.8566,2.3522",,,,spotify,open_note,DEV123,IMEI0001,
+email,EM0774,2025-07-13 06:49:00,incoming,newsletter@example.com,user@example.com,hash_email40,Newsletter,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+email,EM0775,2025-07-13 06:52:00,incoming,service@example.com,user@example.com,hash_email35,Newsletter,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,received,DEV123,IMEI0001,
+media,ME0776,2025-07-13 07:01:00,,,,,,,VOICEMSG_20250710_000775.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+location,LO0777,2025-07-13 07:08:00,,,,,,,,48.870227,2.375755,location_service,fix,DEV123,IMEI0001,promenade
+app_event,AP0778,2025-07-13 07:15:00,,,,,,,,,,sms,start,DEV123,IMEI0001,
+contact,CO0779,2025-07-13 07:18:00,,,,,,,,,,,,DEV123,IMEI0001,
+sms,SM0780,2025-07-13 07:19:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,"Merci, j'ai bien reçu.",,,,sms,received,DEV123,IMEI0001,
+browser,BR0781,2025-07-13 07:22:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,réservation
+sms,SM0782,2025-07-13 07:31:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+location,LO0783,2025-07-13 07:40:00,,,,,,,,48.875945,2.369697,location_service,fix,DEV123,IMEI0001,trajet
+sms,SM0784,2025-07-13 07:45:00,outgoing,+33600000001,+33700000000,hash_15j0,AgenceVoyage,Tu as vu mon message ?,,,,sms,sent,DEV123,IMEI0001,
+call,CA0785,2025-07-13 07:51:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,,,,,phone,call_out,DEV123,IMEI0001,manqué
+sms,SM0786,2025-07-13 08:01:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,"Bonne nuit, bisous.",,,,sms,received,DEV123,IMEI0001,
+media,ME0787,2025-07-13 08:10:00,,,,,,,IMG_20250710_000786.jpg,,,gallery,photo_taken,DEV123,IMEI0001,photo intérieur
+sms,SM0788,2025-07-13 08:13:00,outgoing,+33600000001,+33733333333,hash_19n4,Lucas,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+media,ME0789,2025-07-13 08:15:00,,,,,,,VOICEMSG_20250710_000788.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+contact,CO0790,2025-07-13 08:20:00,,,,,,,,,,,,DEV123,IMEI0001,
+location,LO0791,2025-07-13 08:23:00,,,,,,,,48.854828,2.373841,location_service,fix,DEV123,IMEI0001,
+sms,SM0792,2025-07-13 08:26:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0793,2025-07-13 08:36:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+location,LO0794,2025-07-13 08:38:00,,,,,,,,48.873521,2.352714,location_service,fix,DEV123,IMEI0001,position stable
+email,EM0795,2025-07-13 08:47:00,incoming,service@example.com,user@example.com,hash_email11,Service,Compte-rendu envoyé : merci de confirmer réception.,,,,email,received,DEV123,IMEI0001,
+call,CA0796,2025-07-13 08:49:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,,,,,phone,call_out,DEV123,IMEI0001,durée 00:10:21
+sms,SM0797,2025-07-13 08:54:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0798,2025-07-13 09:00:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0799,2025-07-13 09:01:00,incoming,+33733333333,+33600000001,hash_19n4,Lucas,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0800,2025-07-13 09:10:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,,,,,phone,call_in,DEV123,IMEI0001,manqué
+call,CA0801,2025-07-13 09:16:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,,,,,phone,call_in,DEV123,IMEI0001,durée 00:00:18
+app_event,AP0802,2025-07-13 09:20:00,,,,,,,,,,spotify,start,DEV123,IMEI0001,
+email,EM0803,2025-07-13 09:23:00,incoming,colleague@example.com,user@example.com,hash_email14,HR,Confirmation : votre réservation est effective.,,,,email,received,DEV123,IMEI0001,
+app_event,AP0804,2025-07-13 09:27:00,,,,,,notes://open?id=note_1,,,,notes,backup,DEV123,IMEI0001,
+email,EM0805,2025-07-13 09:30:00,incoming,alerts@example.com,user@example.com,hash_email46,Newsletter,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,received,DEV123,IMEI0001,
+sms,SM0806,2025-07-13 09:31:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+location,LO0807,2025-07-13 09:35:00,,,,,,,,48.877330,2.356305,location_service,fix,DEV123,IMEI0001,trajet
+location,LO0808,2025-07-13 09:42:00,,,,,,,,48.859492,2.355580,location_service,fix,DEV123,IMEI0001,
+call,CA0809,2025-07-13 09:52:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:01:22
+email,EM0810,2025-07-13 09:54:00,outgoing,user@example.com,team@example.com,hash_email39,Paul Martin,"Les événements du weekend : expo, concert, cinéma.",,,,email,sent,DEV123,IMEI0001,
+media,ME0811,2025-07-13 10:02:00,,,,,,,VOICEMSG_20250710_000810.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+call,CA0812,2025-07-13 10:03:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,,,,,phone,call_out,DEV123,IMEI0001,durée 00:02:47
+call,CA0813,2025-07-13 10:12:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,,,,,phone,call_in,DEV123,IMEI0001,manqué
+browser,BR0814,2025-07-13 10:18:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,horaires
+sms,SM0815,2025-07-13 10:19:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+email,EM0816,2025-07-13 10:24:00,incoming,hr@example.com,user@example.com,hash_email14,Service,Compte-rendu envoyé : merci de confirmer réception.,,,,email,received,DEV123,IMEI0001,
+sms,SM0817,2025-07-13 10:27:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,"Bonne nuit, bisous.",,,,sms,received,DEV123,IMEI0001,
+sms,SM0818,2025-07-13 10:37:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,Quel est le plan pour ce weekend ?,,,,sms,sent,DEV123,IMEI0001,
+location,LO0819,2025-07-13 10:39:00,,,,,,,,48.858720,2.342695,location_service,fix,DEV123,IMEI0001,
+sms,SM0820,2025-07-13 10:49:00,incoming,+33688888888,+33600000001,hash_13h8,Samir,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,
+browser,BR0821,2025-07-13 10:53:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,réservation
+location,LO0822,2025-07-13 10:57:00,,,,,,,,48.859534,2.358026,location_service,fix,DEV123,IMEI0001,promenade
+browser,BR0823,2025-07-13 11:00:00,,,,,,https://www.example.com/recettes/pates,,,,browser,visit,DEV123,IMEI0001,réservation
+media,ME0824,2025-07-13 11:07:00,,,,,,,IMG_20250710_000823.jpg,48.857385,2.348861,gallery,photo_taken,DEV123,IMEI0001,photo paysage
+sms,SM0825,2025-07-13 11:13:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+call,CA0826,2025-07-13 11:18:00,incoming,+33688888888,+33600000001,hash_13h8,Samir,,,,,phone,call_in,DEV123,IMEI0001,manqué
+location,LO0827,2025-07-13 11:20:00,,,,,,,,48.875254,2.374349,location_service,fix,DEV123,IMEI0001,position stable
+app_event,AP0828,2025-07-13 11:24:00,,,,,,"uber://request?to=48.8566,2.3522",,,,email,open_note,DEV123,IMEI0001,
+sms,SM0829,2025-07-13 11:26:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+call,CA0830,2025-07-13 11:36:00,outgoing,+33600000001,+33644444444,hash_09d4,Benjamin,,,,,phone,call_out,DEV123,IMEI0001,durée 00:08:57
+email,EM0831,2025-07-13 11:44:00,incoming,hr@example.com,user@example.com,hash_email26,HR,Compte-rendu envoyé : merci de confirmer réception.,,,,email,received,DEV123,IMEI0001,
+media,ME0832,2025-07-13 11:49:00,,,,,,,IMG_20250710_000831.jpg,48.865312,2.355871,gallery,photo_taken,DEV123,IMEI0001,photo amis
+contact,CO0833,2025-07-13 11:53:00,,,,,,,,,,,,DEV123,IMEI0001,
+app_event,AP0834,2025-07-13 12:03:00,,,,,,spotify://track/12345,,,,voice_recorder,fitness_start,DEV123,IMEI0001,
+sms,SM0835,2025-07-13 12:06:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,Je réserve pour 2 personnes.,,,,sms,sent,DEV123,IMEI0001,
+contact,CO0836,2025-07-13 12:14:00,,,,,,,,,,,,DEV123,IMEI0001,
+sms,SM0837,2025-07-13 12:19:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,"Salut, on se voit à le café ?",,,,sms,sent,DEV123,IMEI0001,
+call,CA0838,2025-07-13 12:25:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,,,,,phone,call_in,DEV123,IMEI0001,durée 00:00:02
+email,EM0839,2025-07-13 12:31:00,incoming,service@example.com,user@example.com,hash_email41,Newsletter,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+location,LO0840,2025-07-13 12:41:00,,,,,,,,48.855215,2.366147,location_service,fix,DEV123,IMEI0001,promenade
+location,LO0841,2025-07-13 12:43:00,,,,,,,,48.865500,2.355053,location_service,fix,DEV123,IMEI0001,position stable
+call,CA0842,2025-07-13 12:49:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,,,,,phone,call_in,DEV123,IMEI0001,durée 00:07:56
+location,LO0843,2025-07-13 12:58:00,,,,,,,,48.876461,2.357596,location_service,fix,DEV123,IMEI0001,position stable
+sms,SM0844,2025-07-13 13:03:00,outgoing,+33600000001,+33644444444,hash_09d4,Benjamin,"Merci, j'ai bien reçu.",,,,sms,sent,DEV123,IMEI0001,
+call,CA0845,2025-07-13 13:05:00,outgoing,+33600000001,+33733333333,hash_19n4,Lucas,,,,,phone,call_out,DEV123,IMEI0001,durée 00:05:46
+sms,SM0846,2025-07-13 13:13:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+location,LO0847,2025-07-13 13:20:00,,,,,,,,48.850673,2.341726,location_service,fix,DEV123,IMEI0001,position stable
+sms,SM0848,2025-07-13 13:29:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,"Salut, on se voit à le café ?",,,,sms,sent,DEV123,IMEI0001,
+sms,SM0849,2025-07-13 13:32:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+location,LO0850,2025-07-13 13:37:00,,,,,,,,48.878418,2.348664,location_service,fix,DEV123,IMEI0001,trajet
+app_event,AP0851,2025-07-13 13:40:00,,,,,,spotify://track/12345,,,,calendar,request,DEV123,IMEI0001,
+sms,SM0852,2025-07-13 13:50:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0853,2025-07-13 13:56:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+call,CA0854,2025-07-13 13:58:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,,,,,phone,call_out,DEV123,IMEI0001,durée 00:08:43
+call,CA0855,2025-07-13 14:01:00,outgoing,+33600000001,+33612121212,hash_17l2,Thomas,,,,,phone,call_out,DEV123,IMEI0001,durée 00:09:38
+contact,CO0856,2025-07-13 14:10:00,,,,,,,,,,,,DEV123,IMEI0001,
+call,CA0857,2025-07-13 14:12:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:09:34
+app_event,AP0858,2025-07-13 14:19:00,,,,,,calendar://event?id=meet_18h,,,,fitness,request,DEV123,IMEI0001,
+app_event,AP0859,2025-07-13 14:28:00,,,,,,notes://open?id=note_1,,,,notes,play,DEV123,IMEI0001,
+call,CA0860,2025-07-13 14:35:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,,,,,phone,call_in,DEV123,IMEI0001,durée 00:09:06
+call,CA0861,2025-07-13 14:40:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,,,,,phone,call_out,DEV123,IMEI0001,durée 00:01:18
+location,LO0862,2025-07-13 14:49:00,,,,,,,,48.862259,2.347561,location_service,fix,DEV123,IMEI0001,
+location,LO0863,2025-07-13 14:51:00,,,,,,,,48.865593,2.355001,location_service,fix,DEV123,IMEI0001,position stable
+browser,BR0864,2025-07-13 14:57:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,réservation
+sms,SM0865,2025-07-13 15:04:00,incoming,+33733333333,+33600000001,hash_19n4,Lucas,Je serai en retard de 10 minutes.,,,,sms,received,DEV123,IMEI0001,
+call,CA0866,2025-07-13 15:10:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,,,,,phone,call_in,DEV123,IMEI0001,durée 00:06:48
+sms,SM0867,2025-07-13 15:19:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,"Merci, j'ai bien reçu.",,,,sms,received,DEV123,IMEI0001,
+location,LO0868,2025-07-13 15:27:00,,,,,,,,48.857613,2.352266,location_service,fix,DEV123,IMEI0001,promenade
+media,ME0869,2025-07-13 15:34:00,,,,,,,IMG_20250710_000868.jpg,,,gallery,photo_taken,DEV123,IMEI0001,photo terrasse
+media,ME0870,2025-07-13 15:42:00,,,,,,,IMG_20250710_000869.jpg,48.865250,2.371443,gallery,photo_taken,DEV123,IMEI0001,photo amis
+location,LO0871,2025-07-13 15:43:00,,,,,,,,48.854822,2.378583,location_service,fix,DEV123,IMEI0001,
+media,ME0872,2025-07-13 15:46:00,,,,,,,VOICEMSG_20250710_000871.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+email,EM0873,2025-07-13 15:53:00,incoming,colleague@example.com,user@example.com,hash_email17,HR,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+sms,SM0874,2025-07-13 15:54:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+browser,BR0875,2025-07-13 15:59:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,lecture article
+email,EM0876,2025-07-13 16:02:00,outgoing,user@example.com,archive@example.com,hash_email1,HR,Compte-rendu envoyé : merci de confirmer réception.,,,,email,sent,DEV123,IMEI0001,
+sms,SM0877,2025-07-13 16:03:00,outgoing,+33600000001,+33711111111,hash_16k1,ServiceClient,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+browser,BR0878,2025-07-13 16:09:00,,,,,,https://www.example.com/transport/metro,,,,browser,visit,DEV123,IMEI0001,lecture article
+email,EM0879,2025-07-13 16:11:00,outgoing,user@example.com,archive@example.com,hash_email23,Service,Confirmation : votre réservation est effective.,,,,email,sent,DEV123,IMEI0001,
+location,LO0880,2025-07-13 16:20:00,,,,,,,,48.850461,2.368145,location_service,fix,DEV123,IMEI0001,
+call,CA0881,2025-07-13 16:29:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,,,,,phone,call_in,DEV123,IMEI0001,durée 00:04:14
+location,LO0882,2025-07-13 16:33:00,,,,,,,,48.863643,2.356158,location_service,fix,DEV123,IMEI0001,
+sms,SM0883,2025-07-13 16:40:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,Quel est le plan pour ce weekend ?,,,,sms,sent,DEV123,IMEI0001,
+call,CA0884,2025-07-13 16:46:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:08:52
+media,ME0885,2025-07-13 16:51:00,,,,,,,VOICEMSG_20250710_000884.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+email,EM0886,2025-07-13 17:01:00,outgoing,user@example.com,friend@example.com,hash_email49,Newsletter,Confirmation : votre réservation est effective.,,,,email,sent,DEV123,IMEI0001,
+browser,BR0887,2025-07-13 17:11:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,recherche
+sms,SM0888,2025-07-13 17:13:00,outgoing,+33600000001,+33677777777,hash_12g7,Administratif,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+call,CA0889,2025-07-13 17:19:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,,,,,phone,call_in,DEV123,IMEI0001,manqué
+app_event,AP0890,2025-07-13 17:23:00,,,,,,"maps://route?to=48.8606,2.3376",,,,maps,open_chat,DEV123,IMEI0001,
+browser,BR0891,2025-07-13 17:29:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,horaires
+call,CA0892,2025-07-13 17:35:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:10:59
+app_event,AP0893,2025-07-13 17:43:00,,,,,,"uber://request?to=48.8566,2.3522",,,,whatsapp,play,DEV123,IMEI0001,
+sms,SM0894,2025-07-13 17:48:00,outgoing,+33600000001,+33644444444,hash_09d4,Benjamin,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+app_event,AP0895,2025-07-13 17:54:00,,,,,,,,,,gallery,fitness_start,DEV123,IMEI0001,
+sms,SM0896,2025-07-13 17:56:00,incoming,+33733333333,+33600000001,hash_19n4,Lucas,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+media,ME0897,2025-07-13 18:05:00,,,,,,,IMG_20250710_000896.jpg,,,gallery,photo_taken,DEV123,IMEI0001,selfie
+location,LO0898,2025-07-13 18:13:00,,,,,,,,48.876944,2.375239,location_service,fix,DEV123,IMEI0001,promenade
+call,CA0899,2025-07-13 18:22:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,,,,,phone,call_in,DEV123,IMEI0001,durée 00:09:08
+sms,SM0900,2025-07-13 18:29:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,Quel est le plan pour ce weekend ?,,,,sms,sent,DEV123,IMEI0001,
+call,CA0901,2025-07-13 18:32:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,,,,,phone,call_out,DEV123,IMEI0001,durée 00:07:20
+browser,BR0902,2025-07-13 18:33:00,,,,,,https://www.example.com/billet-musee,,,,browser,visit,DEV123,IMEI0001,horaires
+call,CA0903,2025-07-13 18:35:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,,,,,phone,call_in,DEV123,IMEI0001,durée 00:04:11
+call,CA0904,2025-07-13 18:39:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,,,,,phone,call_in,DEV123,IMEI0001,durée 00:05:23
+sms,SM0905,2025-07-13 18:46:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,
+app_event,AP0906,2025-07-13 18:51:00,,,,,,spotify://track/12345,,,,backup,event_created,DEV123,IMEI0001,
+sms,SM0907,2025-07-13 19:01:00,outgoing,+33600000001,+33733333333,hash_19n4,Lucas,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+media,ME0908,2025-07-13 19:10:00,,,,,,,VOICEMSG_20250710_000907.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+app_event,AP0909,2025-07-13 19:14:00,,,,,,"uber://request?to=48.8566,2.3522",,,,gallery,fitness_start,DEV123,IMEI0001,
+sms,SM0910,2025-07-13 19:15:00,incoming,+33633333333,+33600000001,hash_08c3,Maman,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+email,EM0911,2025-07-13 19:24:00,outgoing,user@example.com,archive@example.com,hash_email20,Newsletter,Compte-rendu envoyé : merci de confirmer réception.,,,,email,sent,DEV123,IMEI0001,
+app_event,AP0912,2025-07-13 19:25:00,,,,,,"uber://request?to=48.8566,2.3522",,,,weather,open_chat,DEV123,IMEI0001,
+sms,SM0913,2025-07-13 19:29:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+call,CA0914,2025-07-13 19:35:00,incoming,+33655555555,+33600000001,hash_10e5,Laura,,,,,phone,call_in,DEV123,IMEI0001,durée 00:08:59
+app_event,AP0915,2025-07-13 19:41:00,,,,,,,,,,sms,request,DEV123,IMEI0001,
+call,CA0916,2025-07-13 19:51:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:10:34
+sms,SM0917,2025-07-13 19:56:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+media,ME0918,2025-07-13 20:04:00,,,,,,,IMG_20250710_000917.jpg,48.858596,2.365268,gallery,photo_taken,DEV123,IMEI0001,photo intérieur
+app_event,AP0919,2025-07-13 20:10:00,,,,,,spotify://track/12345,,,,notes,backup,DEV123,IMEI0001,
+location,LO0920,2025-07-13 20:12:00,,,,,,,,48.852373,2.353745,location_service,fix,DEV123,IMEI0001,promenade
+sms,SM0921,2025-07-13 20:17:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0922,2025-07-13 20:25:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+email,EM0923,2025-07-13 20:32:00,incoming,newsletter@example.com,user@example.com,hash_email2,HR,Votre entretien est confirmé.,,,,email,received,DEV123,IMEI0001,
+browser,BR0924,2025-07-13 20:34:00,,,,,,https://www.example.com/transport/metro,,,,browser,visit,DEV123,IMEI0001,horaires
+call,CA0925,2025-07-13 20:36:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:00:49
+call,CA0926,2025-07-13 20:38:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:01:41
+email,EM0927,2025-07-13 20:45:00,outgoing,user@example.com,friend@example.com,hash_email16,Newsletter,Confirmation : votre réservation est effective.,,,,email,sent,DEV123,IMEI0001,
+location,LO0928,2025-07-13 20:48:00,,,,,,,,48.865802,2.346824,location_service,fix,DEV123,IMEI0001,
+browser,BR0929,2025-07-13 20:54:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,recherche
+email,EM0930,2025-07-13 21:03:00,outgoing,user@example.com,archive@example.com,hash_email9,HR,Compte-rendu envoyé : merci de confirmer réception.,,,,email,sent,DEV123,IMEI0001,
+location,LO0931,2025-07-13 21:13:00,,,,,,,,48.863049,2.365591,location_service,fix,DEV123,IMEI0001,promenade
+app_event,AP0932,2025-07-13 21:21:00,,,,,,,,,,calendar,fitness_start,DEV123,IMEI0001,
+call,CA0933,2025-07-13 21:27:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,,,,,phone,call_in,DEV123,IMEI0001,durée 00:00:00
+call,CA0934,2025-07-13 21:30:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,,,,,phone,call_in,DEV123,IMEI0001,durée 00:00:44
+email,EM0935,2025-07-13 21:38:00,outgoing,user@example.com,client@example.com,hash_email50,Service,"Les événements du weekend : expo, concert, cinéma.",,,,email,sent,DEV123,IMEI0001,
+location,LO0936,2025-07-13 21:39:00,,,,,,,,48.866446,2.347543,location_service,fix,DEV123,IMEI0001,trajet
+call,CA0937,2025-07-13 21:42:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,,,,,phone,call_in,DEV123,IMEI0001,durée 00:06:14
+sms,SM0938,2025-07-13 21:49:00,outgoing,+33600000001,+33733333333,hash_19n4,Lucas,Quel est le plan pour ce weekend ?,,,,sms,sent,DEV123,IMEI0001,
+media,ME0939,2025-07-13 21:54:00,,,,,,,VOICEMSG_20250710_000938.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+location,LO0940,2025-07-13 22:03:00,,,,,,,,48.874264,2.356516,location_service,fix,DEV123,IMEI0001,
+sms,SM0941,2025-07-13 22:08:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,Peux-tu confirmer ?,,,,sms,received,DEV123,IMEI0001,
+sms,SM0942,2025-07-13 22:18:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0943,2025-07-13 22:27:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0944,2025-07-13 22:35:00,outgoing,+33600000001,+33700000000,hash_15j0,AgenceVoyage,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+sms,SM0945,2025-07-13 22:43:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+media,ME0946,2025-07-13 22:51:00,,,,,,,VOICEMSG_20250710_000945.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+call,CA0947,2025-07-13 22:52:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,,,,,phone,call_out,DEV123,IMEI0001,durée 00:02:03
+sms,SM0948,2025-07-13 22:59:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,"Merci, j'ai bien reçu.",,,,sms,received,DEV123,IMEI0001,
+app_event,AP0949,2025-07-13 23:04:00,,,,,,,,,,weather,open,DEV123,IMEI0001,
+email,EM0950,2025-07-13 23:08:00,outgoing,user@example.com,archive@example.com,hash_email16,Paul Martin,Votre entretien est confirmé.,,,,email,sent,DEV123,IMEI0001,
+call,CA0951,2025-07-13 23:10:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,,,,,phone,call_in,DEV123,IMEI0001,durée 00:07:24
+browser,BR0952,2025-07-13 23:15:00,,,,,,https://www.example.com/restaurant/reservation,,,,browser,visit,DEV123,IMEI0001,horaires
+location,LO0953,2025-07-13 23:16:00,,,,,,,,48.872342,2.361983,location_service,fix,DEV123,IMEI0001,
+sms,SM0954,2025-07-13 23:21:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,"Salut, on se voit à le café ?",,,,sms,received,DEV123,IMEI0001,
+email,EM0955,2025-07-13 23:25:00,outgoing,user@example.com,team@example.com,hash_email1,HR,"Les événements du weekend : expo, concert, cinéma.",,,,email,sent,DEV123,IMEI0001,
+location,LO0956,2025-07-13 23:32:00,,,,,,,,48.873674,2.340357,location_service,fix,DEV123,IMEI0001,
+location,LO0957,2025-07-13 23:40:00,,,,,,,,48.870652,2.346200,location_service,fix,DEV123,IMEI0001,
+sms,SM0958,2025-07-13 23:48:00,incoming,+33622222222,+33600000001,hash_07b2,Paul Martin,"Salut, on se voit à la terrasse ?",,,,sms,received,DEV123,IMEI0001,
+call,CA0959,2025-07-13 23:51:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,,,,,phone,call_in,DEV123,IMEI0001,durée 00:02:31
+sms,SM0960,2025-07-14 00:00:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+contact,CO0961,2025-07-14 00:07:00,,,,,,,,,,,,DEV123,IMEI0001,
+call,CA0962,2025-07-14 00:10:00,outgoing,+33600000001,+33655555555,hash_10e5,Laura,,,,,phone,call_out,DEV123,IMEI0001,durée 00:07:35
+sms,SM0963,2025-07-14 00:18:00,outgoing,+33600000001,+33644444444,hash_09d4,Benjamin,Quel est le plan pour ce weekend ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0964,2025-07-14 00:26:00,outgoing,+33600000001,+33655555555,hash_10e5,Laura,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0965,2025-07-14 00:31:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,Quel est le plan pour ce weekend ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0966,2025-07-14 00:40:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,,,,,phone,call_in,DEV123,IMEI0001,durée 00:00:39
+app_event,AP0967,2025-07-14 00:50:00,,,,,,"uber://request?to=48.8566,2.3522",,,,calendar,reminder_set,DEV123,IMEI0001,
+sms,SM0968,2025-07-14 00:59:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,"Bonne nuit, bisous.",,,,sms,received,DEV123,IMEI0001,
+browser,BR0969,2025-07-14 01:08:00,,,,,,https://www.example.com/transport/metro,,,,browser,visit,DEV123,IMEI0001,réservation
+sms,SM0970,2025-07-14 01:14:00,outgoing,+33600000001,+33622222222,hash_07b2,Paul Martin,Quel est le plan pour ce weekend ?,,,,sms,sent,DEV123,IMEI0001,
+contact,CO0971,2025-07-14 01:17:00,,,,,,,,,,,,DEV123,IMEI0001,
+sms,SM0972,2025-07-14 01:18:00,outgoing,+33600000001,+33644444444,hash_09d4,Benjamin,Je réserve pour 2 personnes.,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0973,2025-07-14 01:28:00,incoming,+33733333333,+33600000001,hash_19n4,Lucas,Je réserve pour 2 personnes.,,,,sms,received,DEV123,IMEI0001,
+location,LO0974,2025-07-14 01:38:00,,,,,,,,48.857678,2.354654,location_service,fix,DEV123,IMEI0001,
+contact,CO0975,2025-07-14 01:42:00,,,,,,,,,,,,DEV123,IMEI0001,
+browser,BR0976,2025-07-14 01:44:00,,,,,,https://www.example.com/cinema/horaires,,,,browser,visit,DEV123,IMEI0001,lecture article
+call,CA0977,2025-07-14 01:51:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,,,,,phone,call_in,DEV123,IMEI0001,durée 00:00:52
+location,LO0978,2025-07-14 02:00:00,,,,,,,,48.851220,2.342816,location_service,fix,DEV123,IMEI0001,promenade
+sms,SM0979,2025-07-14 02:04:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,Tu peux m'envoyer le fichier stp ?,,,,sms,sent,DEV123,IMEI0001,
+call,CA0980,2025-07-14 02:08:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,,,,,phone,call_in,DEV123,IMEI0001,durée 00:09:40
+email,EM0981,2025-07-14 02:17:00,outgoing,user@example.com,client@example.com,hash_email50,Newsletter,Confirmation : votre réservation est effective.,,,,email,sent,DEV123,IMEI0001,
+browser,BR0982,2025-07-14 02:24:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,horaires
+media,ME0983,2025-07-14 02:33:00,,,,,,,VOICEMSG_20250710_000982.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+call,CA0984,2025-07-14 02:36:00,incoming,+33699999999,+33600000001,hash_14i9,Marine,,,,,phone,call_in,DEV123,IMEI0001,durée 00:05:57
+sms,SM0985,2025-07-14 02:42:00,incoming,+33722222222,+33600000001,hash_18m3,Livraison,Tu as vu mon message ?,,,,sms,received,DEV123,IMEI0001,
+app_event,AP0986,2025-07-14 02:48:00,,,,,,spotify://track/12345,,,,calendar,update_check,DEV123,IMEI0001,
+sms,SM0987,2025-07-14 02:57:00,incoming,+33700000000,+33600000001,hash_15j0,AgenceVoyage,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,
+call,CA0988,2025-07-14 03:04:00,incoming,+33611111111,+33600000001,hash_06a1,Emma Dupont,,,,,phone,call_in,DEV123,IMEI0001,manqué
+sms,SM0989,2025-07-14 03:05:00,outgoing,+33600000001,+33699999999,hash_14i9,Marine,Je serai en retard de 10 minutes.,,,,sms,sent,DEV123,IMEI0001,
+sms,SM0990,2025-07-14 03:09:00,incoming,+33644444444,+33600000001,hash_09d4,Benjamin,"Salut, on se voit à la gare ?",,,,sms,received,DEV123,IMEI0001,
+email,EM0991,2025-07-14 03:18:00,incoming,colleague@example.com,user@example.com,hash_email3,Service,"Les événements du weekend : expo, concert, cinéma.",,,,email,received,DEV123,IMEI0001,
+sms,SM0992,2025-07-14 03:23:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,"Bonne nuit, bisous.",,,,sms,sent,DEV123,IMEI0001,
+app_event,AP0993,2025-07-14 03:25:00,,,,,,whatsapp://chat?u=emma,,,,weather,update_check,DEV123,IMEI0001,
+media,ME0994,2025-07-14 03:31:00,,,,,,,VOICEMSG_20250710_000993.amr,,,voice_recorder,voice_saved,DEV123,IMEI0001,mémos vocal
+sms,SM0995,2025-07-14 03:41:00,outgoing,+33600000001,+33722222222,hash_18m3,Livraison,Peux-tu confirmer ?,,,,sms,sent,DEV123,IMEI0001,
+contact,CO0996,2025-07-14 03:51:00,,,,,,,,,,,,DEV123,IMEI0001,
+call,CA0997,2025-07-14 03:52:00,incoming,+33711111111,+33600000001,hash_16k1,ServiceClient,,,,,phone,call_in,DEV123,IMEI0001,durée 00:06:26
+email,EM0998,2025-07-14 03:54:00,incoming,service@example.com,user@example.com,hash_email1,Service,"Bonjour, je t'envoie le compte-rendu de la réunion.",,,,email,received,DEV123,IMEI0001,
+sms,SM0999,2025-07-14 03:55:00,outgoing,+33600000001,+33666666666,hash_11f6,Sophie,On garde la même heure pour demain ?,,,,sms,sent,DEV123,IMEI0001,
+browser,BR1000,2025-07-14 03:58:00,,,,,,https://www.example.com/article-cafe-paris,,,,browser,visit,DEV123,IMEI0001,recherche
