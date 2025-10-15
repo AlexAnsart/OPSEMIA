@@ -19,6 +19,7 @@
     "seuil_distance_max": null
   },
   "donnees": {
-    "chemin_csv_donnees": "Cas/Cas1/sms.csv"
+    "chemin_csv_donnees": "Cas/Cas3/sms.csv",
+    "format_csv": "auto"
   }
 }

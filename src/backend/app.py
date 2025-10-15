@@ -75,7 +75,9 @@ def creer_app() -> Flask:
             "version": "1.0.0",
             "endpoints": {
                 "indexation": [
-                    "POST /api/load - Charger un fichier CSV",
+                    "POST /api/load - Charger un fichier CSV (retourne task_id)",
+                    "GET /api/load/progress/<task_id> - Stream SSE pour la progression",
+                    "GET /api/load/status/<task_id> - Statut d'une tâche (polling)",
                     "POST /api/load_dossier - Charger tous les CSV d'un dossier"
                 ],
                 "recherche": [

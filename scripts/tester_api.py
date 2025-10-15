@@ -5,12 +5,19 @@ Teste toutes les routes de l'API et vérifie leur bon fonctionnement.
 
 from __future__ import annotations
 
+import io
 import sys
 import time
 from pathlib import Path
 from typing import Any, Dict
 
 import requests
+
+# Forcer UTF-8 pour la sortie console (nécessaire pour les emojis sur Windows)
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+if sys.stderr.encoding != 'utf-8':
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 # Configuration de l'API
 API_URL = "http://127.0.0.1:5000"

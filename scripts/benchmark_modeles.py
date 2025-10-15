@@ -10,9 +10,16 @@ et calcule des métriques de performance:
 - Temps d'encodage et de recherche
 """
 
+import io
 import sys
 import time
 from pathlib import Path
+
+# Forcer UTF-8 pour la sortie console (nécessaire pour les emojis sur Windows)
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+if sys.stderr.encoding != 'utf-8':
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 from typing import Dict, List, Tuple
 
 import numpy as np

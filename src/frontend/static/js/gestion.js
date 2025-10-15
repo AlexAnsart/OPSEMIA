@@ -222,7 +222,7 @@ function afficherStatistiques(stats) {
 }
 
 /**
- * Charge et indexe un fichier CSV
+ * Charge et indexe un fichier CSV avec suivi de progression SSE
  */
 async function chargerCSV() {
     const cheminCSV = document.getElementById('csv-path')?.value.trim();
@@ -233,8 +233,6 @@ async function chargerCSV() {
         return;
     }
     
-    afficherAlerte('Indexation en cours... Veuillez patienter.', 'info');
-    
     // Désactiver le bouton pendant le traitement
     const submitBtn = document.querySelector('#load-csv-form button[type="submit"]');
     if (submitBtn) {
@@ -243,35 +241,25 @@ async function chargerCSV() {
     }
     
     try {
-        const data = await api.chargerCSV(cheminCSV, null, reinitialiser);
+        // 1. Démarrer l'indexation (retourne immédiatement avec task_id)
+        const response = await api.chargerCSV(cheminCSV, null, reinitialiser);
         
-        if (data.succes) {
-            let message = data.message || 'Indexation terminée avec succès!';
-            
-            // Afficher les statistiques si disponibles
-            if (data.statistiques) {
-                message += `<br><br>Détails:<br>
-                    ${data.statistiques.messages_indexe || 0} messages indexés<br>
-                    ${data.statistiques.chunks_indexes || 0} chunks créés<br>
-                    Durée: ${data.statistiques.duree_totale_sec?.toFixed(2) || 0}s`;
-            }
-            
-            afficherAlerte(message, 'success');
-            
-            // Recharger les statistiques
-            setTimeout(() => {
-                const collapsible = document.getElementById('stats-collapsible');
-                if (collapsible && collapsible.classList.contains('collapsed')) {
-                    collapsible.classList.remove('collapsed');
-                }
-                chargerStatistiques();
-            }, 1000);
-            
-            // Réinitialiser le formulaire
-            document.getElementById('csv-path').value = '';
-            document.getElementById('csv-reset').checked = false;
+        if (!response.succes || !response.task_id) {
+            throw new Error(response.erreur || 'Impossible de démarrer l\'indexation');
         }
+        
+        const taskId = response.task_id;
+        console.log(`📡 Tâche d'indexation démarrée: ${taskId}`);
+        
+        // 2. Afficher la barre de progression
+        afficherBarreProgression();
+        
+        // 3. Se connecter au stream SSE pour suivre la progression
+        await suivreProgressionSSE(taskId);
+        
     } catch (error) {
+        console.error('Erreur lors de l\'indexation:', error);
+        masquerBarreProgression();
         afficherAlerte('Erreur lors de l\'indexation: ' + error.message, 'danger');
     } finally {
         // Réactiver le bouton
@@ -280,6 +268,172 @@ async function chargerCSV() {
             submitBtn.textContent = '📤 Charger et indexer';
         }
     }
+}
+
+/**
+ * Affiche la barre de progression
+ */
+function afficherBarreProgression() {
+    const existingBar = document.getElementById('progress-bar-container');
+    if (existingBar) existingBar.remove();
+    
+    const alertsContainer = document.getElementById('alerts-container');
+    if (!alertsContainer) return;
+    
+    const progressHTML = `
+        <div id="progress-bar-container" class="card" style="margin-bottom: var(--spacing-lg);">
+            <div style="padding: var(--spacing-lg);">
+                <h4 style="color: var(--text-white); margin-bottom: var(--spacing-md);">
+                    📊 Progression de l'indexation
+                </h4>
+                <div style="margin-bottom: var(--spacing-sm);">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-xs);">
+                        <span id="progress-etape" style="color: var(--text-secondary);">Initialisation...</span>
+                        <span id="progress-pct" style="color: var(--accent-color); font-weight: 600;">0%</span>
+                    </div>
+                    <div style="background: var(--bg-darker); border-radius: var(--border-radius); height: 24px; overflow: hidden; position: relative;">
+                        <div id="progress-bar" style="background: linear-gradient(90deg, var(--accent-color), var(--accent-hover)); height: 100%; width: 0%; transition: width 0.3s ease; display: flex; align-items: center; justify-content: center;">
+                            <span id="progress-bar-text" style="color: white; font-size: 0.75rem; font-weight: 600; position: absolute;"></span>
+                        </div>
+                    </div>
+                </div>
+                <p id="progress-message" style="color: var(--text-secondary); font-size: 0.875rem; margin: 0;"></p>
+            </div>
+        </div>
+    `;
+    
+    alertsContainer.insertAdjacentHTML('afterbegin', progressHTML);
+}
+
+/**
+ * Masque la barre de progression
+ */
+function masquerBarreProgression() {
+    const container = document.getElementById('progress-bar-container');
+    if (container) {
+        setTimeout(() => container.remove(), 2000);
+    }
+}
+
+/**
+ * Met à jour la barre de progression
+ */
+function mettreAJourProgression(progression, etape, message) {
+    const progressBar = document.getElementById('progress-bar');
+    const progressPct = document.getElementById('progress-pct');
+    const progressEtape = document.getElementById('progress-etape');
+    const progressMessage = document.getElementById('progress-message');
+    const progressBarText = document.getElementById('progress-bar-text');
+    
+    if (progressBar) {
+        progressBar.style.width = `${progression}%`;
+    }
+    if (progressPct) {
+        progressPct.textContent = `${Math.round(progression)}%`;
+    }
+    if (progressBarText) {
+        progressBarText.textContent = `${Math.round(progression)}%`;
+    }
+    if (progressEtape) {
+        progressEtape.textContent = etape || 'En cours...';
+    }
+    if (progressMessage) {
+        progressMessage.textContent = message || '';
+    }
+}
+
+/**
+ * Suit la progression via Server-Sent Events (SSE)
+ */
+function suivreProgressionSSE(taskId) {
+    return new Promise((resolve, reject) => {
+        const sseURL = `${api.baseURL}/api/load/progress/${taskId}`;
+        console.log(`📡 Tentative connexion SSE: ${sseURL}`);
+        
+        const eventSource = new EventSource(sseURL);
+        
+        console.log(`📡 Connexion SSE établie pour task ${taskId}`);
+        
+        eventSource.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                console.log('📊 Progression:', data);
+                
+                mettreAJourProgression(
+                    data.progression || 0,
+                    data.etape || 'En cours',
+                    data.message || ''
+                );
+                
+            } catch (error) {
+                console.error('Erreur parsing SSE:', error);
+            }
+        };
+        
+        eventSource.addEventListener('complete', (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                console.log('✅ Indexation terminée:', data);
+                
+                eventSource.close();
+                mettreAJourProgression(100, 'Terminé', 'Indexation terminée avec succès!');
+                
+                // Afficher le résumé
+                if (data.statistiques) {
+                    const message = `Indexation terminée avec succès!<br><br>Détails:<br>
+                        ${data.statistiques.messages_indexe || 0} messages indexés<br>
+                        ${data.statistiques.chunks_indexes || 0} chunks créés<br>
+                        Durée: ${data.statistiques.duree_totale_sec?.toFixed(2) || 0}s`;
+                    afficherAlerte(message, 'success');
+                }
+                
+                // Masquer la barre et recharger les stats
+                masquerBarreProgression();
+                setTimeout(() => {
+                    const collapsible = document.getElementById('stats-collapsible');
+                    if (collapsible && collapsible.classList.contains('collapsed')) {
+                        collapsible.classList.remove('collapsed');
+                    }
+                    chargerStatistiques();
+                }, 1000);
+                
+                // Réinitialiser le formulaire
+                document.getElementById('csv-path').value = '';
+                document.getElementById('csv-reset').checked = false;
+                
+                resolve(data);
+            } catch (error) {
+                console.error('Erreur traitement complete:', error);
+                eventSource.close();
+                reject(error);
+            }
+        });
+        
+        eventSource.addEventListener('error', (event) => {
+            console.error('❌ Erreur SSE:', event);
+            eventSource.close();
+            
+            try {
+                const data = event.data ? JSON.parse(event.data) : {};
+                const erreur = data.erreur || 'Erreur de connexion SSE';
+                masquerBarreProgression();
+                afficherAlerte('Erreur: ' + erreur, 'danger');
+                reject(new Error(erreur));
+            } catch (e) {
+                masquerBarreProgression();
+                afficherAlerte('Erreur de connexion au serveur', 'danger');
+                reject(new Error('Erreur de connexion SSE'));
+            }
+        });
+        
+        eventSource.onerror = (error) => {
+            console.error('❌ Erreur connexion SSE:', error);
+            eventSource.close();
+            masquerBarreProgression();
+            afficherAlerte('Erreur de connexion au serveur', 'danger');
+            reject(new Error('Erreur de connexion SSE'));
+        };
+    });
 }
 
 /**

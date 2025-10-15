@@ -102,6 +102,8 @@ class Parametres:
             self.CHEMIN_CSV_DONNEES = str(
                 Path(__file__).resolve().parents[1] / chemin_csv
             )
+        # Format du CSV: "auto" (détection automatique), "cas1" (ancienne structure), ou "cas3" (nouvelle structure)
+        self.FORMAT_CSV = donnees.get("format_csv", "auto")
 
     def _creer_config_defaut(self) -> None:
         """Crée le fichier de configuration par défaut."""
@@ -126,7 +128,8 @@ class Parametres:
                 "seuil_distance_max": None
             },
             "donnees": {
-                "chemin_csv_donnees": "Cas/Cas1/sms.csv"
+                "chemin_csv_donnees": "Cas/Cas1/sms.csv",
+                "format_csv": "auto"
             }
         }
 

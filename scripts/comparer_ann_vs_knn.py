@@ -5,9 +5,16 @@ Ce script montre les différences de performance et de résultats entre les deux
 
 from __future__ import annotations
 
+import io
 import sys
 import time
 from pathlib import Path
+
+# Forcer UTF-8 pour la sortie console (nécessaire pour les emojis sur Windows)
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+if sys.stderr.encoding != 'utf-8':
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 # Ajouter le répertoire racine au path pour les imports
 racine_projet = Path(__file__).resolve().parents[1]
