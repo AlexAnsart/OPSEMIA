@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPSEMIA - Configuration</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-brand">
+                    <img src="/static/assets/logo-slogan.png" alt="OPSEMIA - Accélérez la vérité au service de la justice" class="header-logo-full">
+                </div>
+                <nav class="header-nav">
+                    <a href="/" class="nav-link">🔍 Recherche</a>
+                    <a href="/conversations" class="nav-link">💬 Conversations</a>
+                    <a href="/gestion" class="nav-link active">⚙️ Configuration</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Alertes -->
+            <div id="alerts-container"></div>
+
+            <!-- Section: Chargement de données -->
+            <div class="card">
+                <div class="card-header">
+                    📥 Chargement de données
+                </div>
+                <form id="load-csv-form">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Fichier CSV
+                            <span class="help-icon" data-tooltip="Chemin vers le fichier CSV (ex: Cas/Cas1/sms.csv). Peut être un chemin relatif ou absolu.">?</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="csv-path" 
+                            class="form-input"
+                            placeholder="Cas/Cas1/sms.csv"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="csv-reset">
+                            <span>Réinitialiser la collection existante</span>
+                            <span class="help-icon" data-tooltip="⚠️ Supprime toutes les données existantes avant le chargement">?</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        📤 Charger et indexer
+                    </button>
+                </form>
+            </div>
+
+            <!-- Section: Configuration du système -->
+            <div class="card">
+                <div class="card-header">
+                    ⚙️ Configuration du moteur
+                    <button type="button" id="btn-info-persistance" class="btn btn-sm btn-secondary" style="margin-left: auto;">
+                        ℹ️ Persistance
+                    </button>
+                </div>
+
+                <form id="config-form">
+                    <!-- ENCODAGE -->
+                    <h3 style="color: var(--accent-color); margin-bottom: var(--spacing-md); font-size: 1.1rem;">
+                        🧠 Encodage
+                    </h3>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Modèle d'embedding
+                            <span class="help-icon" data-tooltip="Modèle Sentence Transformer utilisé pour encoder les messages en vecteurs. Redémarrage requis.">?</span>
+                        </label>
+                        <select id="config-modele-embedding" class="form-select">
+                            <option value="">Chargement...</option>
+                        </select>
+                        <small class="form-help" id="modele-description"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Périphérique d'encodage
+                            <span class="help-icon" data-tooltip="Matériel utilisé pour l'encodage. 'auto' détecte CUDA si disponible. Redémarrage requis.">?</span>
+                        </label>
+                        <select id="config-peripherique" class="form-select">
+                            <option value="auto">Auto (recommandé)</option>
+                            <option value="cpu">CPU</option>
+                            <option value="cuda">CUDA (GPU)</option>
+                        </select>
+                    </div>
+
+                    <div class="card-divider"></div>
+
+                    <!-- CHUNKING -->
+                    <h3 style="color: var(--accent-color); margin-bottom: var(--spacing-md); font-size: 1.1rem;">
+                        ✂️ Chunking (Découpage contextuel)
+                    </h3>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Taille de la fenêtre
+                            <span class="help-icon" data-tooltip="Nombre de messages dans une fenêtre de contexte. Redémarrage requis.">?</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="config-taille-fenetre" 
+                            class="form-input"
+                            min="1"
+                            max="50"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Chevauchement (overlap)
+                            <span class="help-icon" data-tooltip="Nombre de messages en commun entre chunks successifs. Redémarrage requis.">?</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="config-overlap" 
+                            class="form-input"
+                            min="0"
+                            max="25"
+                        >
+                    </div>
+
+                    <div class="card-divider"></div>
+
+                    <!-- RECHERCHE -->
+                    <h3 style="color: var(--accent-color); margin-bottom: var(--spacing-md); font-size: 1.1rem;">
+                        🔍 Recherche
+                    </h3>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Méthode de recherche
+                            <span class="help-icon" data-tooltip="ANN: rapide mais approximatif (~95-99% précision). KNN: exact mais plus lent.">?</span>
+                        </label>
+                        <select id="config-methode" class="form-select">
+                            <option value="ANN">ANN (Approximate Nearest Neighbors)</option>
+                            <option value="KNN">KNN (K-Nearest Neighbors - Exact)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Nombre de résultats par défaut
+                            <span class="help-icon" data-tooltip="Nombre de résultats retournés par la recherche (top K)">?</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="config-nb-results" 
+                            class="form-input"
+                            min="1"
+                            max="100"
+                            value="10"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="config-exclure-bruit" checked>
+                            <span>Exclure le bruit par défaut (spam/publicités)</span>
+                            <span class="help-icon" data-tooltip="Active le filtre anti-spam automatiquement lors des recherches">?</span>
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Seuil de distance maximale
+                            <span class="help-icon" data-tooltip="Distance cosine maximale acceptée (vide = pas de limite). Plus la valeur est faible, plus les résultats sont pertinents.">?</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="config-seuil-distance" 
+                            class="form-input"
+                            step="0.01"
+                            min="0"
+                            max="2"
+                            placeholder="Aucun seuil"
+                        >
+                        <small class="form-help">
+                            Laissez vide pour aucun seuil. Valeurs typiques : 0.3-0.7
+                        </small>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">
+                        💾 Sauvegarder la configuration
+                    </button>
+                </form>
+            </div>
+
+            <!-- Section: Statistiques (collapsible) -->
+            <div class="card">
+                <div class="collapsible collapsed" id="stats-collapsible">
+                    <div class="collapsible-header">
+                        <span style="font-size: 1.125rem; font-weight: 600; color: var(--text-white);">
+                            📊 Statistiques d'indexation
+                        </span>
+                        <div style="display: flex; gap: var(--spacing-sm); align-items: center;">
+                            <button id="refresh-stats" class="btn btn-sm btn-secondary">
+                                🔄 Actualiser
+                            </button>
+                            <span class="collapsible-icon">▼</span>
+                        </div>
+                    </div>
+                    <div class="collapsible-content">
+                        <div id="stats-container">
+                            <div class="flex-center" style="padding: 2rem;">
+                                <div class="spinner"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Info Persistance -->
+    <div id="modal-persistance" class="hidden" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 4000; display: flex; align-items: center; justify-content: center;">
+        <div style="background: var(--bg-card); border: 2px solid var(--accent-color); border-radius: var(--border-radius-lg); padding: var(--spacing-2xl); max-width: 600px; box-shadow: var(--shadow-glow);">
+            <h3 style="color: var(--accent-color); margin-bottom: var(--spacing-md);">💾 Persistance de la configuration</h3>
+            <p style="margin-bottom: var(--spacing-md); line-height: 1.6;">
+                Les modifications sont <strong>sauvegardées de manière permanente</strong> dans le fichier <code>config/settings.json</code>.
+            </p>
+            <p style="margin-bottom: var(--spacing-md); line-height: 1.6;">
+                ⚠️ <strong>Attention:</strong> Les changements de modèle d'embedding, périphérique ou chunking nécessitent un <strong>redémarrage du serveur</strong> pour être appliqués.
+            </p>
+            <p style="line-height: 1.6;">
+                Les autres paramètres (recherche) sont appliqués immédiatement sans redémarrage.
+            </p>
+            <button onclick="document.getElementById('modal-persistance').classList.add('hidden')" class="btn btn-primary" style="margin-top: var(--spacing-lg);">
+                Compris
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/gestion.js"></script>
+    <script>
+        // Gestion du logo manquant
+        const logo = document.querySelector('.header-logo-full');
+        if (logo) {
+            logo.onerror = function() {
+                this.style.display = 'none';
+                const headerBrand = document.querySelector('.header-brand');
+                if (headerBrand) {
+                    headerBrand.innerHTML = `
+                        <div class="header-text">
+                            <h1 class="app-title">OPSEMIA</h1>
+                            <p class="app-subtitle">Configuration & Gestion des Données</p>
+                        </div>
+                    `;
+                }
+            };
+        }
+        
+        // Gestion du collapsible
+        document.getElementById('stats-collapsible')?.addEventListener('click', function(e) {
+            if (e.target.closest('#refresh-stats')) return;
+            this.classList.toggle('collapsed');
+        });
+        
+        // Charger les stats au premier clic
+        let statsLoaded = false;
+        document.getElementById('stats-collapsible')?.addEventListener('click', function() {
+            if (!statsLoaded && !this.classList.contains('collapsed')) {
+                statsLoaded = true;
+                if (typeof chargerStatistiques === 'function') {
+                    chargerStatistiques();
+                }
+            }
+        });
+
+        // Modal persistance
+        document.getElementById('btn-info-persistance')?.addEventListener('click', function() {
+            document.getElementById('modal-persistance')?.classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>

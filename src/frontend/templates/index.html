@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPSEMIA - Recherche Sémantique</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-brand">
+                    <img src="/static/assets/logo-slogan.png" alt="OPSEMIA - Accélérez la vérité au service de la justice" class="header-logo-full" id="header-logo">
+                </div>
+                <nav class="header-nav">
+                    <a href="/" class="nav-link active">🔍 Recherche</a>
+                    <a href="/conversations" class="nav-link">💬 Conversations</a>
+                    <a href="/gestion" class="nav-link">⚙️ Configuration</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Barre de recherche -->
+            <div class="card">
+                <form id="search-form">
+                    <div class="search-bar">
+                        <div class="search-input-wrapper">
+                            <span class="search-icon">🔎</span>
+                            <input 
+                                type="text" 
+                                id="search-input" 
+                                class="search-input"
+                                placeholder="Rechercher des messages, conversations, indices..."
+                                required
+                            >
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">Rechercher</button>
+                    </div>
+
+                    <!-- Options de recherche rapide -->
+                    <div class="flex gap-2">
+                        <div class="form-group" style="flex: 1;">
+                            <label class="form-label">
+                                Collection
+                                <span class="help-icon" data-tooltip="Collection de données à interroger">?</span>
+                            </label>
+                            <select id="collection-select" class="form-select">
+                                <option value="messages_cas1">Chargement...</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="width: 150px;">
+                            <label class="form-label">
+                                Résultats
+                                <span class="help-icon" data-tooltip="Nombre de résultats à afficher">?</span>
+                            </label>
+                            <select id="nb-results" class="form-select">
+                                <option value="5">5</option>
+                                <option value="10" selected>10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                            </select>
+                        </div>
+                        <div class="form-group" style="width: 200px;">
+                            <label class="form-label">Filtrage</label>
+                            <label style="display: flex; align-items: center; gap: 0.5rem; padding-top: 0.5rem;">
+                                <input type="checkbox" id="exclude-noise" checked>
+                                <span>Exclure spam/pub</span>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Filtres avancés -->
+            <div id="filters-container" class="filters-container filters-collapsed">
+                <div class="filters-toggle" id="toggle-filters">
+                    <h3>🔬 Filtres avancés</h3>
+                    <span id="filters-toggle-icon">▼</span>
+                </div>
+                <div class="filters-content">
+                    <div class="filters-grid">
+                        <div class="form-group">
+                            <label class="form-label">
+                                Date de début
+                                <span class="help-icon" data-tooltip="Filtrer les messages à partir de cette date">?</span>
+                            </label>
+                            <input type="datetime-local" id="filter-date-start" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                Date de fin
+                                <span class="help-icon" data-tooltip="Filtrer les messages jusqu'à cette date">?</span>
+                            </label>
+                            <input type="datetime-local" id="filter-date-end" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">
+                                Direction
+                                <span class="help-icon" data-tooltip="Filtrer par direction des messages">?</span>
+                            </label>
+                            <select id="filter-direction" class="form-select">
+                                <option value="all">Tous</option>
+                                <option value="incoming">Reçus</option>
+                                <option value="outgoing">Envoyés</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex gap-2 mt-2">
+                        <button type="button" id="apply-filters" class="btn btn-primary">Appliquer les filtres</button>
+                        <button type="button" id="reset-filters" class="btn btn-secondary">Réinitialiser</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Résultats -->
+            <div id="results-header" class="results-header hidden">
+                <div>
+                    <div id="results-count" class="results-count">0 résultat(s)</div>
+                    <div class="text-small text-secondary">Cliquez sur un résultat pour voir le contexte</div>
+                </div>
+            </div>
+
+            <div id="results-container">
+                <!-- Les résultats s'afficheront ici -->
+            </div>
+        </main>
+
+        <!-- Vue contextuelle (panneau latéral) -->
+        <div id="context-view" class="context-view">
+            <div class="context-header">
+                <h2>📱 Vue Contextuelle</h2>
+                <button id="context-close" class="context-close">&times;</button>
+            </div>
+            <div id="context-content" class="context-content">
+                <!-- Le contexte s'affichera ici -->
+            </div>
+        </div>
+
+        <!-- Overlay de chargement -->
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p id="loading-message" style="margin-top: 1rem; color: var(--text-primary);">Chargement...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/search.js"></script>
+    <script src="/static/js/context.js"></script>
+    <script>
+        // Gestion du logo manquant
+        const logo = document.getElementById('header-logo');
+        if (logo) {
+            logo.onerror = function() {
+                this.style.display = 'none';
+                // Afficher un titre de fallback
+                const headerBrand = document.querySelector('.header-brand');
+                if (headerBrand) {
+                    headerBrand.innerHTML = `
+                        <div class="header-text">
+                            <h1 class="app-title">OPSEMIA</h1>
+                            <p class="app-subtitle">Outil Policier de SEmantique et d'Investigation Analytique</p>
+                        </div>
+                    `;
+                }
+            };
+        }
+    </script>
+</body>
+</html>

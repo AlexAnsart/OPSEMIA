@@ -124,7 +124,8 @@ def indexer_csv_messages(
 
     # Stocker les messages individuels
     print("   → Stockage des messages...")
-    ids_messages = [m["id"] for m in messages]
+    # S'assurer que tous les IDs sont des strings non vides
+    ids_messages = [m.get("id") or f"msg_{i}" for i, m in enumerate(messages)]
     metadonnees_messages = [_extraire_metadonnees_message(m) for m in messages]
     
     db.ajouter_messages(
@@ -138,7 +139,8 @@ def indexer_csv_messages(
 
     # Stocker les chunks
     print("   → Stockage des chunks...")
-    ids_chunks = [c["chunk_id"] for c in chunks]
+    # S'assurer que tous les IDs de chunks sont des strings non vides
+    ids_chunks = [c.get("chunk_id") or f"chunk_{i}" for i, c in enumerate(chunks)]
     metadonnees_chunks = [c["metadata"] for c in chunks]
     
     db.ajouter_messages(

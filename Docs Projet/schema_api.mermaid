@@ -1,0 +1,81 @@
+graph TB
+    subgraph FRONTEND["🖥️ FRONTEND (Phase 8)"]
+        UI["Interface Web<br/>HTML + CSS + JavaScript"]
+        API_CLIENT["Classe OpsemiaAPI<br/>(api.js)"]
+        SEARCH_UI["Module Recherche<br/>(search.js)"]
+        CONTEXT_UI["Module Contexte<br/>(context.js)"]
+        ADMIN_UI["Module Admin<br/>(admin.js)"]
+        
+        UI --> SEARCH_UI
+        UI --> CONTEXT_UI
+        UI --> ADMIN_UI
+        SEARCH_UI --> API_CLIENT
+        CONTEXT_UI --> API_CLIENT
+        ADMIN_UI --> API_CLIENT
+    end
+
+    subgraph API["🌐 API REST FLASK (Phase 7)"]
+        FLASK["Serveur Flask<br/>app.py<br/>:5000"]
+        
+        subgraph ROUTES["Blueprints"]
+            BP_INDEXATION["routes_indexation.py<br/>POST /api/load<br/>POST /api/load_dossier"]
+            BP_RECHERCHE["routes_recherche.py<br/>POST /api/search"]
+            BP_DONNEES["routes_donnees.py<br/>GET /api/message/:id<br/>GET /api/context/:id"]
+            BP_CONFIG["routes_config.py<br/>GET /api/config<br/>GET /api/stats<br/>GET /api/collections"]
+        end
+        
+        FLASK --> BP_INDEXATION
+        FLASK --> BP_RECHERCHE
+        FLASK --> BP_DONNEES
+        FLASK --> BP_CONFIG
+    end
+
+    subgraph BACKEND["⚙️ BACKEND (Phases 1-6)"]
+        INDEXER["Indexer<br/>indexer.py"]
+        SEARCH_ENGINE["MoteurRecherche<br/>search_engine.py"]
+        FILTERS["Filtres<br/>filters.py"]
+        VECTOR_DB["BaseVectorielle<br/>vector_db.py"]
+        MODEL_MGR["Encodeur<br/>model_manager.py"]
+        PARSER["Parser CSV<br/>message_extractor.py"]
+        DENOISING["Débruitage<br/>denoising.py"]
+        CHUNKING["Chunking<br/>chunking.py"]
+    end
+
+    subgraph STORAGE["💾 STOCKAGE"]
+        CHROMA["ChromaDB<br/>chroma.sqlite3"]
+        VECTORS["Vecteurs HNSW<br/>*.bin"]
+    end
+
+    %% Connexions API → Backend
+    API_CLIENT -->|HTTP JSON| FLASK
+    
+    BP_INDEXATION --> INDEXER
+    BP_RECHERCHE --> SEARCH_ENGINE
+    BP_RECHERCHE --> FILTERS
+    BP_DONNEES --> VECTOR_DB
+    BP_CONFIG --> VECTOR_DB
+    
+    INDEXER --> PARSER
+    INDEXER --> DENOISING
+    INDEXER --> CHUNKING
+    INDEXER --> MODEL_MGR
+    INDEXER --> VECTOR_DB
+    
+    SEARCH_ENGINE --> MODEL_MGR
+    SEARCH_ENGINE --> FILTERS
+    SEARCH_ENGINE --> VECTOR_DB
+    
+    VECTOR_DB --> CHROMA
+    CHROMA --> VECTORS
+
+    %% Styles
+    classDef frontendStyle fill:#e1f5ff,stroke:#0288d1,stroke-width:3px
+    classDef apiStyle fill:#fff3e0,stroke:#f57c00,stroke-width:3px
+    classDef backendStyle fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    classDef storageStyle fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    
+    class UI,API_CLIENT,SEARCH_UI,CONTEXT_UI,ADMIN_UI frontendStyle
+    class FLASK,BP_INDEXATION,BP_RECHERCHE,BP_DONNEES,BP_CONFIG apiStyle
+    class INDEXER,SEARCH_ENGINE,FILTERS,VECTOR_DB,MODEL_MGR,PARSER,DENOISING,CHUNKING backendStyle
+    class CHROMA,VECTORS storageStyle
+

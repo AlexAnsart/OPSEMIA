@@ -123,7 +123,7 @@
 "sms,SM0457,2025-07-12 01:25:00,outgoing,+33600000001,+33688888888,hash_13h8,Samir,Quel est le plan pour ce weekend ? On se détruit la gueule ?,,,,sms,sent,DEV123,IMEI0001,"
 "sms,SM0467,2025-07-12 02:09:00,incoming,+33612121212,+33600000001,hash_17l2,Thomas,On garde la même heure pour demain ? J'ai de la cocaine et de l'exta.,,,,sms,received,DEV123,IMEI0001,"
 "sms,SM0470,2025-07-12 02:26:00,incoming,+33677777777,+33600000001,hash_12g7,Administratif,""Salut, on se voit à la terrasse ?"",,,,sms,received,DEV123,IMEI0001,"
-"sms,SM0477,2025-07-12 02:58:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,J'avoue nik la police,,,,sms,sent,DEV123,IMEI0001,"
+"sms,SM0477,2025-07-12 02:58:00,outgoing,+33600000001,+33611111111,hash_06a1,Emma Dupont,J'avoue nique la police,,,,sms,sent,DEV123,IMEI0001,"
 "sms,SM0481,2025-07-12 03:19:00,incoming,+33666666666,+33600000001,hash_11f6,Sophie,On garde la même heure pour demain ?,,,,sms,received,DEV123,IMEI0001,"
 "sms,SM0490,2025-07-12 04:12:00,outgoing,+33600000001,+33711111111,hash_16k1,ServiceClient,Quel est le plan pour ce weekend ?,,,,sms,sent,DEV123,IMEI0001,"
 "sms,SM0492,2025-07-12 04:23:00,outgoing,+33600000001,+33633333333,hash_08c3,Maman,""Merci, j'ai bien reçu."",,,,sms,sent,DEV123,IMEI0001,"

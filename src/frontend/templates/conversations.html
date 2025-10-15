@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPSEMIA - Conversations</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-brand">
+                    <img src="/static/assets/logo-slogan.png" alt="OPSEMIA" class="header-logo-full" id="header-logo">
+                </div>
+                <nav class="header-nav">
+                    <a href="/" class="nav-link">🔍 Recherche</a>
+                    <a href="/conversations" class="nav-link active">💬 Conversations</a>
+                    <a href="/gestion" class="nav-link">⚙️ Configuration</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Layout principal en 2 colonnes -->
+        <main class="conversations-layout">
+            <!-- Panneau gauche : Liste des conversations -->
+            <aside class="conversations-sidebar">
+                <div class="sidebar-header">
+                    <h2>💬 Conversations</h2>
+                    <p class="text-small text-muted">
+                        <span id="total-conversations">0</span> conversation(s)
+                    </p>
+                </div>
+
+                <!-- Barre de recherche et filtres -->
+                <div class="sidebar-filters">
+                    <div class="form-group">
+                        <label class="form-label">Collection</label>
+                        <select id="collection-select" class="form-select">
+                            <option value="messages_cas1">messages_cas1</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">🔍 Rechercher une conversation</label>
+                        <input 
+                            type="text" 
+                            id="search-conversations" 
+                            class="form-input"
+                            placeholder="Nom, numéro ou contenu..."
+                        >
+                    </div>
+                </div>
+
+                <!-- Liste des conversations -->
+                <div id="conversations-list" class="conversations-list">
+                    <!-- Les conversations seront injectées ici par JS -->
+                </div>
+            </aside>
+
+            <!-- Panneau droit : Messages de la conversation active -->
+            <section id="conversation-panel" class="conversation-panel">
+                <!-- En-tête de la conversation -->
+                <div class="conversation-header">
+                    <div id="conversation-header-info" class="conversation-header-info">
+                        <div class="empty-state">
+                            <p>📱 Sélectionnez une conversation</p>
+                            <p class="text-small text-muted">Cliquez sur une conversation à gauche pour afficher les messages</p>
+                        </div>
+                    </div>
+                    <button id="close-conversation" class="btn-icon" title="Fermer">&times;</button>
+                </div>
+
+                <!-- Barre de recherche dans la conversation -->
+                <div class="conversation-search">
+                    <div class="search-with-nav">
+                        <input 
+                            type="text" 
+                            id="search-messages" 
+                            class="form-input"
+                            placeholder="🔍 Rechercher dans cette conversation..."
+                        >
+                        <div class="search-controls" id="search-controls" style="display: none;">
+                            <span id="search-counter" class="search-counter">0/0</span>
+                            <button id="search-prev" class="btn-icon-sm" title="Occurrence précédente">▲</button>
+                            <button id="search-next" class="btn-icon-sm" title="Occurrence suivante">▼</button>
+                            <button id="search-clear" class="btn-icon-sm" title="Effacer la recherche">&times;</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zone des messages -->
+                <div id="messages-container" class="messages-container">
+                    <!-- Les messages seront injectés ici par JS -->
+                </div>
+            </section>
+        </main>
+
+        <!-- Overlay de chargement -->
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p id="loading-message" style="margin-top: 1rem; color: var(--text-primary);">Chargement...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/conversations.js"></script>
+    <script>
+        // Gestion du logo manquant
+        const logo = document.getElementById('header-logo');
+        if (logo) {
+            logo.onerror = function() {
+                this.style.display = 'none';
+                const headerBrand = document.querySelector('.header-brand');
+                if (headerBrand) {
+                    headerBrand.innerHTML = `
+                        <div class="header-text">
+                            <h1 class="app-title">OPSEMIA</h1>
+                            <p class="app-subtitle">Conversations</p>
+                        </div>
+                    `;
+                }
+            };
+        }
+    </script>
+</body>
+</html>
+

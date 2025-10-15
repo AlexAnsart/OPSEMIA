@@ -51,6 +51,7 @@ def creer_chunks_fenetre_glissante(
                     "dernier_message_id": ids[-1],
                     "nombre_messages": len(messages),
                     "index_debut": 0,
+                    "is_noise": False,  # Chunks ne sont jamais du bruit
                 },
             }
             chunks.append(chunk)
@@ -75,6 +76,7 @@ def creer_chunks_fenetre_glissante(
                 "dernier_message_id": ids[-1],
                 "nombre_messages": len(fenetre),
                 "index_debut": i,
+                "is_noise": False,  # Chunks ne sont jamais du bruit
             },
         }
         chunks.append(chunk)

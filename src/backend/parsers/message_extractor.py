@@ -37,9 +37,26 @@ def parser_sms_depuis_csv(chemin_csv: Path | str) -> List[Dict[str, Any]]:
     """
     chemin = Path(chemin_csv)
     resultats: List[Dict[str, Any]] = []
-    with chemin.open("r", encoding="utf-8-sig", newline="") as f:
-        lecteur = csv.DictReader(f)
-        for ligne in lecteur:
+    
+    # Lire tout le contenu et nettoyer les guillemets de début/fin de chaque ligne
+    with chemin.open("r", encoding="utf-8-sig") as f:
+        lignes = f.readlines()
+    
+    # Nettoyer chaque ligne: retirer les guillemets de début/fin
+    lignes_nettoyees = []
+    for ligne in lignes:
+        ligne_stripped = ligne.strip()
+        if ligne_stripped.startswith('"') and ligne_stripped.endswith('"'):
+            ligne_stripped = ligne_stripped[1:-1]
+        lignes_nettoyees.append(ligne_stripped)
+    
+    # Créer un lecteur CSV avec le contenu corrigé
+    import io
+    contenu_corrige = '\n'.join(lignes_nettoyees)
+    f_corrige = io.StringIO(contenu_corrige)
+    lecteur = csv.DictReader(f_corrige)
+    
+    for ligne in lecteur:
             # Le CSV contient déjà uniquement des SMS, pas besoin de filtrer
             normalise: Dict[str, Any] = {
                 "id": ligne.get("id"),
