@@ -1,0 +1,36 @@
+# Modèles ML lourds (téléchargés automatiquement)
+.cache/
+**/.cache/
+**/cache/
+models/
+*.bin
+*.safetensors
+*.onnx
+
+# Environnement virtuel Python
+.venv/
+venv/
+env/
+ENV/
+
+# Fichiers Python compilés
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Fichiers temporaires
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Base de données temporaires et vectorielles
+*.db
+*.sqlite
+*.sqlite3
+data/chroma_db/

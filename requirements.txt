@@ -1,0 +1,10 @@
+numpy>=1.26
+pandas>=2.2
+torch>=2.1; platform_system!="Windows" or platform_machine!="x86_64" or python_version>="3.9"
+torch==2.1.2+cpu; sys_platform=="win32" and platform_machine=="AMD64" and python_version>="3.9" --extra-index-url https://download.pytorch.org/whl/cpu
+sentence-transformers>=2.6
+transformers>=4.43
+tqdm>=4.66
+chromadb>=0.4.22
+
+
