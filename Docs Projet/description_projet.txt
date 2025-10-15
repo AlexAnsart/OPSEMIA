@@ -1,0 +1,59 @@
+On développe un outil pour la police scientifique. Notre objectif est de faciliter leur analyse de supports numériques (téléphones, ordinateurs, etc.)
+C’est un hackathon donc on ne va produire qu’un prototype le plus fonctionnel possible.
+
+Notre objectif est de concevoir un moteur de recherche sémantique (pas seulement par correspondance de mots-clés) intelligent portant à la fois sur les textes ET les images.
+On part du principe qu’on a déjà 4 CSV: un pour les messages, un pour les images, un pour les mails, un pour les vidéos. Cf. ta base de connaissances pour le format de ces deux CSV.
+Avant l’étape du moteur de recherche, on appliquera peut-être une fonction pour flagger les pubs et contenus commerciaux, et autres informations impertinentes de manière générale. On pourrait donc avoir une sorte de fonction placeholder contenant ce passage que l’on développera éventuellement plus tard. Le résultat de cette fonction pourrait être une simple colonne “Pub” ou “Bruit” avec Oui/Non. Et si c’est oui, alors on pénalise dans les résultats du moteur de recherche.
+
+Pour le moteur de recherche en lui-même, on se base donc sur les deux CSV après ce passage de “débruitage” (même si on ne vire jamais de donnée, on les flagge juste dans une colonne spéciale). Pars du principe que ces deux CSV sont déjà dans le workspace.
+
+Il faut rendre le plus de choses possible paramétrables, dans un simple fichier settings.py pour le moment.
+Le livrable final sera un outil (site web local) permettant une démonstration complète de notre solution.
+Il faut que le jury de la police scientifique puisse facilement se projeter, donc un max de choses configurables, rendre étendable (à plus de deux CSV, des structures de supports numériques différentes, etc.)
+
+Notre moteur de recherche doit également être équipé d’un système de filtrage: par heure (début/fin) (basé sur un timestamp dans le CSV), par géolocalisation, et peut-être d’autres filtres manuels ? (Mis par les analystes)
+
+L’idée du moteur de recherche est que l’on puisse par exemple rechercher “transfert argent rendez-vous suspect” et que ça renvoie les résultats par ordre décroissant de pertinence parmi les messages, les images, vidéos et les mails (possibilité de sélectionner ce qu’on veut, ou tout en même temps). Le moteur de recherche chercherait donc uniquement parmi ce qui a été sélectionné. Pour les vidéos, on verra en bonus. On se concentre en priorité sur les messages, puis sur les images. Et on verra pour les mails et les vidéos encore après. Pour les images, on pourrait imaginer un modèle de vision qui décrirait très précisément chaque image, pour ensuite pouvoir rechercher du texte
+
+Pour chaque résultat de recherche, il faut pouvoir les remettre dans leur contexte: par exemple pouvoir cliquer dessus et voir directement où ça apparaît dans les messages (ou dans les images triées chronologiquement). Cela suppose d’avoir toute une partie de l’outil qui permet de visualiser (en plus beau qu’un CSV) les messages, conversations, images triées par ordre chronologique, et mails. Et pouvoir cliquer depuis un résultat de recherche et être redirigé vers le message dans son contexte.
+
+Pour le moment, on n’a que le CSV des messages, on pourra étendre aux images un peu plus tard (donc prévois bien ça quand même). Et même ce CSV de messages, on va le modifier un peu, par exemple on va le restructurer et on va virer les mails etc.
+Si le format des CSV ne convient pas pour ce qu’on fait, tu peux suggérer une modification (par exemple pour le format de l’heure, etc.) ce sont des CSV de démo donc tu peux aussi, si tu veux, suggérer un ajout de colonnes ou d’information
+Pour les images et vidéos on aura aussi un timestamp et une géolocalisation
+Il faut faire attention à prévoir que les structures des CSV puissent changer au cours du temps, donc rendre ça le plus modulable possible. Il faut faire des petits fichiers (toujours moins de 100 lignes de code par fichier, une seule fonction par fichier), tout doit être extrêmement bien organisé. Et seulement un seul fichier de documentation README.md (aucun autre fichier de documentation à générer).
+
+Il faut aussi garder à l’esprit qu’on ne peut pas transmettre de données d’enquête à des services tiers. 
+
+
+Autres notes:
+Appliquer ANN au lieu de KNN (configurable)
+encoder chaque message mais aussi des chunks de contexte (fenêtre glissante de length configurable en termes de nombre de messages)
+Rendre paramétrable le modèle d’encodage utilisé
+Permettre configuration du system prompt
+Permettre un fine tuning
+→ Expliquer exactement comment ça se ferait, avec les données de leurs affaires, au fur et à mesure
+→ Il faut des conversations labellisées
+→ Adapter rapidement au jargon criminel français (qui évolue en permanence)
+Possibilité de “charger” les CSV d’un même dossier
+→ Tout serait encodé via BGE (+ modèle de vision pour les images) et stocké en DB portative .sqlite si possible (via ChromaDB?)
+
+Modèles dont on veut permettre l’utilisation (configurable dans settings.py):
+BGE-M3 (BAAI/bge-m3) 
+→ Taille: 2.2GB 
+→ Performance: 85-86% MTEB (meilleur français) 
+→ Contexte: 8192 tokens 
+→ Dimensions: 1024 
+→ RAM: 4-6GB 
+→ Niveau: 4.5 
+
+Nomic Embed v2 MoE (nomic-ai/nomic-embed-text-v2-moe) 
+→ Taille: 1.2GB 
+→ Performance: 84% MTEB 
+→ Contexte: 8192 tokens 
+→ Dimensions: 768 (flexible avec Matryoshka) 
+→ RAM: 3-4GB 
+→ Niveau: 4.5 
+→ ALTERNATIVE si BGE trop lourd
+
+
+Il faut donc une interface pour déterminer quel modèle est utilisé, et voir si l’usage doit varier. 
