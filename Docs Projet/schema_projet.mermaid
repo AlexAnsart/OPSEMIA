@@ -1,0 +1,147 @@
+graph TB
+    subgraph INPUT["📱 DONNÉES BRUTES"]
+        RAW["Support Numérique<br/>(E01, ZIP, Dossier)"]
+    end
+
+    subgraph EXTRACTION["🔧 SERVICE EXTRACTION"]
+        PARSER["Parser Forensique<br/>- E01 Reader<br/>- ZIP Extractor<br/>- Filesystem Walker"]
+        STRUCT["Structuration<br/>- Messages<br/>- Emails<br/>- Images<br/>- Vidéos"]
+        PARSER --> STRUCT
+    end
+
+    subgraph CSV_STORAGE["📊 CSV STRUCTURÉS"]
+        CSV_MSG["messages.csv<br/>(id, timestamp, from, to,<br/>message, gps_lat, gps_lon)"]
+        CSV_MAIL["emails.csv<br/>(id, timestamp, from, to,<br/>subject, body)"]
+        CSV_IMG["images.csv<br/>(id, timestamp, filepath,<br/>gps_lat, gps_lon)"]
+        CSV_VID["videos.csv<br/>(id, timestamp, filepath,<br/>gps_lat, gps_lon)"]
+    end
+
+    subgraph DENOISING["🚫 SERVICE DÉBRUITAGE"]
+        SPAM_DETECT["Détecteur Pubs/Spam<br/>- Règles heuristiques<br/>- Patterns commerciaux<br/>- Liste annonceurs"]
+        FLAG["Ajout colonne<br/>'is_noise' (bool)"]
+        SPAM_DETECT --> FLAG
+    end
+
+    subgraph CONFIG["⚙️ CONFIGURATION"]
+        SETTINGS["settings.py<br/>---<br/>• EMBEDDING_MODEL<br/>• VISION_MODEL<br/>• SYSTEM_PROMPT<br/>• CHUNK_SIZE<br/>• CHUNK_OVERLAP<br/>• SEARCH_METHOD (ANN/KNN)<br/>• ANN_INDEX_TYPE<br/>• DIMENSIONS"]
+    end
+
+    subgraph ENCODING["🧠 SERVICE ENCODAGE"]
+        MODEL_MGR["Model Manager<br/>(dynamique)"]
+        
+        subgraph TEXT_ENC["Encodage Texte"]
+            BGE["BGE-M3<br/>(paramétrable)<br/>768/1024 dims"]
+            CHUNKS["Chunking<br/>- Messages individuels<br/>- Fenêtre glissante<br/>(N messages)"]
+        end
+        
+        subgraph IMG_ENC["Encodage Images"]
+            BLIP["BLIP-base<br/>Description → Texte"]
+            IMG_TO_TXT["Text → BGE-M3"]
+        end
+        
+        MODEL_MGR --> BGE
+        MODEL_MGR --> BLIP
+    end
+
+    subgraph FINE_TUNE["🎯 FINE-TUNING (Optionnel)"]
+        FT_DATA["Données Labellisées<br/>- Conversations suspectes<br/>- Paires (query, doc)<br/>- Scores de pertinence"]
+        FT_TRAIN["Training<br/>- Contrastive Loss<br/>- LoRA (efficace)<br/>- 1-3 epochs"]
+        FT_MODEL["Modèle Adapté<br/>Jargon criminel FR"]
+        FT_DATA --> FT_TRAIN --> FT_MODEL
+    end
+
+    subgraph VECTOR_DB["💾 BASE VECTORIELLE"]
+        CHROMA["ChromaDB<br/>(SQLite backend)<br/>chroma.sqlite3"]
+        
+        subgraph COLLECTIONS["Collections"]
+            COL_MSG["messages<br/>- embeddings<br/>- metadata<br/>- is_noise flag"]
+            COL_CHUNK["message_chunks<br/>- context embeddings<br/>- chunk_ids"]
+            COL_IMG["images<br/>- description embeddings<br/>- filepath"]
+            COL_MAIL["emails<br/>- embeddings<br/>- metadata"]
+        end
+        
+        CHROMA --> COL_MSG
+        CHROMA --> COL_CHUNK
+        CHROMA --> COL_IMG
+        CHROMA --> COL_MAIL
+    end
+
+    subgraph SEARCH["🔍 SERVICE RECHERCHE"]
+        QUERY_INPUT["Requête Utilisateur<br/>+ Filtres"]
+        QUERY_ENC["Encodage Requête<br/>(même modèle)"]
+        
+        FILTERS["Filtres Pré-Recherche<br/>- Timestamp (début/fin)<br/>- GPS (rayon)<br/>- Type (msg/mail/img)<br/>- Exclude noise<br/>→ Réduit corpus"]
+        
+        subgraph SEARCH_ENGINE["Moteur de Recherche<br/>(sur corpus filtré)"]
+            ANN_SEARCH["ANN Search<br/>(HNSW, IVF)<br/>- Rapide<br/>- ~95% précision"]
+            KNN_SEARCH["KNN Search<br/>(Brute Force)<br/>- Exact<br/>- Plus lent"]
+        end
+        
+        RANKING["Post-Ranking<br/>- Cosine similarity<br/>- Score boost (mots-clés)<br/>- Réordonnancement"]
+        
+        QUERY_INPUT --> QUERY_ENC
+        QUERY_INPUT --> FILTERS
+        FILTERS --> ANN_SEARCH
+        FILTERS --> KNN_SEARCH
+        ANN_SEARCH --> RANKING
+        KNN_SEARCH --> RANKING
+        QUERY_ENC --> ANN_SEARCH
+        QUERY_ENC --> KNN_SEARCH
+    end
+
+    subgraph RESULTS["📋 RÉSULTATS"]
+        TOP_K["Top K résultats<br/>(score, contenu, metadata)"]
+        CONTEXT["Vue Contextuelle<br/>- Messages adjacents<br/>- Timeline<br/>- Carte géospatiale"]
+    end
+
+    subgraph UI["🖥️ INTERFACE WEB"]
+        SEARCH_UI["Barre de Recherche<br/>+ Filtres avancés"]
+        VIZ["Visualisations<br/>- Liste résultats<br/>- Timeline<br/>- Carte<br/>- Graphe relations"]
+        ADMIN["Admin<br/>- Charger dossier<br/>- Config modèle<br/>- Fine-tuning<br/>- Stats indexation"]
+    end
+
+    %% Flux principal
+    RAW --> PARSER
+    STRUCT --> CSV_MSG
+    STRUCT --> CSV_MAIL
+    STRUCT --> CSV_IMG
+    STRUCT --> CSV_VID
+    
+    CSV_MSG --> SPAM_DETECT
+    CSV_MAIL --> SPAM_DETECT
+    
+    FLAG --> BGE
+    FLAG --> CHUNKS
+    CHUNKS --> BGE
+    CSV_IMG --> BLIP
+    BLIP --> IMG_TO_TXT
+    IMG_TO_TXT --> BGE
+    
+    BGE --> CHROMA
+    
+    CONFIG -.-> MODEL_MGR
+    CONFIG -.-> SEARCH_ENGINE
+    FT_MODEL -.-> MODEL_MGR
+    
+    RANKING --> TOP_K
+    TOP_K --> VIZ
+    
+    SEARCH_UI --> QUERY_INPUT
+    VIZ --> CONTEXT
+    ADMIN --> CONFIG
+    ADMIN --> FT_TRAIN
+    
+    %% Styles
+    classDef inputStyle fill:#e1f5ff,stroke:#0288d1,stroke-width:2px
+    classDef processStyle fill:#fff3e0,stroke:#f57c00,stroke-width:2px
+    classDef storageStyle fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px
+    classDef searchStyle fill:#e8f5e9,stroke:#388e3c,stroke-width:2px
+    classDef uiStyle fill:#fce4ec,stroke:#c2185b,stroke-width:2px
+    classDef configStyle fill:#fff9c4,stroke:#f9a825,stroke-width:2px
+    
+    class RAW,CSV_MSG,CSV_MAIL,CSV_IMG,CSV_VID inputStyle
+    class PARSER,STRUCT,SPAM_DETECT,FLAG,BGE,BLIP,CHUNKS,IMG_TO_TXT,MODEL_MGR processStyle
+    class CHROMA,COL_MSG,COL_CHUNK,COL_IMG,COL_MAIL storageStyle
+    class QUERY_INPUT,QUERY_ENC,ANN_SEARCH,KNN_SEARCH,FILTERS,RANKING searchStyle
+    class SEARCH_UI,VIZ,ADMIN,TOP_K,CONTEXT uiStyle
+    class CONFIG,SETTINGS,FT_DATA,FT_TRAIN,FT_MODEL configStyle
