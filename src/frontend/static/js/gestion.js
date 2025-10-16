@@ -226,6 +226,7 @@ function afficherStatistiques(stats) {
  */
 async function chargerCSV() {
     const cheminCSV = document.getElementById('csv-path')?.value.trim();
+    const nomCas = document.getElementById('csv-nom-cas')?.value.trim() || null;
     const reinitialiser = document.getElementById('csv-reset')?.checked;
     
     if (!cheminCSV) {
@@ -242,7 +243,7 @@ async function chargerCSV() {
     
     try {
         // 1. Démarrer l'indexation (retourne immédiatement avec task_id)
-        const response = await api.chargerCSV(cheminCSV, null, reinitialiser);
+        const response = await api.chargerCSV(cheminCSV, nomCas, reinitialiser);
         
         if (!response.succes || !response.task_id) {
             throw new Error(response.erreur || 'Impossible de démarrer l\'indexation');
@@ -399,6 +400,7 @@ function suivreProgressionSSE(taskId) {
                 
                 // Réinitialiser le formulaire
                 document.getElementById('csv-path').value = '';
+                document.getElementById('csv-nom-cas').value = '';
                 document.getElementById('csv-reset').checked = false;
                 
                 resolve(data);
