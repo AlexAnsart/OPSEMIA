@@ -25,6 +25,7 @@ from typing import Dict, List, Tuple, Optional
 
 import numpy as np
 import requests
+import torch
 from dotenv import load_dotenv
 from PIL import Image
 from sentence_transformers import SentenceTransformer
@@ -208,7 +209,7 @@ def calculer_durees_encodage_texte() -> Dict[str, Dict]:
     Approche simplifiée :
     1. Encoder un court texte (5-10 tokens)
     2. Calculer durée par token
-    3. Extrapoler pour 1 message (10 tokens), 1000 messages, 1M messages
+    3. Extrapoler pour 1 message (10 tokens), 100k messages
     
     Returns:
         Dictionnaire avec les durées par modèle
@@ -222,7 +223,7 @@ def calculer_durees_encodage_texte() -> Dict[str, Dict]:
     # Texte de test court (environ 5 tokens)
     texte_test = "Ceci est un test"
     NB_TOKENS_TEST = 5
-    NB_TOKENS_PAR_MESSAGE = 50  # Estimation moyenne d'un message
+    NB_TOKENS_PAR_MESSAGE = 10  # Estimation moyenne d'un message
     NB_TESTS = 5  # Répéter pour moyenne plus stable
     
     for modele_info in MODELES_TEXTE:
@@ -235,38 +236,59 @@ def calculer_durees_encodage_texte() -> Dict[str, Dict]:
             print("   ⏳ Chargement du modèle...")
             debut_chargement = time.time()
             try:
-                modele = SentenceTransformer(modele_info['id'], trust_remote_code=True)
-            except:
-                modele = SentenceTransformer(modele_info['id'])
-            duree_chargement = time.time() - debut_chargement
-            print(f"   ✓ Chargé en {duree_chargement:.2f}s")
-            
-            # Mesurer durée d'encodage (moyenne sur plusieurs tests)
-            durees = []
-            for _ in range(NB_TESTS):
-                debut = time.time()
-                _ = modele.encode([texte_test], normalize_embeddings=True, show_progress_bar=False)
-                durees.append(time.time() - debut)
-            
-            duree_moyenne = np.mean(durees)
-            duree_par_token = duree_moyenne / NB_TOKENS_TEST
-            
-            # Extrapolations
-            duree_1_message = duree_par_token * NB_TOKENS_PAR_MESSAGE
-            duree_1M_messages = duree_1_message * 1_000_000
-            
-            resultats[modele_info['nom']] = {
-                "duree_chargement_s": duree_chargement,
-                "duree_par_token_ms": duree_par_token * 1000,
-                "duree_1_message_ms": duree_1_message * 1000,
-                "debit_msg_par_s": 1 / duree_1_message if duree_1_message > 0 else 0,
-                "estimation_1M_messages_h": duree_1M_messages / 3600,
-            }
-            
-            print(f"   ⏱️  Par token: {duree_par_token*1000:.2f}ms")
-            print(f"   ⏱️  Par message ({NB_TOKENS_PAR_MESSAGE} tokens): {duree_1_message*1000:.2f}ms")
-            print(f"   ⏱️  Débit: {1/duree_1_message:.1f} msg/s")
-            print(f"   📈 Estimation 1M messages: {duree_1M_messages/3600:.1f}h")
+                try:
+                    modele = SentenceTransformer(modele_info['id'], trust_remote_code=True)
+                except:
+                    modele = SentenceTransformer(modele_info['id'])
+                duree_chargement = time.time() - debut_chargement
+                print(f"   ✓ Chargé en {duree_chargement:.2f}s")
+                
+                # Mesurer durée d'encodage (moyenne sur plusieurs tests)
+                print("   ⏳ Test d'encodage...")
+                durees = []
+                for i in range(NB_TESTS):
+                    debut = time.time()
+                    _ = modele.encode([texte_test], normalize_embeddings=True, show_progress_bar=False)
+                    durees.append(time.time() - debut)
+                
+                duree_moyenne = np.mean(durees)
+                duree_par_token = duree_moyenne / NB_TOKENS_TEST
+                
+                # Extrapolations
+                duree_1_message = duree_par_token * NB_TOKENS_PAR_MESSAGE
+                duree_100k_messages = duree_1_message * 100_000
+                
+                resultats[modele_info['nom']] = {
+                    "duree_chargement_s": duree_chargement,
+                    "duree_par_token_ms": duree_par_token * 1000,
+                    "duree_1_message_ms": duree_1_message * 1000,
+                    "debit_msg_par_s": 1 / duree_1_message if duree_1_message > 0 else 0,
+                    "estimation_100k_messages_h": duree_100k_messages / 3600,
+                }
+                
+                print(f"   ⏱️  Par token: {duree_par_token*1000:.2f}ms")
+                print(f"   ⏱️  Par message ({NB_TOKENS_PAR_MESSAGE} tokens): {duree_1_message*1000:.2f}ms")
+                print(f"   ⏱️  Débit: {1/duree_1_message:.1f} msg/s")
+                print(f"   📈 Estimation 100k messages: {duree_100k_messages/3600:.1f}h")
+                
+            except Exception as e:
+                print(f"   ❌ ERREUR lors du test du modèle: {type(e).__name__}: {str(e)}")
+                print(f"   ⚠️  Le modèle sera ignoré dans les résultats")
+                resultats[modele_info['nom']] = {
+                    "erreur": str(e),
+                    "duree_chargement_s": 0,
+                    "duree_par_token_ms": 0,
+                    "duree_1_message_ms": 0,
+                    "debit_msg_par_s": 0,
+                    "estimation_100k_messages_h": 0,
+                }
+            finally:
+                # Libérer la mémoire
+                if 'modele' in locals():
+                    del modele
+                torch.cuda.empty_cache() if torch.cuda.is_available() else None
+                import gc
+                gc.collect()
             
         else:
             # Modèle via API - Estimation basée sur les autres modèles
@@ -278,21 +300,21 @@ def calculer_durees_encodage_texte() -> Dict[str, Dict]:
             # Estimation (en supposant ~2ms/token pour BGE-M3)
             duree_par_token_estimee = 2 * facteur  # ms
             duree_1_message_estimee = duree_par_token_estimee * NB_TOKENS_PAR_MESSAGE
-            duree_1M_estimee = (duree_1_message_estimee / 1000) * 1_000_000
+            duree_100k_estimee = (duree_1_message_estimee / 1000) * 100_000
             
             resultats[modele_info['nom']] = {
                 "duree_chargement_s": "N/A (API)",
                 "duree_par_token_ms": f"~{duree_par_token_estimee:.1f}",
                 "duree_1_message_ms": f"~{duree_1_message_estimee:.1f}",
                 "debit_msg_par_s": f"~{1000/duree_1_message_estimee:.1f}",
-                "estimation_1M_messages_h": f"~{duree_1M_estimee/3600:.1f}",
+                "estimation_100k_messages_h": f"~{duree_100k_estimee/3600:.1f}",
                 "note": f"Estimation basée sur ratio de paramètres (facteur {facteur:.1f}x vs BGE-M3)",
             }
             
             print(f"   📊 Par token: ~{duree_par_token_estimee:.1f}ms")
             print(f"   📊 Par message ({NB_TOKENS_PAR_MESSAGE} tokens): ~{duree_1_message_estimee:.1f}ms")
             print(f"   📊 Débit: ~{1000/duree_1_message_estimee:.1f} msg/s")
-            print(f"   📈 Estimation 1M messages: ~{duree_1M_estimee/3600:.1f}h")
+            print(f"   📈 Estimation 100k messages: ~{duree_100k_estimee/3600:.1f}h")
             print(f"   ℹ️  {resultats[modele_info['nom']]['note']}")
     
     return resultats
@@ -353,44 +375,59 @@ def calculer_durees_encodage_images() -> Dict[str, any]:
     nb_tests = min(3, len(images_valides))
     print(f"\n⏳ Test sur {nb_tests} images...")
     
-    temps_description = []
-    temps_encodage = []
-    
-    for img_info in images_valides[:nb_tests]:
-        chemin = Path(img_info["chemin_absolu"])
-        image_pil = Image.open(chemin).convert("RGB")
+    try:
+        temps_description = []
+        temps_encodage = []
         
-        # Description
-        debut = time.time()
-        description = encodeur_image.decrire_image(image_pil)
-        temps_description.append(time.time() - debut)
+        for img_info in images_valides[:nb_tests]:
+            chemin = Path(img_info["chemin_absolu"])
+            image_pil = Image.open(chemin).convert("RGB")
+            
+            # Description
+            debut = time.time()
+            description = encodeur_image.decrire_image(image_pil)
+            temps_description.append(time.time() - debut)
+            
+            # Encodage
+            debut = time.time()
+            _ = encodeur_texte.encoder([description])
+            temps_encodage.append(time.time() - debut)
         
-        # Encodage
-        debut = time.time()
-        _ = encodeur_texte.encoder([description])
-        temps_encodage.append(time.time() - debut)
-    
-    duree_desc_moyenne = np.mean(temps_description)
-    duree_enc_moyenne = np.mean(temps_encodage)
-    duree_totale_moyenne = duree_desc_moyenne + duree_enc_moyenne
-    
-    resultats = {
-        "duree_chargement_s": duree_chargement,
-        "duree_description_moyenne_s": duree_desc_moyenne,
-        "duree_encodage_desc_moyenne_ms": duree_enc_moyenne * 1000,
-        "duree_totale_moyenne_s": duree_totale_moyenne,
-        "duree_min_s": min(temps_description) + min(temps_encodage),
-        "duree_max_s": max(temps_description) + max(temps_encodage),
-        "estimation_1000_images_h": (duree_totale_moyenne * 1000) / 3600,
-    }
-    
-    print(f"\n📊 Résultats ({nb_tests} images testées):")
-    print(f"   ⏱️  Description moyenne: {duree_desc_moyenne:.2f}s")
-    print(f"   ⏱️  Encodage description: {duree_enc_moyenne*1000:.2f}ms")
-    print(f"   ⏱️  Total moyen/image: {duree_totale_moyenne:.2f}s")
-    print(f"   📈 Estimation 1000 images: {resultats['estimation_1000_images_h']:.1f}h")
-    
-    return resultats
+        duree_desc_moyenne = np.mean(temps_description)
+        duree_enc_moyenne = np.mean(temps_encodage)
+        duree_totale_moyenne = duree_desc_moyenne + duree_enc_moyenne
+        
+        resultats = {
+            "duree_chargement_s": duree_chargement,
+            "duree_description_moyenne_s": duree_desc_moyenne,
+            "duree_encodage_desc_moyenne_ms": duree_enc_moyenne * 1000,
+            "duree_totale_moyenne_s": duree_totale_moyenne,
+            "duree_min_s": min(temps_description) + min(temps_encodage),
+            "duree_max_s": max(temps_description) + max(temps_encodage),
+            "estimation_1000_images_h": (duree_totale_moyenne * 1000) / 3600,
+        }
+        
+        print(f"\n📊 Résultats ({nb_tests} images testées):")
+        print(f"   ⏱️  Description moyenne: {duree_desc_moyenne:.2f}s")
+        print(f"   ⏱️  Encodage description: {duree_enc_moyenne*1000:.2f}ms")
+        print(f"   ⏱️  Total moyen/image: {duree_totale_moyenne:.2f}s")
+        print(f"   📈 Estimation 1000 images: {resultats['estimation_1000_images_h']:.1f}h")
+        
+        return resultats
+        
+    except Exception as e:
+        print(f"\n❌ ERREUR lors du test des images: {type(e).__name__}: {str(e)}")
+        print("   ⚠️  Utilisation de valeurs par défaut")
+        return {
+            "duree_chargement_s": duree_chargement,
+            "duree_description_moyenne_s": 28.0,
+            "duree_encodage_desc_moyenne_ms": 2000,
+            "duree_totale_moyenne_s": 30.0,
+            "duree_min_s": "N/A",
+            "duree_max_s": "N/A",
+            "estimation_1000_images_h": 30.0 * 1000 / 3600,
+            "note": f"Erreur: {str(e)}",
+        }
 
 
 # ============================================================================
@@ -442,7 +479,12 @@ def indexer_dataset_benchmark(modele_info: Dict, encodeur_texte, encodeur_image=
     
     # Encoder les messages
     print(f"   🧠 Encodage {len(messages)} messages...")
-    textes = [msg.get("apercu_message", "") or "" for msg in messages]
+    textes = [msg.get("message", "") or "" for msg in messages]
+    
+    # DEBUG: Afficher les 3 premiers messages pour vérifier
+    print(f"   🔍 DEBUG - Vérification du contenu:")
+    for i in range(min(3, len(messages))):
+        print(f"      msg_{i:03d}: {textes[i][:60]}...")
     
     debut_encodage = time.time()
     if modele_info['local']:
@@ -607,6 +649,7 @@ def evaluer_modele_benchmark(modele_info: Dict, nom_collection: str) -> Dict:
     # Vérifier le nombre de documents dans la collection
     nb_docs = db.compter_documents(nom_collection)
     print(f"   📊 Collection contient {nb_docs} documents")
+    print(f"   📏 Critère: au moins 1 ID attendu dans le top {TOP_K_BENCHMARK} résultats")
     
     debut_eval = time.time()
     requetes_traitees = 0
@@ -643,7 +686,9 @@ def evaluer_modele_benchmark(modele_info: Dict, nom_collection: str) -> Dict:
             print(f"      Requête: {requete[:60]}...")
             print(f"      IDs attendus: {ids_attendus[:3]}")
             print(f"      IDs obtenus: {ids_resultats[:5]}")
-            print(f"      Distance 1er résultat: {resultats[0]['distance']:.4f}" if resultats else "Aucun résultat")
+            # Vérifier si au moins 1 ID attendu est dans les résultats
+            trouve = any(id_att in ids_resultats[:TOP_K_BENCHMARK] for id_att in ids_attendus)
+            print(f"      ✅ TROUVÉ dans top {TOP_K_BENCHMARK}" if trouve else f"      ❌ PAS TROUVÉ dans top {TOP_K_BENCHMARK}")
             debug_logs_affiches += 1
         
         # Calculer métriques
@@ -774,7 +819,11 @@ Le **taux de réussite** (score sur 100) représente le pourcentage de requêtes
     contenu += "| Modèle | Chargement | Msg Court | 100 Tokens | 1000 Msgs | Débit | Est. 1M Msgs |\n"
     contenu += "|--------|-----------|-----------|------------|-----------|-------|-------------|\n"
     
-    for modele_nom, durees in durees_texte.items():
+    # Séparer modèles valides et en erreur
+    durees_valides = {nom: d for nom, d in durees_texte.items() if 'erreur' not in d}
+    durees_erreurs = {nom: d for nom, d in durees_texte.items() if 'erreur' in d}
+    
+    for modele_nom, durees in durees_valides.items():
         chargement = durees.get('duree_chargement_s', 'N/A')
         if isinstance(chargement, (int, float)):
             chargement = f"{chargement:.1f}s"
@@ -795,15 +844,22 @@ Le **taux de réussite** (score sur 100) représente le pourcentage de requêtes
         if isinstance(debit, (int, float)):
             debit = f"{debit:.1f}/s"
         
-        est_1m = durees.get('estimation_1M_messages_h', 'N/A')
-        if isinstance(est_1m, (int, float)):
-            est_1m = f"{est_1m:.1f}h"
+        est_100k = durees.get('estimation_100k_messages_h', 'N/A')
+        if isinstance(est_100k, (int, float)):
+            est_100k = f"{est_100k:.1f}h"
         
-        contenu += f"| **{modele_nom}** | {chargement} | {msg_court} | {tokens_100} | {msgs_1000} | {debit} | {est_1m} |\n"
+        contenu += f"| **{modele_nom}** | {chargement} | {msg_court} | {tokens_100} | {msgs_1000} | {debit} | {est_100k} |\n"
         
         # Note pour Qwen3
         if 'note' in durees:
             contenu += f"\n> 📝 **Note {modele_nom}:** {durees['note']}\n\n"
+    
+    # Afficher les erreurs si présentes
+    if durees_erreurs:
+        contenu += "\n#### ⚠️ Modèles en erreur\n\n"
+        for modele_nom, durees in durees_erreurs.items():
+            contenu += f"- **{modele_nom}**: {durees['erreur']}\n"
+        contenu += "\n"
     
     contenu += "\n### 1.2 Images (BLIP + Encodage Description)\n\n"
     
@@ -824,12 +880,12 @@ Le **taux de réussite** (score sur 100) représente le pourcentage de requêtes
     contenu += """
 ### 1.3 Estimations Globales
 
-#### Pour 1 Million de Messages
+#### Pour 100k Messages
 
 """
     
     for modele_nom, durees in durees_texte.items():
-        est = durees.get('estimation_1M_messages_h', 'N/A')
+        est = durees.get('estimation_100k_messages_h', 'N/A')
         if isinstance(est, str) and est.startswith('~'):
             contenu += f"- **{modele_nom}:** {est}\n"
         elif isinstance(est, (int, float)):
@@ -847,12 +903,23 @@ Le **taux de réussite** (score sur 100) représente le pourcentage de requêtes
         contenu += f"| Modèle | **Score (/100)** | P@1 | P@3 | P@{TOP_K_BENCHMARK} | R@{TOP_K_BENCHMARK} | MRR |\n"
         contenu += "|--------|------------------|-----|-----|-----|-----|-----|\n"
         
+        # Séparer résultats valides et erreurs
+        resultats_valides = [r for r in resultats_benchmark if 'erreur' not in r]
+        resultats_erreurs = [r for r in resultats_benchmark if 'erreur' in r]
+        
         # Trier par taux de réussite (score sur 100)
-        resultats_tries = sorted(resultats_benchmark, key=lambda x: x.get('taux_reussite', 0), reverse=True)
+        resultats_tries = sorted(resultats_valides, key=lambda x: x.get('taux_reussite', 0), reverse=True)
         
         for res in resultats_tries:
             score = res.get('taux_reussite', 0)
             contenu += f"| **{res['modele']}** | **{score:.1f}%** | {res['precision@1']:.3f} | {res['precision@3']:.3f} | {res.get(f'precision@{TOP_K_BENCHMARK}', 0):.3f} | {res.get(f'recall@{TOP_K_BENCHMARK}', 0):.3f} | {res['mrr']:.3f} |\n"
+        
+        # Afficher les erreurs si présentes
+        if resultats_erreurs:
+            contenu += "\n#### ⚠️ Modèles en erreur\n\n"
+            for res in resultats_erreurs:
+                contenu += f"- **{res['modele']}**: {res['erreur']}\n"
+            contenu += "\n"
     else:
         contenu += "\n---\n\n## 🎯 Partie 2 : Benchmark de Qualité (Précision)\n\n"
         contenu += "**⏭️ Tests de qualité non exécutés**\n\n"
@@ -882,30 +949,38 @@ Le **taux de réussite** (score sur 100) représente le pourcentage de requêtes
     
     contenu += "\n---\n\n## 🏆 Conclusions\n\n"
     
-    # Meilleur modèle
-    meilleur = resultats_tries[0]
-    contenu += f"### Meilleur Modèle Global: **{meilleur['modele']}**\n\n"
-    contenu += f"- **Score:** {meilleur.get('taux_reussite', 0):.1f}/100 ({meilleur.get('taux_reussite', 0):.1f}% de requêtes réussies)\n"
-    contenu += f"- **MRR:** {meilleur['mrr']:.3f}\n"
-    contenu += f"- **Precision@{TOP_K_BENCHMARK}:** {meilleur.get(f'precision@{TOP_K_BENCHMARK}', 0):.3f}\n"
-    contenu += f"- **Recall@{TOP_K_BENCHMARK}:** {meilleur.get(f'recall@{TOP_K_BENCHMARK}', 0):.3f}\n\n"
+    # Meilleur modèle (si résultats disponibles)
+    if resultats_tries:
+        meilleur = resultats_tries[0]
+        contenu += f"### Meilleur Modèle Global: **{meilleur['modele']}**\n\n"
+        
+        # Vérifier si le modèle a une erreur
+        if 'erreur' in meilleur:
+            contenu += f"⚠️ **Erreur:** {meilleur['erreur']}\n\n"
+        else:
+            contenu += f"- **Score:** {meilleur.get('taux_reussite', 0):.1f}/100 ({meilleur.get('taux_reussite', 0):.1f}% de requêtes réussies)\n"
+            contenu += f"- **MRR:** {meilleur['mrr']:.3f}\n"
+            contenu += f"- **Precision@{TOP_K_BENCHMARK}:** {meilleur.get(f'precision@{TOP_K_BENCHMARK}', 0):.3f}\n"
+            contenu += f"- **Recall@{TOP_K_BENCHMARK}:** {meilleur.get(f'recall@{TOP_K_BENCHMARK}', 0):.3f}\n\n"
+    else:
+        contenu += "⚠️ **Aucun résultat disponible** (tous les modèles ont échoué ou tests ignorés)\n\n"
     
     # Compromis vitesse/qualité
     contenu += "### Compromis Vitesse/Qualité\n\n"
     
     for res in resultats_tries:
         duree_modele = durees_texte.get(res['modele'], {})
-        est_1m = duree_modele.get('estimation_1M_messages_h', 'N/A')
+        est_100k = duree_modele.get('estimation_100k_messages_h', 'N/A')
         
-        if isinstance(est_1m, str):
-            est_str = est_1m
-        elif isinstance(est_1m, (int, float)):
-            est_str = f"{est_1m:.1f}h"
+        if isinstance(est_100k, str):
+            est_str = est_100k
+        elif isinstance(est_100k, (int, float)):
+            est_str = f"{est_100k:.1f}h"
         else:
             est_str = "N/A"
         
         score = res.get('taux_reussite', 0)
-        contenu += f"- **{res['modele']}:** Score {score:.1f}/100, Vitesse {est_str} pour 1M msgs\n"
+        contenu += f"- **{res['modele']}:** Score {score:.1f}/100, Vitesse {est_str} pour 100k msgs\n"
     
     contenu += "\n### Recommandations\n\n"
     contenu += f"1. **Pour la qualité maximale:** Privilégier le modèle avec le meilleur score (taux de réussite sur {TOP_K_BENCHMARK} résultats)\n"
@@ -1001,41 +1076,70 @@ def main():
         print(f"MODÈLE: {modele_info['nom']}")
         print(f"{'='*80}")
         
-        # Charger encodeur
-        if modele_info['local']:
-            try:
-                encodeur = SentenceTransformer(modele_info['id'], trust_remote_code=True)
-            except:
-                encodeur = SentenceTransformer(modele_info['id'])
-            
-            encodeur_wrap = EncodeurTexte(
-                id_modele=modele_info['id'],
-                preference_peripherique=parametres.PERIPHERIQUE_EMBEDDING
-            )
-        else:
-            encodeur = None
-            encodeur_wrap = None
-        
-        if not args.skip_quality:
-            # Indexer dataset
-            nom_collection = indexer_dataset_benchmark(
-                modele_info, 
-                encodeur_wrap, 
-                encodeur_image,
-                force_reindex=args.force
-            )
-            
-            # Évaluer
-            resultats = evaluer_modele_benchmark(modele_info, nom_collection)
-            resultats_benchmark.append(resultats)
-            
-            # Nettoyer uniquement si force (sinon garder le cache)
-            if args.force:
-                db = BaseVectorielle(chemin_persistance=CHEMIN_DB_BENCHMARK)
-                db.supprimer_collection(nom_collection)
-                print(f"   🗑️  Collection temporaire supprimée")
+        try:
+            # Charger encodeur
+            if modele_info['local']:
+                try:
+                    encodeur = SentenceTransformer(modele_info['id'], trust_remote_code=True)
+                except:
+                    encodeur = SentenceTransformer(modele_info['id'])
+                
+                encodeur_wrap = EncodeurTexte(
+                    id_modele=modele_info['id'],
+                    preference_peripherique=parametres.PERIPHERIQUE_EMBEDDING
+                )
             else:
-                print(f"   💾 Collection conservée pour cache")
+                encodeur = None
+                encodeur_wrap = None
+            
+            if not args.skip_quality:
+                # Indexer dataset
+                nom_collection = indexer_dataset_benchmark(
+                    modele_info, 
+                    encodeur_wrap, 
+                    encodeur_image,
+                    force_reindex=args.force
+                )
+                
+                # Évaluer
+                resultats = evaluer_modele_benchmark(modele_info, nom_collection)
+                resultats_benchmark.append(resultats)
+                
+                # Nettoyer uniquement si force (sinon garder le cache)
+                if args.force:
+                    db = BaseVectorielle(chemin_persistance=CHEMIN_DB_BENCHMARK)
+                    db.supprimer_collection(nom_collection)
+                    print(f"   🗑️  Collection temporaire supprimée")
+                else:
+                    print(f"   💾 Collection conservée pour cache")
+                    
+        except Exception as e:
+            print(f"\n❌ ERREUR CRITIQUE avec le modèle {modele_info['nom']}: {type(e).__name__}: {str(e)}")
+            print(f"   ⚠️  Le modèle sera ignoré dans les résultats")
+            print(f"   ⏩ Passage au modèle suivant...\n")
+            
+            # Ajouter un résultat par défaut avec erreur
+            if not args.skip_quality:
+                resultats_benchmark.append({
+                    "modele": modele_info['nom'],
+                    "erreur": str(e),
+                    "precision@1": 0,
+                    "precision@3": 0,
+                    f"precision@{TOP_K_BENCHMARK}": 0,
+                    f"recall@{TOP_K_BENCHMARK}": 0,
+                    "mrr": 0,
+                    "taux_reussite": 0,
+                })
+        
+        finally:
+            # Libérer la mémoire
+            if 'encodeur' in locals():
+                del encodeur
+            if 'encodeur_wrap' in locals():
+                del encodeur_wrap
+            torch.cuda.empty_cache() if torch.cuda.is_available() else None
+            import gc
+            gc.collect()
     
     # ========== PARTIE 3: GÉNÉRATION RAPPORT ==========
     if not args.skip_speed or not args.skip_quality:

@@ -45,7 +45,7 @@ MODELES_DISPONIBLES = [
 # Paramètres de benchmark (non persistés dans settings.json)
 # Une recherche est considérée comme réussie si au moins 1 résultat attendu
 # est présent dans les TOP_K_BENCHMARK premiers résultats
-TOP_K_BENCHMARK = 10
+TOP_K_BENCHMARK = 3
 
 
 class Parametres:
