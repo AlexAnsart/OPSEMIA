@@ -365,15 +365,24 @@ def _extraire_metadonnees_message(message: Dict[str, Any]) -> Dict[str, Any]:
     Returns:
         Métadonnées JSON-serializable
     """
+    # Identifier l'interlocuteur pour le groupement par conversation
+    direction = message.get("direction", "")
+    if direction == "incoming":
+        contact = message.get("from", "")
+    else:
+        contact = message.get("to", "")
+    
     return {
         "timestamp": message.get("timestamp", ""),
-        "direction": message.get("direction", ""),
+        "direction": direction,
         "from": message.get("from", ""),
         "to": message.get("to", ""),
+        "contact": contact,  # Interlocuteur (pour grouper les conversations)
         "contact_name": message.get("contact_name", ""),
         "gps_lat": message.get("gps_lat") or 0.0,
         "gps_lon": message.get("gps_lon") or 0.0,
         "is_noise": message.get("is_noise", False),
         "app": message.get("app", ""),
+        "type": "message",  # Type pour distinguer des chunks
     }
 

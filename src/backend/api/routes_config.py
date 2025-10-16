@@ -14,6 +14,7 @@ sys.path.insert(0, str(racine_projet))
 
 from config.settings import Parametres, obtenir_parametres, recharger_parametres, MODELES_DISPONIBLES
 from src.backend.database.vector_db import BaseVectorielle
+from src.backend.models.model_manager import recharger_encodeur_texte, obtenir_id_modele_actuel
 
 # Blueprint pour les routes de configuration
 bp_config = Blueprint("config", __name__, url_prefix="/api")
@@ -49,6 +50,12 @@ def obtenir_config() -> tuple[Dict[str, Any], int]:
                 "nombre_resultats": parametres.NOMBRE_RESULTATS_RECHERCHE,
                 "exclure_bruit_par_defaut": parametres.EXCLURE_BRUIT_PAR_DEFAUT,
                 "seuil_distance_max": parametres.SEUIL_DISTANCE_MAX
+            },
+            "images": {
+                "longueur_min_description": parametres.LONGUEUR_MIN_DESCRIPTION_IMAGE,
+                "longueur_max_description": parametres.LONGUEUR_MAX_DESCRIPTION_IMAGE,
+                "num_beams": parametres.NUM_BEAMS_DESCRIPTION_IMAGE,
+                "temperature": parametres.TEMPERATURE_DESCRIPTION_IMAGE
             }
         }
         
@@ -77,7 +84,11 @@ def modifier_config() -> tuple[Dict[str, Any], int]:
             "methode_recherche": "ANN",
             "nombre_resultats_recherche": 15,
             "exclure_bruit_par_defaut": true,
-            "seuil_distance_max": 0.5
+            "seuil_distance_max": 0.5,
+            "longueur_min_description_image": 30,
+            "longueur_max_description_image": 150,
+            "num_beams_description_image": 15,
+            "temperature_description_image": 0.3
         }
 
     Returns:
@@ -94,19 +105,42 @@ def modifier_config() -> tuple[Dict[str, Any], int]:
         
         # Obtenir les paramètres actuels
         parametres = obtenir_parametres()
+        id_modele_avant = parametres.ID_MODELE_EMBEDDING
+        peripherique_avant = parametres.PERIPHERIQUE_EMBEDDING
         
         # Sauvegarder les modifications dans le JSON
         parametres.sauvegarder(data)
         
         # Recharger les paramètres
-        recharger_parametres()
+        parametres_nouveaux = recharger_parametres()
         
         modifs = list(data.keys())
         
-        # Déterminer si un redémarrage est nécessaire
+        # Vérifier si le modèle d'embedding ou le périphérique a changé
+        modele_change = "id_modele_embedding" in data and data["id_modele_embedding"] != id_modele_avant
+        peripherique_change = "peripherique_embedding" in data and data["peripherique_embedding"] != peripherique_avant
+        
+        # Recharger l'encodeur si nécessaire (automatique, sans redémarrage)
+        if modele_change or peripherique_change:
+            try:
+                print(f"🔄 Rechargement du modèle d'embedding: {parametres_nouveaux.ID_MODELE_EMBEDDING} ({parametres_nouveaux.PERIPHERIQUE_EMBEDDING})")
+                recharger_encodeur_texte()
+                print(f"✅ Modèle rechargé avec succès")
+            except Exception as e:
+                print(f"❌ Erreur lors du rechargement du modèle: {e}")
+                # Restaurer les anciens paramètres si le rechargement échoue
+                parametres.sauvegarder({
+                    "id_modele_embedding": id_modele_avant,
+                    "peripherique_embedding": peripherique_avant
+                })
+                recharger_parametres()
+                return jsonify({
+                    "succes": False,
+                    "erreur": f"Impossible de charger le modèle {data.get('id_modele_embedding')}: {str(e)}"
+                }), 500
+        
+        # Déterminer si un redémarrage est nécessaire (uniquement pour chunking maintenant)
         redemarrage_requis = any(k in data for k in [
-            "id_modele_embedding",
-            "peripherique_embedding",
             "taille_fenetre_chunk",
             "overlap_fenetre_chunk"
         ])
@@ -117,8 +151,11 @@ def modifier_config() -> tuple[Dict[str, Any], int]:
             "modifications": data
         }
         
+        if modele_change or peripherique_change:
+            reponse["info"] = f"✅ Modèle rechargé automatiquement: {parametres_nouveaux.ID_MODELE_EMBEDDING}"
+        
         if redemarrage_requis:
-            reponse["avertissement"] = "⚠️ Redémarrage du serveur requis pour appliquer certains changements (modèle d'embedding, chunking)"
+            reponse["avertissement"] = "⚠️ Redémarrage du serveur requis pour appliquer les changements de chunking (taille fenêtre, overlap)"
         
         return jsonify(reponse), 200
         
@@ -201,6 +238,45 @@ def lister_collections() -> tuple[Dict[str, Any], int]:
             "succes": True,
             "nombre_collections": len(liste_collections),
             "collections": liste_collections
+        }), 200
+        
+    except Exception as e:
+        return jsonify({
+            "succes": False,
+            "erreur": str(e)
+        }), 500
+
+
+@bp_config.route("/collections/<nom_collection>", methods=["DELETE"])
+def supprimer_collection(nom_collection: str) -> tuple[Dict[str, Any], int]:
+    """Supprime une collection de ChromaDB.
+
+    Args:
+        nom_collection: Nom de la collection à supprimer
+
+    Returns:
+        JSON avec confirmation
+    """
+    try:
+        parametres = obtenir_parametres()
+        db = BaseVectorielle(parametres.CHEMIN_BASE_CHROMA)
+        
+        # Vérifier si la collection existe
+        collections = db.client.list_collections()
+        collection_existe = any(col.name == nom_collection for col in collections)
+        
+        if not collection_existe:
+            return jsonify({
+                "succes": False,
+                "erreur": f"Collection '{nom_collection}' introuvable"
+            }), 404
+        
+        # Supprimer la collection
+        db.supprimer_collection(nom_collection)
+        
+        return jsonify({
+            "succes": True,
+            "message": f"Collection '{nom_collection}' supprimée avec succès"
         }), 200
         
     except Exception as e:

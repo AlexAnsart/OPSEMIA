@@ -18,21 +18,19 @@ let searchState = {
  * Initialisation au chargement de la page
  */
 document.addEventListener('DOMContentLoaded', async () => {
-    // Charger les collections disponibles
-    await chargerCollections();
-    
-    // Vérifier s'il y a une navigation depuis la recherche
+    // Vérifier s'il y a une navigation depuis la recherche AVANT de charger les collections
     const navContact = sessionStorage.getItem('nav_contact');
     const navMessageId = sessionStorage.getItem('nav_messageId');
     const navCollection = sessionStorage.getItem('nav_collection');
     
+    // Définir la collection active avant de charger le dropdown
     if (navCollection) {
         collectionActive = navCollection;
-        const select = document.getElementById('collection-select');
-        if (select) {
-            select.value = navCollection;
-        }
+        console.log('Collection définie depuis navigation:', navCollection);
     }
+    
+    // Charger les collections disponibles (le dropdown se remplira avec la bonne collection active)
+    await chargerCollections();
     
     // Charger la liste des conversations
     await chargerConversations();
@@ -91,12 +89,22 @@ async function chargerCollections() {
             const select = document.getElementById('collection-select');
             if (!select) return;
             
-            // Filtrer pour ne garder que les collections de messages (pas les chunks)
-            const collectionsMessages = data.collections.filter(c => !c.includes('chunk'));
+            // Filtrer pour ne garder que les collections de messages (pas les chunks ni les images)
+            const collectionsMessages = data.collections.filter(c => 
+                !c.nom.includes('chunk') && !c.nom.includes('image')
+            );
+            
+            console.log('Collections messages:', collectionsMessages);
             
             select.innerHTML = collectionsMessages.map(c => 
-                `<option value="${c}" ${c === collectionActive ? 'selected' : ''}>${c}</option>`
+                `<option value="${c.nom}" ${c.nom === collectionActive ? 'selected' : ''}>${c.nom} (${c.nombre_documents} docs)</option>`
             ).join('');
+            
+            // Si la collection active n'existe plus, prendre la première
+            if (collectionsMessages.length > 0 && !collectionsMessages.find(c => c.nom === collectionActive)) {
+                collectionActive = collectionsMessages[0].nom;
+                select.value = collectionActive;
+            }
         }
     } catch (error) {
         console.error('Erreur chargement collections:', error);

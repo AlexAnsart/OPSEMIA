@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import psutil
 import sys
 import threading
 import uuid
@@ -18,6 +19,7 @@ sys.path.insert(0, str(racine_projet))
 
 from config.settings import obtenir_parametres
 from src.backend.database.indexer import indexer_csv_messages
+from src.backend.models.model_manager import obtenir_encodeur_texte
 
 # Configuration du logger
 logging.basicConfig(level=logging.INFO)
@@ -96,6 +98,85 @@ def charger_csv() -> tuple[Dict[str, Any], int]:
                         "progression": pct,
                         "message": msg
                     })
+        
+        # IMPORTANT: Précharger le modèle d'embedding AVANT de lancer le thread
+        # pour éviter de bloquer le serveur Flask pendant 15-30s (surtout avec Qwen3)
+        
+        # 1. Vérifier la RAM disponible
+        mem = psutil.virtual_memory()
+        ram_disponible_gb = mem.available / (1024**3)
+        ram_totale_gb = mem.total / (1024**3)
+        ram_utilisee_pct = mem.percent
+        
+        logger.info(f"💾 RAM système:")
+        logger.info(f"   • Total: {ram_totale_gb:.1f} GB")
+        logger.info(f"   • Disponible: {ram_disponible_gb:.1f} GB")
+        logger.info(f"   • Utilisée: {ram_utilisee_pct:.1f}%")
+        
+        # Obtenir le modèle configuré
+        parametres = obtenir_parametres()
+        modele_id = parametres.ID_MODELE_EMBEDDING
+        
+        # Estimer la RAM requise selon le modèle
+        ram_requise = {
+            "OrdalieTech/Solon-embeddings-large-0.1": 2.0,
+            "jinaai/jina-embeddings-v3": 3.0,
+            "BAAI/bge-m3": 3.5,
+            "Qwen/Qwen3-Embedding-8B": 10.0,  # 8GB modèle + 2GB overhead
+        }
+        ram_necessaire = ram_requise.get(modele_id, 2.0)
+        
+        logger.info(f"🧠 Modèle à charger: {modele_id}")
+        logger.info(f"   • RAM estimée nécessaire: {ram_necessaire:.1f} GB")
+        
+        # Avertissement si RAM semble faible (sans bloquer)
+        if ram_disponible_gb < ram_necessaire:
+            logger.warning(
+                f"⚠️ RAM disponible ({ram_disponible_gb:.1f} GB) inférieure à "
+                f"l'estimation pour {modele_id} ({ram_necessaire:.1f} GB). "
+                f"Tentative de chargement quand même..."
+            )
+        
+        # Tenter le chargement du modèle
+        try:
+            logger.info(f"🔄 Préchargement du modèle d'embedding...")
+            logger.info(f"   ⏳ Ceci peut prendre 15-60 secondes pour les gros modèles...")
+            
+            encodeur = obtenir_encodeur_texte()
+            
+            # Vérifier la RAM après chargement
+            mem_apres = psutil.virtual_memory()
+            ram_utilisee_chargement = (mem.available - mem_apres.available) / (1024**3)
+            
+            logger.info(f"✅ Modèle préchargé: {encodeur.id_modele} (dim={encodeur.dimension_embedding})")
+            logger.info(f"   • RAM utilisée pour le chargement: {ram_utilisee_chargement:.2f} GB")
+            logger.info(f"   • RAM disponible restante: {mem_apres.available / (1024**3):.1f} GB")
+            
+        except MemoryError as e:
+            logger.error(f"❌ Erreur: Mémoire insuffisante!")
+            message_erreur = (
+                f"Mémoire RAM insuffisante pour charger {modele_id}. "
+                f"Utilisez un modèle plus léger (BGE-M3, Jina v3) ou libérez de la RAM."
+            )
+            with _taches_lock:
+                if task_id in _taches_indexation:
+                    _taches_indexation[task_id]["etat"] = "erreur"
+                    _taches_indexation[task_id]["erreur"] = message_erreur
+            return jsonify({
+                "succes": False,
+                "erreur": message_erreur
+            }), 500
+            
+        except Exception as e:
+            logger.error(f"❌ Erreur préchargement modèle: {e}", exc_info=True)
+            with _taches_lock:
+                if task_id in _taches_indexation:
+                    _taches_indexation[task_id]["etat"] = "erreur"
+                    _taches_indexation[task_id]["erreur"] = f"Impossible de charger le modèle: {str(e)}"
+            return jsonify({
+                "succes": False,
+                "erreur": f"Impossible de charger le modèle d'embedding: {str(e)}"
+            }), 500
         
         # Fonction d'indexation dans un thread
         def run_indexation():

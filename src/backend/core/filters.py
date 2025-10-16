@@ -124,21 +124,45 @@ def combiner_filtres(*filtres: Dict[str, Any]) -> Dict[str, Any]:
         *filtres: Liste de filtres à combiner
 
     Returns:
-        Filtre combiné (fusion des dictionnaires)
+        Filtre combiné avec tous les filtres dans un seul $and
 
     Note:
-        ChromaDB utilise une logique AND implicite pour les clés multiples.
-        Pour des conditions OR complexes, utilisez l'opérateur $or.
+        Si plusieurs filtres sont fournis, ils sont tous combinés dans un $and
+        pour assurer une compatibilité maximale avec ChromaDB.
+        ChromaDB nécessite que tous les filtres complexes soient dans le $and.
     """
-    filtre_combine = {}
+    if not filtres:
+        return {}
     
-    for filtre in filtres:
-        for cle, valeur in filtre.items():
-            if cle in filtre_combine and isinstance(valeur, dict) and isinstance(filtre_combine[cle], dict):
-                # Fusion des sous-dictionnaires (ex: timestamp avec $gte et $lte)
-                filtre_combine[cle].update(valeur)
-            else:
-                filtre_combine[cle] = valeur
+    # Éliminer les filtres vides
+    filtres_non_vides = [f for f in filtres if f]
     
-    return filtre_combine
+    if not filtres_non_vides:
+        return {}
+    
+    if len(filtres_non_vides) == 1:
+        return filtres_non_vides[0]
+    
+    # Collecter toutes les conditions dans une liste pour $and
+    conditions_and = []
+    
+    for filtre in filtres_non_vides:
+        if "$and" in filtre:
+            # Si le filtre contient déjà un $and, extraire ses conditions
+            conditions_and.extend(filtre["$and"])
+            # Ajouter aussi les autres clés du filtre s'il y en a
+            for cle, valeur in filtre.items():
+                if cle != "$and":
+                    conditions_and.append({cle: valeur})
+        else:
+            # Filtre simple : ajouter chaque clé comme une condition
+            for cle, valeur in filtre.items():
+                conditions_and.append({cle: valeur})
+    
+    # Si on a une seule condition, la retourner directement
+    if len(conditions_and) == 1:
+        return conditions_and[0]
+    
+    # Sinon, retourner un $and avec toutes les conditions
+    return {"$and": conditions_and}
 

@@ -8,6 +8,11 @@ tqdm>=4.66
 chromadb>=0.4.22
 flask>=3.0
 flask-cors>=4.0
+psutil>=5.9  # Requis pour la surveillance de la RAM système
 einops>=0.7  # Requis pour Jina-embeddings-v3 et certains modèles avancés
+sentencepiece>=0.1.99  # Requis pour MarianMT (traduction EN->FR des images)
+Pillow>=10.0  # Requis pour le traitement d'images (BLIP)
+python-dotenv>=1.0  # Requis pour charger les variables d'environnement depuis .env
+requests>=2.31  # Requis pour les appels API (DeepInfra pour Qwen3)
 
 

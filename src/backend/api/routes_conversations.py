@@ -59,24 +59,51 @@ def lister_conversations() -> tuple[Dict[str, Any], int]:
                 "total": 0
             }), 200
         
-        # Grouper par contact
+        # Détecter le propriétaire du téléphone (le numéro qui apparaît le plus souvent)
+        numero_counts = {}
+        for i, msg_id in enumerate(tous_messages["ids"]):
+            metadata = tous_messages["metadatas"][i] if tous_messages["metadatas"] else {}
+            from_num = metadata.get("from", "")
+            to_num = metadata.get("to", "")
+            
+            if from_num:
+                numero_counts[from_num] = numero_counts.get(from_num, 0) + 1
+            if to_num:
+                numero_counts[to_num] = numero_counts.get(to_num, 0) + 1
+        
+        # Le propriétaire est le numéro qui apparaît le plus
+        proprietaire = max(numero_counts.items(), key=lambda x: x[1])[0] if numero_counts else None
+        
+        print(f"Propriétaire détecté: {proprietaire}")
+        
+        # Grouper par interlocuteur (l'autre personne dans la conversation)
         conversations_map = {}
         
         for i, msg_id in enumerate(tous_messages["ids"]):
             metadata = tous_messages["metadatas"][i] if tous_messages["metadatas"] else {}
             document = tous_messages["documents"][i] if tous_messages["documents"] else ""
             
-            # Identifier le contact (utiliser from ou to selon la direction)
-            direction = metadata.get("direction", "")
-            contact = metadata.get("from", "") if direction == "incoming" else metadata.get("to", "")
-            contact_name = metadata.get("contact_name", contact)
+            from_num = metadata.get("from", "")
+            to_num = metadata.get("to", "")
             
-            # Clé unique pour le contact
-            cle_contact = contact or "inconnu"
+            # Identifier l'interlocuteur (l'autre personne que le propriétaire)
+            if from_num == proprietaire:
+                interlocuteur = to_num
+            elif to_num == proprietaire:
+                interlocuteur = from_num
+            else:
+                # Si ni from ni to n'est le propriétaire, prendre from ou to selon direction
+                direction = metadata.get("direction", "")
+                interlocuteur = from_num if direction == "incoming" else to_num
+            
+            contact_name = metadata.get("contact_name", interlocuteur)
+            
+            # Clé unique pour l'interlocuteur
+            cle_contact = interlocuteur or "inconnu"
             
             if cle_contact not in conversations_map:
                 conversations_map[cle_contact] = {
-                    "contact": contact,
+                    "contact": interlocuteur,
                     "contact_name": contact_name,
                     "messages": [],
                     "dernier_message": None,
@@ -167,18 +194,43 @@ def obtenir_conversation(contact: str) -> tuple[Dict[str, Any], int]:
                 "erreur": "Aucun message trouvé"
             }), 404
         
-        # Filtrer les messages pour ce contact
+        # Détecter le propriétaire du téléphone (même logique que lister_conversations)
+        numero_counts = {}
+        for i in range(len(tous_messages["ids"])):
+            metadata = tous_messages["metadatas"][i] if tous_messages["metadatas"] else {}
+            from_num = metadata.get("from", "")
+            to_num = metadata.get("to", "")
+            
+            if from_num:
+                numero_counts[from_num] = numero_counts.get(from_num, 0) + 1
+            if to_num:
+                numero_counts[to_num] = numero_counts.get(to_num, 0) + 1
+        
+        proprietaire = max(numero_counts.items(), key=lambda x: x[1])[0] if numero_counts else None
+        
+        print(f"obtenir_conversation - Propriétaire détecté: {proprietaire}, Contact recherché: {contact}")
+        
+        # Filtrer les messages pour cette conversation (tous les messages où l'interlocuteur est le contact)
         messages_conversation = []
         
         for i, msg_id in enumerate(tous_messages["ids"]):
             metadata = tous_messages["metadatas"][i] if tous_messages["metadatas"] else {}
             document = tous_messages["documents"][i] if tous_messages["documents"] else ""
             
-            # Vérifier si le message appartient à cette conversation
-            msg_from = metadata.get("from", "")
-            msg_to = metadata.get("to", "")
+            from_num = metadata.get("from", "")
+            to_num = metadata.get("to", "")
             
-            if contact in [msg_from, msg_to]:
+            # Identifier l'interlocuteur pour ce message
+            if from_num == proprietaire:
+                interlocuteur = to_num
+            elif to_num == proprietaire:
+                interlocuteur = from_num
+            else:
+                direction = metadata.get("direction", "")
+                interlocuteur = from_num if direction == "incoming" else to_num
+            
+            # Si l'interlocuteur correspond au contact recherché, ajouter le message
+            if interlocuteur == contact:
                 messages_conversation.append({
                     "id": msg_id,
                     "document": document,
@@ -246,26 +298,47 @@ def rechercher_dans_conversation(contact: str) -> tuple[Dict[str, Any], int]:
             limit=count if count > 0 else 10000
         )
         
-        # Filtrer par contact et par mot-clé
+        # Détecter le propriétaire (même logique)
+        numero_counts = {}
+        for i in range(len(tous_messages["ids"])):
+            metadata = tous_messages["metadatas"][i] if tous_messages["metadatas"] else {}
+            from_num = metadata.get("from", "")
+            to_num = metadata.get("to", "")
+            
+            if from_num:
+                numero_counts[from_num] = numero_counts.get(from_num, 0) + 1
+            if to_num:
+                numero_counts[to_num] = numero_counts.get(to_num, 0) + 1
+        
+        proprietaire = max(numero_counts.items(), key=lambda x: x[1])[0] if numero_counts else None
+        
+        # Filtrer par interlocuteur et par mot-clé
         messages_trouves = []
         
         for i, msg_id in enumerate(tous_messages["ids"]):
             metadata = tous_messages["metadatas"][i] if tous_messages["metadatas"] else {}
             document = tous_messages["documents"][i] if tous_messages["documents"] else ""
             
-            # Vérifier si le message appartient à cette conversation
-            msg_from = metadata.get("from", "")
-            msg_to = metadata.get("to", "")
+            from_num = metadata.get("from", "")
+            to_num = metadata.get("to", "")
             
-            if contact in [msg_from, msg_to]:
-                # Rechercher le terme dans le document
-                if query in document.lower():
-                    messages_trouves.append({
-                        "id": msg_id,
-                        "document": document,
-                        "metadata": metadata,
-                        "timestamp": metadata.get("timestamp", "")
-                    })
+            # Identifier l'interlocuteur
+            if from_num == proprietaire:
+                interlocuteur = to_num
+            elif to_num == proprietaire:
+                interlocuteur = from_num
+            else:
+                direction = metadata.get("direction", "")
+                interlocuteur = from_num if direction == "incoming" else to_num
+            
+            # Si l'interlocuteur correspond et le terme est dans le message
+            if interlocuteur == contact and query in document.lower():
+                messages_trouves.append({
+                    "id": msg_id,
+                    "document": document,
+                    "metadata": metadata,
+                    "timestamp": metadata.get("timestamp", "")
+                })
         
         # Trier chronologiquement
         messages_trouves.sort(key=lambda x: x["timestamp"] or "")

@@ -17,6 +17,7 @@
                 <nav class="header-nav">
                     <a href="/" class="nav-link">🔍 Recherche</a>
                     <a href="/conversations" class="nav-link">💬 Conversations</a>
+                    <a href="/galerie" class="nav-link">🖼️ Galerie</a>
                     <a href="/gestion" class="nav-link active">⚙️ Configuration</a>
                 </nav>
             </div>
@@ -27,16 +28,16 @@
             <!-- Alertes -->
             <div id="alerts-container"></div>
 
-            <!-- Section: Chargement de données -->
+            <!-- Section: Chargement de données (Messages) -->
             <div class="card">
                 <div class="card-header">
-                    📥 Chargement de données
+                    💬 Chargement de messages
                 </div>
                 <form id="load-csv-form">
                     <div class="form-group">
                         <label class="form-label">
-                            Fichier CSV
-                            <span class="help-icon" data-tooltip="Chemin vers le fichier CSV (ex: Cas/Cas1/sms.csv). Peut être un chemin relatif ou absolu.">?</span>
+                            Fichier CSV de messages
+                            <span class="help-icon" data-tooltip="Chemin vers le fichier CSV de messages (ex: Cas/Cas1/sms.csv). Peut être un chemin relatif ou absolu.">?</span>
                         </label>
                         <input 
                             type="text" 
@@ -48,22 +49,6 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">
-                            Nom du cas (optionnel)
-                            <span class="help-icon" data-tooltip="Identifiant pour différencier les collections (ex: cas1, cas3). Les collections s'appelleront messages_cas1, messages_cas3, etc.">?</span>
-                        </label>
-                        <input 
-                            type="text" 
-                            id="csv-nom-cas" 
-                            class="form-input"
-                            placeholder="cas3"
-                        >
-                        <small class="form-help">
-                            Laissez vide pour créer une collection "messages" sans suffixe
-                        </small>
-                    </div>
-
-                    <div class="form-group">
                         <label style="display: flex; align-items: center; gap: 0.5rem;">
                             <input type="checkbox" id="csv-reset">
                             <span>Réinitialiser la collection existante</span>
@@ -72,7 +57,41 @@
                     </div>
 
                     <button type="submit" class="btn btn-primary">
-                        📤 Charger et indexer
+                        📤 Charger et indexer les messages
+                    </button>
+                </form>
+            </div>
+
+            <!-- Section: Chargement d'images -->
+            <div class="card">
+                <div class="card-header">
+                    🖼️ Chargement d'images
+                </div>
+                <form id="load-images-form">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Fichier CSV d'images
+                            <span class="help-icon" data-tooltip="Chemin vers le fichier CSV d'images (ex: Cas/Cas4/images.csv). Doit contenir: nom_image, chemin, date_prise, heure_prise, latitude, longitude.">?</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="images-csv-path" 
+                            class="form-input"
+                            placeholder="Cas/Cas4/images.csv"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label style="display: flex; align-items: center; gap: 0.5rem;">
+                            <input type="checkbox" id="images-reset">
+                            <span>Réinitialiser la collection d'images existante</span>
+                            <span class="help-icon" data-tooltip="⚠️ Supprime toutes les images existantes avant le chargement">?</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        📤 Charger et indexer les images
                     </button>
                 </form>
             </div>
@@ -95,7 +114,7 @@
                     <div class="form-group">
                         <label class="form-label">
                             Modèle d'embedding
-                            <span class="help-icon" data-tooltip="Modèle Sentence Transformer utilisé pour encoder les messages en vecteurs. Redémarrage requis.">?</span>
+                            <span class="help-icon" data-tooltip="Modèle Sentence Transformer utilisé pour encoder les messages en vecteurs. Rechargement automatique sans redémarrage.">?</span>
                         </label>
                         <select id="config-modele-embedding" class="form-select">
                             <option value="">Chargement...</option>
@@ -106,7 +125,7 @@
                     <div class="form-group">
                         <label class="form-label">
                             Périphérique d'encodage
-                            <span class="help-icon" data-tooltip="Matériel utilisé pour l'encodage. 'auto' détecte CUDA si disponible. Redémarrage requis.">?</span>
+                            <span class="help-icon" data-tooltip="Matériel utilisé pour l'encodage. 'auto' détecte CUDA si disponible. Rechargement automatique sans redémarrage.">?</span>
                         </label>
                         <select id="config-peripherique" class="form-select">
                             <option value="auto">Auto (recommandé)</option>
@@ -178,7 +197,7 @@
                             id="config-nb-results" 
                             class="form-input"
                             min="1"
-                            max="100"
+                            max="1000"
                             value="10"
                         >
                     </div>
@@ -208,6 +227,74 @@
                         <small class="form-help">
                             Laissez vide pour aucun seuil. Valeurs typiques : 0.3-0.7
                         </small>
+                    </div>
+
+                    <h4 style="color: var(--text-white); margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md); padding-top: var(--spacing-lg); border-top: 1px solid var(--border-color);">
+                        🖼️ Paramètres d'images
+                    </h4>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Longueur minimale de description
+                            <span class="help-icon" data-tooltip="Nombre minimum de tokens générés par BLIP pour la description">?</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="config-img-min-length" 
+                            class="form-input"
+                            min="10"
+                            max="100"
+                            step="5"
+                            value="30"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Longueur maximale de description
+                            <span class="help-icon" data-tooltip="Nombre maximum de tokens générés par BLIP pour la description">?</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="config-img-max-length" 
+                            class="form-input"
+                            min="50"
+                            max="300"
+                            step="10"
+                            value="150"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Nombre de beams
+                            <span class="help-icon" data-tooltip="Plus de beams = meilleure qualité mais plus lent (typique: 5-20)">?</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="config-img-num-beams" 
+                            class="form-input"
+                            min="1"
+                            max="50"
+                            step="1"
+                            value="15"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Température
+                            <span class="help-icon" data-tooltip="Contrôle la créativité (0.0-1.0). Plus bas = plus déterministe">?</span>
+                        </label>
+                        <input 
+                            type="number" 
+                            id="config-img-temperature" 
+                            class="form-input"
+                            min="0"
+                            max="1"
+                            step="0.1"
+                            value="0.3"
+                        >
                     </div>
 
                     <button type="submit" class="btn btn-success">
@@ -250,10 +337,13 @@
                 Les modifications sont <strong>sauvegardées de manière permanente</strong> dans le fichier <code>config/settings.json</code>.
             </p>
             <p style="margin-bottom: var(--spacing-md); line-height: 1.6;">
-                ⚠️ <strong>Attention:</strong> Les changements de modèle d'embedding, périphérique ou chunking nécessitent un <strong>redémarrage du serveur</strong> pour être appliqués.
+                ✅ <strong>Modèle d'embedding & périphérique:</strong> Rechargement <strong>automatique</strong> sans redémarrage (peut prendre quelques secondes pour les gros modèles).
+            </p>
+            <p style="margin-bottom: var(--spacing-md); line-height: 1.6;">
+                ⚠️ <strong>Chunking:</strong> Les changements de taille de fenêtre ou overlap nécessitent un <strong>redémarrage du serveur</strong> pour être appliqués.
             </p>
             <p style="line-height: 1.6;">
-                Les autres paramètres (recherche) sont appliqués immédiatement sans redémarrage.
+                ✅ <strong>Paramètres de recherche:</strong> Appliqués immédiatement sans redémarrage.
             </p>
             <button onclick="document.getElementById('modal-persistance').classList.add('hidden')" class="btn btn-primary" style="margin-top: var(--spacing-lg);">
                 Compris

@@ -18,6 +18,7 @@ sys.path.insert(0, str(racine_projet))
 from src.backend.api.routes_config import bp_config
 from src.backend.api.routes_conversations import bp_conversations
 from src.backend.api.routes_donnees import bp_donnees
+from src.backend.api.routes_images import bp_images
 from src.backend.api.routes_indexation import bp_indexation
 from src.backend.api.routes_recherche import bp_recherche
 
@@ -47,6 +48,7 @@ def creer_app() -> Flask:
     app.register_blueprint(bp_recherche)
     app.register_blueprint(bp_donnees)
     app.register_blueprint(bp_conversations)
+    app.register_blueprint(bp_images)
     app.register_blueprint(bp_config)
     
     # Routes frontend (interface web)
@@ -64,6 +66,11 @@ def creer_app() -> Flask:
     def conversations():
         """Page de visualisation des conversations."""
         return render_template("conversations.html")
+    
+    @app.route("/galerie", methods=["GET"])
+    def galerie():
+        """Page de visualisation de la galerie d'images."""
+        return render_template("galerie.html")
     
     # Route API documentation (JSON)
     @app.route("/api", methods=["GET"])

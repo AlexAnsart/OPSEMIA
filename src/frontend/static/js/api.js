@@ -158,6 +158,36 @@ class OpsemiaAPI {
             })
         });
     }
+
+    /**
+     * Charger et indexer un fichier CSV d'images
+     */
+    async chargerImages(cheminCSV, nomCas = null, reinitialiser = false) {
+        return this._request('/api/load_images', {
+            method: 'POST',
+            body: JSON.stringify({
+                chemin_csv: cheminCSV,
+                nom_cas: nomCas,
+                reinitialiser: reinitialiser
+            })
+        });
+    }
+
+    /**
+     * Obtenir la galerie d'images
+     */
+    async obtenirGalerie(collection = 'images', tri = 'chronologique', limite = 500) {
+        return this._request(`/api/images/galerie?collection=${collection}&tri=${tri}&limite=${limite}`);
+    }
+
+    /**
+     * Supprimer une collection
+     */
+    async supprimerCollection(nomCollection) {
+        return this._request(`/api/collections/${encodeURIComponent(nomCollection)}`, {
+            method: 'DELETE'
+        });
+    }
 }
 
 // Instance globale de l'API

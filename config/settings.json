@@ -4,13 +4,14 @@
     "peripherique_embedding": "cpu"
   },
   "chunking": {
-    "taille_fenetre_chunk": 1,
+    "taille_fenetre_chunk": 3,
     "overlap_fenetre_chunk": 1
   },
   "base_vectorielle": {
     "chemin_base_chroma": "data/chroma_db",
     "nom_collection_messages": "messages",
-    "nom_collection_chunks": "message_chunks"
+    "nom_collection_chunks": "message_chunks",
+    "nom_collection_images": "images"
   },
   "recherche": {
     "methode_recherche": "ANN",
@@ -21,5 +22,11 @@
   "donnees": {
     "chemin_csv_donnees": "Cas/Cas3/sms.csv",
     "format_csv": "auto"
+  },
+  "images": {
+    "longueur_min_description": 20,
+    "longueur_max_description": 100,
+    "num_beams": 20,
+    "temperature": 0.3
   }
 }

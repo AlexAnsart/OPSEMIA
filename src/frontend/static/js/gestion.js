@@ -22,6 +22,11 @@ function initGestion() {
         await chargerCSV();
     });
     
+    document.getElementById('load-images-form')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        await chargerImages();
+    });
+    
     document.getElementById('config-form')?.addEventListener('submit', async (e) => {
         e.preventDefault();
         await sauvegarderConfiguration();
@@ -112,6 +117,27 @@ function afficherConfiguration(config) {
     if (seuilDistance && config.recherche.seuil_distance_max !== null && config.recherche.seuil_distance_max !== undefined) {
         seuilDistance.value = config.recherche.seuil_distance_max;
     }
+
+    // Images
+    const imgMinLength = document.getElementById('config-img-min-length');
+    if (imgMinLength && config.images) {
+        imgMinLength.value = config.images.longueur_min_description || 30;
+    }
+
+    const imgMaxLength = document.getElementById('config-img-max-length');
+    if (imgMaxLength && config.images) {
+        imgMaxLength.value = config.images.longueur_max_description || 150;
+    }
+
+    const imgNumBeams = document.getElementById('config-img-num-beams');
+    if (imgNumBeams && config.images) {
+        imgNumBeams.value = config.images.num_beams || 15;
+    }
+
+    const imgTemperature = document.getElementById('config-img-temperature');
+    if (imgTemperature && config.images) {
+        imgTemperature.value = config.images.temperature || 0.3;
+    }
 }
 
 /**
@@ -187,8 +213,11 @@ function afficherStatistiques(stats) {
         </div>
     `;
     
-    // Collections
+    // Collections avec bouton de suppression
     if (stats.collections && stats.collections.length > 0) {
+        // Filtrer les collections "undefined" ou vides
+        const collectionsValides = stats.collections.filter(col => col.nom && col.nom !== 'undefined' && col.nom.trim() !== '');
+        
         html += `
             <div>
                 <h4 style="color: var(--text-white); margin-bottom: var(--spacing-md);">Détails des collections</h4>
@@ -197,13 +226,23 @@ function afficherStatistiques(stats) {
                         <tr>
                             <th>Nom de la collection</th>
                             <th>Documents</th>
+                            <th style="width: 100px;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        ${stats.collections.map(col => `
+                        ${collectionsValides.map(col => `
                             <tr>
                                 <td><code>${col.nom}</code></td>
                                 <td><span class="badge badge-success">${col.nombre_documents}</span></td>
+                                <td>
+                                    <button 
+                                        onclick="supprimerCollectionConfirm('${col.nom.replace(/'/g, "\\'")}')"
+                                        class="btn btn-sm btn-danger"
+                                        title="Supprimer cette collection"
+                                    >
+                                        🗑️
+                                    </button>
+                                </td>
                             </tr>
                         `).join('')}
                     </tbody>
@@ -222,11 +261,34 @@ function afficherStatistiques(stats) {
 }
 
 /**
+ * Confirmation avant suppression d'une collection
+ */
+async function supprimerCollectionConfirm(nomCollection) {
+    const confirmation = confirm(`⚠️ Êtes-vous sûr de vouloir supprimer la collection "${nomCollection}" ?\n\nCette action est irréversible et supprimera tous les documents de cette collection.`);
+    
+    if (!confirmation) return;
+    
+    try {
+        const response = await api.supprimerCollection(nomCollection);
+        
+        if (response.succes) {
+            afficherAlerte(`✅ Collection "${nomCollection}" supprimée avec succès`, 'success');
+            chargerStatistiques();  // Recharger les stats
+        } else {
+            throw new Error(response.erreur || 'Erreur inconnue');
+        }
+    } catch (error) {
+        console.error('Erreur suppression collection:', error);
+        afficherAlerte(`❌ Erreur lors de la suppression: ${error.message}`, 'danger');
+    }
+}
+
+/**
  * Charge et indexe un fichier CSV avec suivi de progression SSE
  */
 async function chargerCSV() {
     const cheminCSV = document.getElementById('csv-path')?.value.trim();
-    const nomCas = document.getElementById('csv-nom-cas')?.value.trim() || null;
+    const nomCas = null; // Nom du cas toujours null (non configurable)
     const reinitialiser = document.getElementById('csv-reset')?.checked;
     
     if (!cheminCSV) {
@@ -238,11 +300,14 @@ async function chargerCSV() {
     const submitBtn = document.querySelector('#load-csv-form button[type="submit"]');
     if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Indexation en cours...';
+        submitBtn.textContent = '⏳ Chargement du modèle...';
     }
     
     try {
-        // 1. Démarrer l'indexation (retourne immédiatement avec task_id)
+        // Afficher un message de chargement du modèle
+        afficherAlerte('⏳ Chargement du modèle d\'embedding en mémoire... Cela peut prendre 15-30 secondes pour les gros modèles comme Qwen3 (8GB). Veuillez patienter.', 'info');
+        
+        // 1. Démarrer l'indexation (peut prendre du temps si le modèle n'est pas encore chargé)
         const response = await api.chargerCSV(cheminCSV, nomCas, reinitialiser);
         
         if (!response.succes || !response.task_id) {
@@ -251,6 +316,11 @@ async function chargerCSV() {
         
         const taskId = response.task_id;
         console.log(`📡 Tâche d'indexation démarrée: ${taskId}`);
+        
+        // Mettre à jour le bouton
+        if (submitBtn) {
+            submitBtn.textContent = '📊 Indexation en cours...';
+        }
         
         // 2. Afficher la barre de progression
         afficherBarreProgression();
@@ -266,7 +336,57 @@ async function chargerCSV() {
         // Réactiver le bouton
         if (submitBtn) {
             submitBtn.disabled = false;
-            submitBtn.textContent = '📤 Charger et indexer';
+            submitBtn.textContent = '📤 Charger et indexer les messages';
+        }
+    }
+}
+
+/**
+ * Charge et indexe un fichier CSV d'images avec suivi de progression SSE
+ */
+async function chargerImages() {
+    const cheminCSV = document.getElementById('images-csv-path')?.value.trim();
+    const nomCas = null; // Nom du cas toujours null (non configurable)
+    const reinitialiser = document.getElementById('images-reset')?.checked;
+    
+    if (!cheminCSV) {
+        afficherAlerte('Veuillez saisir le chemin du fichier CSV d\'images', 'warning');
+        return;
+    }
+    
+    // Désactiver le bouton pendant le traitement
+    const submitBtn = document.querySelector('#load-images-form button[type="submit"]');
+    if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Indexation d\'images en cours...';
+    }
+    
+    try {
+        // 1. Démarrer l'indexation (retourne immédiatement avec task_id)
+        const response = await api.chargerImages(cheminCSV, nomCas, reinitialiser);
+        
+        if (!response.succes || !response.task_id) {
+            throw new Error(response.erreur || 'Impossible de démarrer l\'indexation d\'images');
+        }
+        
+        const taskId = response.task_id;
+        console.log(`📡 Tâche d'indexation d'images démarrée: ${taskId}`);
+        
+        // 2. Afficher la barre de progression
+        afficherBarreProgression();
+        
+        // 3. Se connecter au stream SSE pour suivre la progression
+        await suivreProgressionImagesSSE(taskId);
+        
+    } catch (error) {
+        console.error('Erreur lors de l\'indexation d\'images:', error);
+        masquerBarreProgression();
+        afficherAlerte('Erreur lors de l\'indexation d\'images: ' + error.message, 'danger');
+    } finally {
+        // Réactiver le bouton
+        if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = '📤 Charger et indexer les images';
         }
     }
 }
@@ -400,7 +520,6 @@ function suivreProgressionSSE(taskId) {
                 
                 // Réinitialiser le formulaire
                 document.getElementById('csv-path').value = '';
-                document.getElementById('csv-nom-cas').value = '';
                 document.getElementById('csv-reset').checked = false;
                 
                 resolve(data);
@@ -417,13 +536,13 @@ function suivreProgressionSSE(taskId) {
             
             try {
                 const data = event.data ? JSON.parse(event.data) : {};
-                const erreur = data.erreur || 'Erreur de connexion SSE';
+                const erreur = data.erreur || 'Erreur de connexion au serveur';
                 masquerBarreProgression();
                 afficherAlerte('Erreur: ' + erreur, 'danger');
                 reject(new Error(erreur));
             } catch (e) {
                 masquerBarreProgression();
-                afficherAlerte('Erreur de connexion au serveur', 'danger');
+                afficherAlerte('Erreur de connexion au serveur. Le modèle est peut-être trop lourd pour votre système.', 'danger');
                 reject(new Error('Erreur de connexion SSE'));
             }
         });
@@ -432,8 +551,102 @@ function suivreProgressionSSE(taskId) {
             console.error('❌ Erreur connexion SSE:', error);
             eventSource.close();
             masquerBarreProgression();
+            afficherAlerte('Erreur de connexion au serveur. Si vous utilisez un gros modèle (Qwen3), il peut avoir épuisé la RAM disponible.', 'danger');
+            reject(new Error('Erreur de connexion SSE - Ressources insuffisantes'));
+        };
+    });
+}
+
+/**
+ * Suit la progression d'indexation d'images via Server-Sent Events (SSE)
+ */
+function suivreProgressionImagesSSE(taskId) {
+    return new Promise((resolve, reject) => {
+        const sseURL = `${api.baseURL}/api/load_images/progress/${taskId}`;
+        console.log(`📡 Tentative connexion SSE images: ${sseURL}`);
+        
+        const eventSource = new EventSource(sseURL);
+        
+        console.log(`📡 Connexion SSE images établie pour task ${taskId}`);
+        
+        eventSource.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                console.log('📊 Progression images:', data);
+                
+                mettreAJourProgression(
+                    data.progression || 0,
+                    data.etape || 'En cours',
+                    data.message || ''
+                );
+                
+            } catch (error) {
+                console.error('Erreur parsing SSE images:', error);
+            }
+        };
+        
+        eventSource.addEventListener('complete', (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                console.log('✅ Indexation d\'images terminée:', data);
+                
+                eventSource.close();
+                mettreAJourProgression(100, 'Terminé', 'Indexation d\'images terminée avec succès!');
+                
+                // Afficher le résumé
+                if (data.statistiques) {
+                    const message = `Indexation d'images terminée avec succès!<br><br>Détails:<br>
+                        ${data.statistiques.images_indexees || 0} images indexées<br>
+                        ${data.statistiques.images_manquantes || 0} images manquantes<br>
+                        Durée: ${data.statistiques.duree_totale_sec?.toFixed(2) || 0}s`;
+                    afficherAlerte(message, 'success');
+                }
+                
+                // Masquer la barre et recharger les stats
+                masquerBarreProgression();
+                setTimeout(() => {
+                    const collapsible = document.getElementById('stats-collapsible');
+                    if (collapsible && collapsible.classList.contains('collapsed')) {
+                        collapsible.classList.remove('collapsed');
+                    }
+                    chargerStatistiques();
+                }, 1000);
+                
+                // Réinitialiser le formulaire
+                document.getElementById('images-csv-path').value = '';
+                document.getElementById('images-reset').checked = false;
+                
+                resolve(data);
+            } catch (error) {
+                console.error('Erreur traitement complete images:', error);
+                eventSource.close();
+                reject(error);
+            }
+        });
+        
+        eventSource.addEventListener('error', (event) => {
+            console.error('❌ Erreur SSE images:', event);
+            eventSource.close();
+            
+            try {
+                const data = event.data ? JSON.parse(event.data) : {};
+                const erreur = data.erreur || 'Erreur de connexion SSE images';
+                masquerBarreProgression();
+                afficherAlerte('Erreur: ' + erreur, 'danger');
+                reject(new Error(erreur));
+            } catch (e) {
+                masquerBarreProgression();
+                afficherAlerte('Erreur de connexion au serveur', 'danger');
+                reject(new Error('Erreur de connexion SSE images'));
+            }
+        });
+        
+        eventSource.onerror = (error) => {
+            console.error('❌ Erreur connexion SSE images:', error);
+            eventSource.close();
+            masquerBarreProgression();
             afficherAlerte('Erreur de connexion au serveur', 'danger');
-            reject(new Error('Erreur de connexion SSE'));
+            reject(new Error('Erreur de connexion SSE images'));
         };
     });
 }
@@ -458,7 +671,13 @@ async function sauvegarderConfiguration() {
         methode_recherche: document.getElementById('config-methode')?.value,
         nombre_resultats_recherche: parseInt(document.getElementById('config-nb-results')?.value || gestionState.configActuelle?.recherche?.nombre_resultats || '10'),
         exclure_bruit_par_defaut: document.getElementById('config-exclure-bruit')?.checked,
-        seuil_distance_max: seuilDistance
+        seuil_distance_max: seuilDistance,
+        
+        // Images
+        longueur_min_description_image: parseInt(document.getElementById('config-img-min-length')?.value || '30'),
+        longueur_max_description_image: parseInt(document.getElementById('config-img-max-length')?.value || '150'),
+        num_beams_description_image: parseInt(document.getElementById('config-img-num-beams')?.value || '15'),
+        temperature_description_image: parseFloat(document.getElementById('config-img-temperature')?.value || '0.3')
     };
     
     try {
@@ -467,6 +686,12 @@ async function sauvegarderConfiguration() {
         if (data.succes) {
             afficherAlerte('Configuration sauvegardée avec succès!', 'success');
             
+            // Afficher le message d'info (rechargement automatique du modèle)
+            if (data.info) {
+                afficherAlerte(data.info, 'info');
+            }
+            
+            // Afficher l'avertissement (redémarrage requis pour chunking)
             if (data.avertissement) {
                 afficherAlerte(data.avertissement, 'warning');
             }

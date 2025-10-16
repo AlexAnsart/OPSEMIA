@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OPSEMIA - Galerie d'Images</title>
+    <link rel="stylesheet" href="/static/css/main.css">
+    <style>
+        /* Styles spécifiques pour la galerie */
+        .galerie-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            padding: var(--spacing-lg);
+        }
+
+        .galerie-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .galerie-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+            border-color: var(--accent-color);
+        }
+
+        .galerie-item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: var(--bg-darker);
+        }
+
+        .galerie-item-info {
+            padding: var(--spacing-md);
+        }
+
+        .galerie-item-nom {
+            font-weight: 600;
+            color: var(--text-white);
+            font-size: 0.875rem;
+            margin-bottom: var(--spacing-xs);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .galerie-item-meta {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        /* Modale d'image en plein écran */
+        .image-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 5000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-xl);
+        }
+
+        .image-modal.visible {
+            display: flex;
+        }
+
+        .image-modal-content {
+            max-width: 90vw;
+            max-height: 85vh;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            overflow-y: auto;
+            padding-right: var(--spacing-sm);
+        }
+
+        .image-modal-img {
+            max-width: 100%;
+            max-height: 55vh;
+            object-fit: contain;
+            border-radius: var(--border-radius);
+            flex-shrink: 0;
+        }
+
+        .image-modal-info {
+            background: var(--bg-card);
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius);
+            max-width: 100%;
+            flex-shrink: 0;
+        }
+
+        .image-modal-close {
+            position: absolute;
+            top: var(--spacing-lg);
+            right: var(--spacing-lg);
+            background: var(--bg-card);
+            border: none;
+            color: var(--text-white);
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .image-modal-close:hover {
+            background: var(--accent-color);
+            transform: rotate(90deg);
+        }
+
+        .galerie-controles {
+            display: flex;
+            gap: var(--spacing-md);
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .empty-galerie {
+            text-align: center;
+            padding: var(--spacing-2xl);
+            color: var(--text-secondary);
+        }
+
+        .empty-galerie-icon {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-lg);
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <div class="header-brand">
+                    <img src="/static/assets/logo-slogan.png" alt="OPSEMIA" class="header-logo-full" id="header-logo">
+                </div>
+                <nav class="header-nav">
+                    <a href="/" class="nav-link">🔍 Recherche</a>
+                    <a href="/conversations" class="nav-link">💬 Conversations</a>
+                    <a href="/galerie" class="nav-link active">🖼️ Galerie</a>
+                    <a href="/gestion" class="nav-link">⚙️ Configuration</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- En-tête de la galerie -->
+            <div class="card">
+                <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h2 style="margin: 0;">🖼️ Galerie d'Images</h2>
+                        <p id="galerie-count" class="text-small text-secondary" style="margin: var(--spacing-xs) 0 0 0;">
+                            Chargement...
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Contrôles de la galerie -->
+                <div class="galerie-controles">
+                    <div class="form-group" style="flex: 1; min-width: 200px;">
+                        <label class="form-label">Collection</label>
+                        <select id="collection-select" class="form-select">
+                            <option value="images">images</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="flex: 1; min-width: 150px;">
+                        <label class="form-label">Tri</label>
+                        <select id="tri-select" class="form-select">
+                            <option value="chronologique">Chronologique (récent)</option>
+                            <option value="nom">Alphabétique</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group" style="flex: 1; min-width: 150px;">
+                        <label class="form-label">Affichage</label>
+                        <select id="limite-select" class="form-select">
+                            <option value="50">50 images</option>
+                            <option value="100">100 images</option>
+                            <option value="200">200 images</option>
+                            <option value="500" selected>500 images</option>
+                            <option value="1000">1000 images</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; align-items: flex-end; gap: var(--spacing-sm);">
+                        <button id="btn-refresh" class="btn btn-secondary">🔄 Actualiser</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grille de la galerie -->
+            <div id="galerie-container">
+                <!-- Les images seront injectées ici par JS -->
+            </div>
+        </main>
+
+        <!-- Modale d'image -->
+        <div id="image-modal" class="image-modal">
+            <button id="modal-close" class="image-modal-close">&times;</button>
+            <div class="image-modal-content">
+                <img id="modal-image" class="image-modal-img" src="" alt="">
+                <div class="image-modal-info">
+                    <h3 id="modal-titre" style="color: var(--accent-color); margin-bottom: var(--spacing-md);"></h3>
+                    <div id="modal-metadata" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-md);"></div>
+                    <div id="modal-description" style="margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid var(--border-color);"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Overlay de chargement -->
+        <div id="loading-overlay" class="loading-overlay hidden">
+            <div class="loading-content">
+                <div class="spinner"></div>
+                <p id="loading-message" style="margin-top: 1rem; color: var(--text-primary);">Chargement...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/galerie.js"></script>
+    <script>
+        // Gestion du logo manquant
+        const logo = document.getElementById('header-logo');
+        if (logo) {
+            logo.onerror = function() {
+                this.style.display = 'none';
+                const headerBrand = document.querySelector('.header-brand');
+                if (headerBrand) {
+                    headerBrand.innerHTML = `
+                        <div class="header-text">
+                            <h1 class="app-title">OPSEMIA</h1>
+                            <p class="app-subtitle">Galerie d'Images</p>
+                        </div>
+                    `;
+                }
+            };
+        }
+    </script>
+</body>
+</html>
+
+

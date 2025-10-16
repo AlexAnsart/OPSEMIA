@@ -28,15 +28,16 @@ bp_recherche = Blueprint("recherche", __name__, url_prefix="/api")
 
 @bp_recherche.route("/search", methods=["POST"])
 def rechercher() -> tuple[Dict[str, Any], int]:
-    """Recherche sémantique dans une collection avec filtres optionnels.
+    """Recherche sémantique dans une ou plusieurs collections avec filtres optionnels.
 
     Body JSON attendu:
         {
-            "requete": "rendez-vous argent",      # Requis
-            "nom_collection": "messages_cas1",    # Requis
-            "nombre_resultats": 10,               # Optionnel
-            "exclure_bruit": true,                # Optionnel
-            "filtres": {                          # Optionnel
+            "requete": "rendez-vous argent",           # Requis
+            "nom_collection": "messages_cas1",         # Requis (string ou liste)
+            "inclure_chunks": true,                    # Optionnel (défaut: true)
+            "nombre_resultats": 10,                    # Optionnel
+            "exclure_bruit": true,                     # Optionnel
+            "filtres": {                               # Optionnel
                 "timestamp_debut": "2024-01-01",
                 "timestamp_fin": "2024-12-31",
                 "direction": "incoming",
@@ -46,8 +47,13 @@ def rechercher() -> tuple[Dict[str, Any], int]:
             }
         }
 
+    Note: 
+        - Si inclure_chunks=true, la recherche inclut automatiquement les chunks 
+          et déduplique les résultats (garde la meilleure occurrence)
+        - nom_collection peut être une string ou une liste de strings
+
     Returns:
-        JSON avec liste de résultats et leurs scores
+        JSON avec liste de résultats dédupliqués et leurs scores
     """
     try:
         data = request.get_json()
@@ -60,6 +66,7 @@ def rechercher() -> tuple[Dict[str, Any], int]:
         
         requete = data["requete"]
         nom_collection = data["nom_collection"]
+        inclure_chunks = data.get("inclure_chunks", True)  # Par défaut, inclure les chunks
         nombre_resultats = data.get("nombre_resultats", None)
         exclure_bruit = data.get("exclure_bruit", None)
         filtres_data = data.get("filtres", {})
@@ -72,34 +79,77 @@ def rechercher() -> tuple[Dict[str, Any], int]:
         db = BaseVectorielle(parametres.CHEMIN_BASE_CHROMA)
         moteur = MoteurRecherche(db, parametres)
         
-        # Effectuer la recherche
-        resultats = moteur.rechercher(
-            requete=requete,
-            nom_collection=nom_collection,
-            filtres=filtres if filtres else None,
-            nombre_resultats=nombre_resultats,
-            exclure_bruit=exclure_bruit,
-        )
+        # Déterminer les collections à rechercher
+        if isinstance(nom_collection, list):
+            # Liste de collections fournie
+            collections = nom_collection
+        else:
+            # Collection unique - ajouter la collection de chunks si demandé
+            collections = [nom_collection]
+            
+            if inclure_chunks:
+                # Déduire le nom de la collection de chunks
+                # Ex: "messages_cas3" → "message_chunks_cas3"
+                nom_chunks = nom_collection.replace("messages", "message_chunks")
+                
+                # Vérifier que la collection de chunks existe
+                try:
+                    db.compter_documents(nom_chunks)
+                    collections.append(nom_chunks)
+                    print(f"🔍 Recherche avec chunks: {nom_collection} + {nom_chunks}")
+                except:
+                    print(f"⚠️  Collection de chunks '{nom_chunks}' introuvable, recherche sans chunks")
+        
+        # Effectuer la recherche avec ou sans déduplication
+        if len(collections) > 1:
+            # Multi-collections avec déduplication
+            resultats = moteur.rechercher_avec_filtrage_doublons(
+                requete=requete,
+                noms_collections=collections,
+                filtres=filtres if filtres else None,
+                nombre_resultats=nombre_resultats,
+                exclure_bruit=exclure_bruit,
+            )
+        else:
+            # Collection unique - recherche classique
+            resultats = moteur.rechercher(
+                requete=requete,
+                nom_collection=collections[0],
+                filtres=filtres if filtres else None,
+                nombre_resultats=nombre_resultats,
+                exclure_bruit=exclure_bruit,
+            )
+            
+            # Ajouter collection_source pour cohérence avec multi-collections
+            for res in resultats:
+                res["collection_source"] = collections[0]
         
         # DEBUG: Logger les résultats
         print(f"\n=== RECHERCHE API ===")
         print(f"Requête: {requete}")
-        print(f"Collection: {nom_collection}")
+        print(f"Collections: {collections}")
+        print(f"Inclure chunks: {inclure_chunks}")
         print(f"Nombre résultats demandés: {nombre_resultats}")
         print(f"Exclure bruit: {exclure_bruit}")
         print(f"Filtres: {filtres}")
         print(f"Nombre de résultats trouvés: {len(resultats)}")
         if resultats:
-            print(f"Premier résultat: {resultats[0]}")
+            print(f"Premier résultat:")
+            print(f"  - Type: {resultats[0].get('metadata', {}).get('type', 'unknown')}")
+            print(f"  - Score: {resultats[0].get('score', 0):.3f}")
+            print(f"  - Document: {resultats[0].get('document', '')[:100]}...")
         print(f"=====================\n")
         
         return jsonify({
             "succes": True,
             "nombre_resultats": len(resultats),
-            "resultats": resultats
+            "resultats": resultats,
+            "collections_recherchees": collections
         }), 200
         
     except Exception as e:
+        import traceback
+        traceback.print_exc()
         return jsonify({
             "succes": False,
             "erreur": str(e)

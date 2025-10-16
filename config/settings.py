@@ -42,6 +42,11 @@ MODELES_DISPONIBLES = [
     }
 ]
 
+# Paramètres de benchmark (non persistés dans settings.json)
+# Une recherche est considérée comme réussie si au moins 1 résultat attendu
+# est présent dans les TOP_K_BENCHMARK premiers résultats
+TOP_K_BENCHMARK = 10
+
 
 class Parametres:
     """Paramètres de configuration pour OPSEMIA.
@@ -87,6 +92,7 @@ class Parametres:
             )
         self.NOM_COLLECTION_MESSAGES = base_vectorielle.get("nom_collection_messages", "messages")
         self.NOM_COLLECTION_CHUNKS = base_vectorielle.get("nom_collection_chunks", "message_chunks")
+        self.NOM_COLLECTION_IMAGES = base_vectorielle.get("nom_collection_images", "images")
 
         # RECHERCHE
         self.METHODE_RECHERCHE = recherche.get("methode_recherche", "KNN")
@@ -104,6 +110,13 @@ class Parametres:
             )
         # Format du CSV: "auto" (détection automatique), "cas1" (ancienne structure), ou "cas3" (nouvelle structure)
         self.FORMAT_CSV = donnees.get("format_csv", "auto")
+        
+        # IMAGES
+        images = config.get("images", {})
+        self.LONGUEUR_MIN_DESCRIPTION_IMAGE = images.get("longueur_min_description", 30)
+        self.LONGUEUR_MAX_DESCRIPTION_IMAGE = images.get("longueur_max_description", 150)
+        self.NUM_BEAMS_DESCRIPTION_IMAGE = images.get("num_beams", 15)
+        self.TEMPERATURE_DESCRIPTION_IMAGE = images.get("temperature", 0.3)
 
     def _creer_config_defaut(self) -> None:
         """Crée le fichier de configuration par défaut."""
@@ -119,7 +132,8 @@ class Parametres:
             "base_vectorielle": {
                 "chemin_base_chroma": "data/chroma_db",
                 "nom_collection_messages": "messages",
-                "nom_collection_chunks": "message_chunks"
+                "nom_collection_chunks": "message_chunks",
+                "nom_collection_images": "images"
             },
             "recherche": {
                 "methode_recherche": "KNN",
@@ -130,6 +144,12 @@ class Parametres:
             "donnees": {
                 "chemin_csv_donnees": "Cas/Cas1/sms.csv",
                 "format_csv": "auto"
+            },
+            "images": {
+                "longueur_min_description": 30,
+                "longueur_max_description": 150,
+                "num_beams": 15,
+                "temperature": 0.3
             }
         }
 
@@ -178,6 +198,31 @@ class Parametres:
         if "seuil_distance_max" in modifications:
             config["recherche"]["seuil_distance_max"] = modifications["seuil_distance_max"]
             self.SEUIL_DISTANCE_MAX = modifications["seuil_distance_max"]
+
+        # IMAGES
+        if "longueur_min_description_image" in modifications:
+            if "images" not in config:
+                config["images"] = {}
+            config["images"]["longueur_min_description"] = int(modifications["longueur_min_description_image"])
+            self.LONGUEUR_MIN_DESCRIPTION_IMAGE = int(modifications["longueur_min_description_image"])
+
+        if "longueur_max_description_image" in modifications:
+            if "images" not in config:
+                config["images"] = {}
+            config["images"]["longueur_max_description"] = int(modifications["longueur_max_description_image"])
+            self.LONGUEUR_MAX_DESCRIPTION_IMAGE = int(modifications["longueur_max_description_image"])
+
+        if "num_beams_description_image" in modifications:
+            if "images" not in config:
+                config["images"] = {}
+            config["images"]["num_beams"] = int(modifications["num_beams_description_image"])
+            self.NUM_BEAMS_DESCRIPTION_IMAGE = int(modifications["num_beams_description_image"])
+
+        if "temperature_description_image" in modifications:
+            if "images" not in config:
+                config["images"] = {}
+            config["images"]["temperature"] = float(modifications["temperature_description_image"])
+            self.TEMPERATURE_DESCRIPTION_IMAGE = float(modifications["temperature_description_image"])
 
         # Sauvegarder dans le fichier
         with open(CHEMIN_CONFIG_JSON, 'w', encoding='utf-8') as f:

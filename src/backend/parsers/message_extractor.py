@@ -135,8 +135,10 @@ def _parser_cas3(chemin_csv: Path) -> List[Dict[str, Any]]:
             apercu_message, indice_lieu, pieces_jointes, types_pj, score_risque, 
             mots_cles
             
-    Note: Les colonnes score_risque, mots_cles, indice_lieu, objet_email, canal
-          sont ignorées (colonnes obsolètes).
+    Note: Les colonnes score_risque, mots_cles, indice_lieu sont ignorées 
+          (colonnes obsolètes non utilisées pour l'indexation).
+          
+    Supporte tous les canaux: SMS, WhatsApp, Email
     """
     resultats: List[Dict[str, Any]] = []
     
@@ -144,9 +146,11 @@ def _parser_cas3(chemin_csv: Path) -> List[Dict[str, Any]]:
         lecteur = csv.DictReader(f)
         
         for ligne in lecteur:
-            # Vérifier que le canal est SMS (ignorer les autres types)
-            canal = ligne.get("canal", "").upper()
-            if canal != "SMS":
+            # Récupérer le canal (SMS, WhatsApp, Email, etc.)
+            canal = ligne.get("canal", "").strip()
+            
+            # Ignorer les lignes sans canal
+            if not canal:
                 continue
             
             # Mapper le sens (reçu/envoyé/brouillon) vers direction (incoming/outgoing)
@@ -178,7 +182,7 @@ def _parser_cas3(chemin_csv: Path) -> List[Dict[str, Any]]:
                 "media_filename": ligne.get("pieces_jointes"),  # Approximatif
                 "gps_lat": None,  # Non disponible dans Cas3
                 "gps_lon": None,  # Non disponible dans Cas3
-                "app": "sms",  # Par défaut SMS puisqu'on filtre par canal
+                "app": canal.lower(),  # Utiliser le canal réel (sms, whatsapp, email)
                 "app_event": None,
                 "device_id": ligne.get("appareil"),
                 "imei": None,  # Non disponible dans Cas3
@@ -195,14 +199,19 @@ def _parser_cas3(chemin_csv: Path) -> List[Dict[str, Any]]:
 
 
 def parser_sms_depuis_csv(chemin_csv: Path | str, format_force: Optional[str] = None) -> List[Dict[str, Any]]:
-    """Extrait les SMS d'un CSV et normalise les champs.
+    """Extrait les messages d'un CSV et normalise les champs.
     
     Supporte deux formats de CSV :
     - Cas1/Cas2 : ancienne structure avec record_type, id, timestamp, direction, ...
+      (filtre uniquement les SMS via record_type)
     - Cas3 : nouvelle structure avec id_message, horodatage, sens, canal, ...
+      (supporte tous les canaux: SMS, WhatsApp, Email)
     
     La détection du format est automatique selon le header, mais peut être forcée
     avec le paramètre format_force.
+    
+    Note: Les colonnes score_risque et mots_cles présentes dans Cas3 sont ignorées
+          et ne sont pas utilisées pour l'indexation.
     
     Args:
         chemin_csv: Chemin vers le fichier CSV

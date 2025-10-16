@@ -17,6 +17,7 @@
                 <nav class="header-nav">
                     <a href="/" class="nav-link active">🔍 Recherche</a>
                     <a href="/conversations" class="nav-link">💬 Conversations</a>
+                    <a href="/galerie" class="nav-link">🖼️ Galerie</a>
                     <a href="/gestion" class="nav-link">⚙️ Configuration</a>
                 </nav>
             </div>
@@ -45,12 +46,15 @@
                     <div class="flex gap-2">
                         <div class="form-group" style="flex: 1;">
                             <label class="form-label">
-                                Collection
-                                <span class="help-icon" data-tooltip="Collection de données à interroger">?</span>
+                                Collections
+                                <span class="help-icon" data-tooltip="Sélectionnez une ou plusieurs collections à interroger">?</span>
                             </label>
-                            <select id="collection-select" class="form-select">
-                                <option value="messages_cas1">Chargement...</option>
-                            </select>
+                            <div id="collections-checkboxes" style="display: flex; flex-wrap: wrap; gap: var(--spacing-sm); padding: var(--spacing-sm); border: 1px solid var(--border-color); border-radius: var(--border-radius); background: var(--bg-darker); max-height: 120px; overflow-y: auto;">
+                                <label style="display: flex; align-items: center; gap: 0.3rem; padding: 0.3rem 0.5rem; background: var(--bg-primary); border-radius: var(--border-radius); cursor: pointer;">
+                                    <input type="checkbox" value="loading" disabled>
+                                    <span style="font-size: 0.9rem;">Chargement...</span>
+                                </label>
+                            </div>
                         </div>
                         <div class="form-group" style="width: 150px;">
                             <label class="form-label">
@@ -62,6 +66,10 @@
                                 <option value="10" selected>10</option>
                                 <option value="20">20</option>
                                 <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option>
+                                <option value="500">500</option>
+                                <option value="1000">1000</option>
                             </select>
                         </div>
                         <div class="form-group" style="width: 200px;">
