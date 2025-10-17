@@ -2,17 +2,40 @@
 
 **Outil Policier de SEMantique et d'Investigation Analytique**
 
-Moteur de recherche sémantique pour l'analyse de supports numériques (téléphones, ordinateurs) destiné à la police scientifique. Permet la recherche intelligente dans les messages, emails, images et vidéos extraits d'enquêtes.
+Moteur de recherche sémantique intelligent pour l'analyse de supports numériques (téléphones, ordinateurs) destiné à la police scientifique. Permet la recherche par sens dans les messages, emails, images et vidéos extraits d'enquêtes.
 
-## 🎯 Fonctionnalités
+## 🎯 Fonctionnalités Clés
 
+### ⚡ **Gain de temps - Recherches instantanées**
 - **Recherche sémantique** : Recherche par sens plutôt que par mots-clés exacts
-- **Support multi-formats** : Messages (SMS), emails, images, vidéos
-- **Indexation vectorielle** : Utilisation de modèles d'embedding de pointe (BGE-M3)
+- **Indexation vectorielle** : Utilisation de modèles d'embedding de pointe (BGE-M3, Jina-v3)
+- **Recherche ANN** : Algorithmes HNSW pour des résultats ultra-rapides (O(log n))
+
+### 🎯 **Recherche d'images grâce à leur contenu**
+- **Modèle de vision** : BLIP pour générer des descriptions textuelles précises en français
+- **Encodage sémantique** : Les descriptions d'images sont encodées avec le même modèle que les textes
+- **Recherche unifiée** : Recherchez "arme blanche" et trouvez les images contenant des couteaux, même sans métadonnées
+- **Pipeline complet** : Image → Description (BLIP) → Traduction (EN→FR) → Encodage (BGE-M3) → Recherche vectorielle
+
+### 🚫 **Débruitage automatique - Filtre pubs et bruit**
+- **Détection intelligente** : Filtrage automatique des pubs, contenus commerciaux et spam
+- **Flags de pertinence** : Colonne `is_noise` pour pénaliser les contenus non pertinents
+- **Filtrage configurable** : Exclusion automatique ou manuelle du bruit dans les résultats
+
+### 🔗 **Capture la continuité des conversations**
 - **Chunking contextuel** : Fenêtre glissante pour préserver le contexte conversationnel
-- **Débruitage** : Filtrage automatique des pubs et contenus commerciaux
-- **Base vectorielle locale** : ChromaDB avec backend SQLite pour garantir la confidentialité
+- **Vue contextuelle** : Affichage des messages avant/après pour comprendre le contexte
+- **Navigation fluide** : Passage direct de la recherche aux conversations complètes
+
+### ⚙️ **Intégration facile**
+- **Support multi-formats** : Messages (SMS), emails, images, vidéos
+- **Parsing modulable** : Support de différentes structures CSV et formats forensiques
 - **Configuration flexible** : Tous les paramètres modifiables via `config/settings.py`
+
+### 🔒 **Solution sécurisée et locale**
+- **Base vectorielle locale** : ChromaDB avec backend SQLite pour garantir la confidentialité
+- **Modèles locaux** : Aucune donnée transmise à des services tiers
+- **Gratuit** : Utilisation de modèles open-source sans coût de licence
 
 ## 📋 Architecture
 
@@ -77,30 +100,6 @@ python scripts/analyser_chromadb.py
 
 Ce script analyse le contenu de la base ChromaDB et affiche les statistiques d'indexation.
 
-## 📊 Utilisation
-
-### Indexer un CSV de messages
-
-Le pipeline complet indexe automatiquement le CSV de démo (Cas1) :
-
-```bash
-python src/backend/core/pipeline_example.py
-```
-
-Ce script effectue :
-1. **Parsing** du CSV
-2. **Débruitage** (flagging du spam/pubs)
-3. **Chunking** (fenêtres de contexte glissantes)
-4. **Encodage** vectoriel (BGE-M3)
-5. **Stockage** dans ChromaDB
-
-### Résultat
-
-Les données indexées sont stockées dans `data/chroma_db/` sous forme de base vectorielle locale. Deux collections sont créées :
-
-- `messages_cas1` : Messages individuels (275 documents)
-- `message_chunks_cas1` : Chunks de contexte (1 document)
-
 ### Stockage des vecteurs
 
 **Base SQLite** (`chroma.sqlite3`) :
@@ -137,49 +136,6 @@ Le pipeline affiche des indicateurs de progression et de durée pour chaque phas
 💾 Phase 5/5: Stockage dans ChromaDB...
    ✓ Stockage terminé (0.89s)
 ```
-
-### Recherche sémantique interactive
-
-**Lancer la recherche :**
-```bash
-python src/backend/core/pipeline_example.py --search
-```
-
-**Exemple de session :**
-```text
-🔍 OPSEMIA - Recherche Sémantique Interactive
-======================================================================
-📚 Collection: messages_cas1 (275 documents)
-🧠 Modèle: BAAI/bge-m3
-⚙️  Méthode: ANN
-📊 Résultats par requête: 10
-🚫 Exclusion bruit: Oui
-
-💡 Tapez votre requête (ou 'quit' pour quitter)
-======================================================================
-
-🔎 Requête: rendez-vous argent
-
-⏳ Recherche en cours...
-
-✅ 10 résultat(s) trouvé(s):
-----------------------------------------------------------------------
-
-1. [Score: 0.842]
-   📅 2024-03-15 14:23:12 | 👤 Marc Durand | ↔️  incoming
-   💬 On se retrouve demain à 15h pour le transfert. Prends l'argent liquide...
-```
-
-**Démonstration avec filtres :**
-```bash
-python scripts/demo_recherche_filtree.py
-```
-
-**Comparer ANN vs KNN :**
-```bash
-python scripts/comparer_ann_vs_knn.py
-```
-Ce script compare la performance et les résultats des deux méthodes sur les mêmes requêtes.
 
 ## ⚙️ Configuration
 
@@ -339,55 +295,6 @@ Direction: incoming
 GPS: 48.8566, 2.3522
 ```
 
-## 🔍 Utilisation avancée
-
-### Recherche programmatique
-
-```python
-from config.settings import obtenir_parametres
-from src.backend.core.search_engine import MoteurRecherche
-from src.backend.core.filters import creer_filtre_temporel
-from src.backend.database.vector_db import BaseVectorielle
-
-# Initialisation
-parametres = obtenir_parametres()
-db = BaseVectorielle(parametres.CHEMIN_BASE_CHROMA)
-moteur = MoteurRecherche(db, parametres)
-
-# Recherche simple
-resultats = moteur.rechercher(
-    requete="rendez-vous suspect",
-    nom_collection="messages_cas1",
-    nombre_resultats=5
-)
-
-# Recherche avec filtres
-filtre = creer_filtre_temporel("2024-03-01", "2024-03-31")
-resultats = moteur.rechercher(
-    requete="transfert argent",
-    nom_collection="messages_cas1",
-    filtres=filtre,
-    exclure_bruit=True
-)
-
-# Afficher
-for res in resultats:
-    print(f"[{res['score']:.3f}] {res['document'][:100]}")
-```
-
-### Filtres disponibles
-
-- **Temporel** : `creer_filtre_temporel("2024-01-01", "2024-12-31")`
-- **Géographique** : `creer_filtre_geographique(lat, lon, rayon_km)`
-- **Exclusion bruit** : `creer_filtre_exclusion_bruit(exclure=True)`
-- **Combinaison** : `combiner_filtres(filtre1, filtre2)`
-
-### Scores de pertinence
-
-- **> 0.8** : Très pertinent
-- **0.6 - 0.8** : Pertinent  
-- **< 0.6** : Peu pertinent
-
 ## 🖥️ Interface Web
 
 OPSEMIA dispose d'une interface web moderne pour faciliter l'utilisation par les analystes de la police scientifique.
@@ -513,12 +420,6 @@ python scripts/tester_api.py
 CSV → Parser → Débruitage → Chunking → BGE-M3 → ChromaDB (HNSW)
 ```
 
-**Performance (sur 275 messages) :**
-- **Indexation** : ~15-20s
-- **Recherche ANN (HNSW)** : < 0.1s (95-99% précision)
-- **Recherche KNN (exact)** : < 0.5s (100% précision)
-
-**Implémentation KNN** : Récupère tous les embeddings, calcule manuellement les distances cosine avec NumPy, trie et retourne les top K. Garantit une précision exacte contrairement à l'approximation HNSW.
 
 **Fichiers clés :**
 - `src/backend/core/search_engine.py` : Moteur de recherche
