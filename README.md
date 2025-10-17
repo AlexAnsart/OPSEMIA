@@ -239,27 +239,6 @@ Ce script évalue automatiquement plusieurs modèles sur un dataset de test thé
 - **Precision@K / Recall@K** : Pertinence des résultats
 - **Temps de chargement et recherche**
 
-### Dataset de test
-
-Le benchmark utilise **20 documents** et **16 requêtes** couvrant :
-- Transactions financières suspectes
-- Rendez-vous et lieux de rencontre
-- Trafic de substances
-- Menaces et violence
-- Relations entre individus
-- Dates et horaires
-
-**Niveaux de difficulté :** Facile, Moyen, Difficile
-
-### Résultats attendus
-
-| Modèle | Dimensions | NDCG@5 | MRR | Temps (ms) | Taille |
-|--------|------------|--------|-----|------------|--------|
-| Jina-v3 | 1024 | ~0.87 | ~0.92 | ~0.4 | 570 MB |
-| BGE-M3 | 1024 | ~0.82 | ~0.89 | ~0.5 | 2.2 GB |
-| Qwen3-8B | 4096 | ~0.85 | ~0.91 | ~1.2 | 8 GB |
-
-**Documentation complète** : Voir `Docs Projet/Guide_Modeles_Benchmark.md`
 
 ## 📁 Structure du projet
 

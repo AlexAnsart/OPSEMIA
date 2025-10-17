@@ -2,10 +2,13 @@
 .cache/
 **/.cache/
 **/cache/
-models/
 *.bin
 *.safetensors
 *.onnx
+
+# Variables d'environnement et secrets
+.env
+.env.local
 
 # Environnement virtuel Python
 .venv/
