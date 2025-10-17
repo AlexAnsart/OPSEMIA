@@ -1,8 +1,25 @@
 # OPSEMIA
 
+<div align="center">
+  <img src="Docs%20Projet/Logo-slogan-fond-blanc.png" alt="Logo OPSEMIA" width="400">
+</div>
+
 **Outil Policier de SEMantique et d'Investigation Analytique**
 
 Moteur de recherche sémantique intelligent pour l'analyse de supports numériques (téléphones, ordinateurs) destiné à la police scientifique. Permet la recherche par sens dans les messages, emails, images et vidéos extraits d'enquêtes.
+
+## 🖥️ Interface Web
+
+<div align="center">
+  <h3>🔍 Moteur de Recherche Sémantique</h3>
+  <img src="Docs%20Projet/Recherche.png" alt="Interface de recherche sémantique OPSEMIA" width="800">
+  
+  <h3>💬 Visualisation des Conversations</h3>
+  <img src="Docs%20Projet/Conversations.png" alt="Interface de visualisation des conversations" width="800">
+  
+  <h3>⚙️ Configuration et Gestion</h3>
+  <img src="Docs%20Projet/Configuration.png" alt="Interface de configuration pour analystes" width="800">
+</div>
 
 ## 🎯 Fonctionnalités Clés
 
